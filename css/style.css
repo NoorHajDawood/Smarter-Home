@@ -1,0 +1,601 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+header, main, footer, nav, section {
+    display: block;
+}
+
+body {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    padding-bottom: 40px;
+}
+
+header {
+    /* position: relative; */
+    background-color: #f7f6f6;
+    height: 50px;
+    display: flex;
+}
+
+#logo {
+    position: absolute;
+    display: block;
+    background-image: url(../images/logo.png);
+    width: 95px;
+    height: 46px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* top: 50%; */
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#wrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: black;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    margin: 5px auto;
+}
+
+.btnClickable {
+    border-style: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+}
+
+.dropDown {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.dropDownToggle {
+    background-color: #ebebeb;
+    color: #444444;
+}
+
+.headerIcon {
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    font-size: 0;
+    background-color: transparent;
+    border-style: none;
+    align-self: center;
+    margin-right: 5px;
+}
+
+.noti {
+    background-image: url(../images/notifications_active_icon.png);
+}
+
+.search {
+    background-image: url(../images/search_icon.png);
+}
+
+.profile {
+    display: block;
+    background-repeat: no-repeat;
+    text-indent: 40px;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    background-image: url(../images/userID1.png);
+    min-width: 30px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.homeList {
+    /* height: 31px; */
+    line-height: 31px;
+    text-indent: 40px;
+}
+
+.rectangle {
+    border-radius: 10px;
+    width: 100%;
+    max-width: 300px;
+    height: 100px;
+    background-color: gray;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.preview {
+    height: 170px;
+    margin-top: 10px;
+}
+
+.rowContainer {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.ham {
+    background-image: url(../images/hamburger.png);
+}
+
+footer {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    background-color: #f7f6f6;
+    z-index: 999;
+}
+
+footer nav {
+    width: 100%;
+    height: 40px;
+    align-self: center;
+}
+
+footer ul {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+footer li {
+    width: 100%;
+    display: flex;
+    align-content: center;
+}
+
+footer a {
+    position: relative;
+    display: block;
+    margin: auto 0;
+    background-color: transparent;
+    width: 100%;
+    height: 32px;
+    border-style: none;
+    background-position: top;
+    background-repeat: no-repeat;
+    color: #929292;
+}
+
+footer span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: block;
+    font-size: 8px;
+    text-align: center;
+}
+
+footer .selected {
+    background-color: #ebebeb;
+}
+
+footer .selected>a {
+    color: black;
+}
+
+.homeButton {
+    background-image: url(../images/home_icon.png);
+}
+
+.roomsButton {
+    background-image: url(../images/rooms_icon_gray.png);
+}
+
+.devicesButton {
+    background-image: url(../images/devices_icon_gray.png);
+}
+
+.automationButton {
+    background-image: url(../images/automation_icon_gray.png);
+}
+
+.bader {
+    width: 251px;
+    height: 100%;
+    position: absolute;
+    padding-top: 25px;
+    margin-left: -12px;
+    background-color: white;
+    border-right: solid thin;
+    z-index: 1000;
+}
+
+.bader .dropdown-toggle {
+    background-color: transparent;
+    color: black;
+    border-style: none;
+    box-shadow: none;
+    /* height: 24px; */
+}
+
+.bader .btn-primary:focus {
+    background-color: transparent;
+    color: black;
+    border-style: none;
+}
+
+.bader .btn:focus {
+    box-shadow: none;
+}
+
+.bader hr {
+    margin-right: 10%;
+}
+
+.bader a {
+    font-weight: bold;
+}
+
+.bader:hover {
+    background-color: white;
+}
+
+.carousel {
+    margin-top: 10px;
+}
+
+.carousel-indicators {
+    bottom: -40px;
+}
+
+.carousel-inner {
+    margin-bottom: 30px;
+    color: black;
+}
+
+.carousel>button {
+    background-color: #f7f6f6bd;
+}
+
+.shortcut {
+    display: flex;
+    width: 30%;
+    min-width: 130px;
+    background-color: white;
+    flex-flow: column;
+    position: relative;
+}
+
+.shortcut>span {
+    display: block;
+    align-self: center;
+    margin-top: 5px;
+    height: 20px;
+    background-repeat: no-repeat;
+}
+
+.vac-sm {
+    width: 20px;
+    background-image: url(../images/vaccum_sm.png);
+}
+
+.tv-sm {
+    width: 20px;
+    background-image: url(../images/tv_sm.png);
+}
+
+.ac-sm {
+    width: 40px;
+    background-image: url(../images/ac_sm.png);
+}
+
+.shortcut>h5 {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.shortcut>div {
+    margin-left: 5px;
+    text-indent: 15px;
+}
+
+.shortcut>div>span {
+    display: block;
+    text-align: left;
+    font-size: 10px;
+    background-repeat: no-repeat;
+    margin-top: 2px
+}
+
+.time-sm {
+    background-image: url(../images/time_sm.png);
+}
+
+.location-sm {
+    background-image: url(../images/location_sm.png);
+}
+
+.carousel-item {
+    padding: 2px;
+}
+
+.home {
+    background-image: url(../images/homes_icon.png);
+    background-repeat: no-repeat;
+    text-indent: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    height: 24px;
+    background-color: transparent;
+    border-style: none;
+    color: black;
+    padding: 0;
+}
+
+.myhome {
+    background-image: url(../images/full_home_icon.png);
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-style: none;
+    color: black;
+}
+
+.switch {
+    position: absolute;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+    top: 5px;
+    right: 5px;
+}
+
+/* Hide default HTML checkbox */
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(13px);
+    -ms-transform: translateX(13px);
+    transform: translateX(13px);
+}
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.addplace {
+    background-image: url(../images/full_plus_icon.png);
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-style: none;
+    color: black;
+}
+
+.member {
+    background-image: url(../images/members_icon.png);
+}
+
+.history {
+    background-image: url(../images/history_icon.png);
+}
+
+.nextBtn {
+    width: 24px;
+    height: 24px;
+    background-image: url(../images/next_icon.png);
+    background-repeat: no-repeat;
+}
+
+.previousBtn {
+    width: 24px;
+    height: 24px;
+    background-image: url(../images/previous_icon.png);
+    background-repeat: no-repeat;
+}
+
+.setting {
+    position: absolute;
+    background-image: url(../images/settings_icon.png);
+    width: 24px;
+    height: 24px;
+    bottom: 5px;
+    left: 5px;
+}
+
+.help {
+    position: absolute;
+    background-image: url(../images/full_help_icon.png);
+    bottom: 5px;
+    right: 10px;
+    text-indent: 30px;
+    line-height: 24px;
+}
+
+.centered {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#menuToggle {
+    display: block;
+    position: relative;
+    top: 50px;
+    left: 50px;
+    z-index: 1000;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#menuToggle a {
+    text-decoration: none;
+    color: #232323;
+    transition: color 0.3s ease;
+}
+
+#menuToggle a:hover {
+    color: tomato;
+}
+
+#menuToggle input {
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    cursor: pointer;
+    opacity: 0;
+    /* hide this */
+    z-index: 2;
+    /* and place it over the hamburger */
+    -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+
+#menuToggle span {
+    display: block;
+    width: 24px;
+    height: 4px;
+    margin-bottom: 2px;
+    position: relative;
+    background: black;
+    border-radius: 3px;
+    z-index: 1;
+    transform-origin: 4px 0px;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+    transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+    transform-origin: 0% 100%;
+}
+
+/* 
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+
+#menuToggle input:checked~span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+
+#menuToggle input:checked~span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+
+#menuToggle input:checked~span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+
+#menu {
+    position: absolute;
+    width: 300px;
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+    background: #ededed;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+}
+
+#menu li {
+    padding: 10px 0;
+    font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+
+#menuToggle input:checked~ul {
+    transform: none;
+}
