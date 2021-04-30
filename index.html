@@ -48,39 +48,48 @@
                   Too bad the menu has to be inside of the button
                   but hey, it's pure CSS magic.
                   -->
-                <ul id="menuBurger" class="menu">
 
-                    <li><a class="profile avatar" href="#">Micheal Rand</a></li>
-                    <li>
+                
 
-                        <button class="btn btn-primary home" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
-                            My Homes
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
-                                data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-                        </button>
+              
+                    <ul id="menuBurger" class="menu ">
 
-                        <div class="collapse" id="homes">
+                        <li><a class="profile avatar" href="#">Micheal Rand</a></li>
+                        <li>
 
-                            <ul>
-                                <li><a class="profile myhome homeList" href="#">My Home</a></li>
-                                <li><a class="profile addplace homeList" href="#">Add place</a></li>
+                            <button class="btn btn-primary home" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
+                                My Homes
+                                <button type="button" class="btn btn-secondary dropdown-toggle"
+                                    data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false"
+                                    aria-controls="homes"></button>
+                            </button>
 
-                            </ul>
+                            <div class="collapse" id="homes">
+
+                                <ul>
+                                    <li><a class="profile myhome homeList" href="#">My Home</a></li>
+                                    <li><a class="profile addplace homeList" href="#">Add place</a></li>
+
+                                </ul>
 
 
-                        </div>
-                    </li>
-                    <hr>
-                    <li><a class="profile roomsButton" href="#">Rooms</a></li>
-                    <li><a class="profile devicesButton" href="#">Devices</a></li>
-                    <li><a class="profile automationButton" href="#">Automations</a></li>
-                    <li><a class="profile member" href="#">Members</a></li>
-                    <hr>
-                    <li><a class="profile history" href="#">History</a></li>
-                    <li><a class="profile setting" href="#"></a></li>
-                    <li><a class="profile help" href="#">help</a></li>
-                </ul>
+                            </div>
+                        </li>
+                        <hr>
+                        <li><a class="profile roomsButton" href="#">Rooms</a></li>
+                        <li><a class="profile devicesButton" href="#">Devices</a></li>
+                        <li><a class="profile automationButton" href="#">Automations</a></li>
+                        <li><a class="profile member" href="#">Members</a></li>
+                        <hr>
+                        <li><a class="profile history" href="#">History</a></li>
+                        <li><a class="profile setting" href="#"></a></li>
+                        <li><a class="profile help" href="#">help</a></li>
+      
+                          
+                    </ul>
+                   
+             
             </div>
         </nav>
 
@@ -176,8 +185,12 @@
                 <li><a class="profile member" href="#">Members</a></li>
                 <hr>
                 <li><a class="profile history" href="#">History</a></li>
+
+
                 <li><a class="profile setting" href="#"></a></li>
                 <li><a class="profile help" href="#">help</a></li>
+
+
             </ul>
         </nav>
         <div id="wrapper">
@@ -262,6 +275,7 @@
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
+                                        <button class="functionalButton star star-full"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
                                         <span class="tv-sm"></span>
@@ -277,6 +291,7 @@
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
+                                        <button class="functionalButton star star-full"></button>
                                     </a>
                                 </div>
                             </div>
@@ -284,6 +299,7 @@
                     </div>
                 </section>
                 <hr>
+                <div class="clear"></div>
                 <section class="sectionContainer" id="frequentlySection">
                     <h3>Frequently Used</h3>
                     <div id="frequent" class="carousel carousel-dark slide" data-bs-ride="carousel"
@@ -310,6 +326,7 @@
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
+                                        <button class="functionalButton star star-empty"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
                                         <span class="tv-sm"></span>
@@ -325,6 +342,7 @@
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
+                                        <button class="functionalButton star star-empty"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
                                         <span class="ac-sm"></span>
@@ -342,6 +360,7 @@
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
+                                        <button class="functionalButton star star-empty"></button>
                                     </a>
                                 </div>
                             </div>
@@ -380,14 +399,17 @@
                                     <a class="rectangle btnClickable shortcut" href="#">
                                         <span class="sun-sm"></span>
                                         <h5>iVaccum</h5>
+                                        <button class="functionalButton star star-empty"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
                                         <span class="homeButton"></span>
                                         <h5>iVaccum</h5>
+                                        <button class="functionalButton star star-empty"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
                                         <span class="shield-sm"></span>
                                         <h5>iVaccum</h5>
+                                        <button class="functionalButton star star-empty"></button>
                                     </a>
                                 </div>
                             </div>
@@ -402,6 +424,7 @@
                         </div>
                     </div>
                 </section>
+                <div class="clear"></div>
             </main>
         </div>
     </div>
