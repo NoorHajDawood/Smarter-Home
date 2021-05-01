@@ -32,7 +32,7 @@
                   A fake / hidden checkbox is used as click reciever,
                   so you can use the :checked selector on it.
                   -->
-                <input type="checkbox" />
+                <input id="burgerInput" type="checkbox" />
 
                 <!--
                   Some spans to act as a hamburger.
@@ -49,47 +49,46 @@
                   but hey, it's pure CSS magic.
                   -->
 
-                
-
-              
-                    <ul id="menuBurger" class="menu ">
-
-                        <li><a class="profile avatar" href="#">Micheal Rand</a></li>
-                        <li>
-
-                            <button class="btn btn-primary home" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
-                                My Homes
-                                <button type="button" class="btn btn-secondary dropdown-toggle"
-                                    data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false"
-                                    aria-controls="homes"></button>
-                            </button>
-
-                            <div class="collapse" id="homes">
-
-                                <ul>
-                                    <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
-                                    <li><a class="profile addplace homeList" href="#">Add place</a></li>
-
-                                </ul>
 
 
-                            </div>
-                        </li>
-                        <hr>
-                        <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
-                        <li><a class="profile devicesButton" href="#">Devices</a></li>
-                        <li><a class="profile automationButton" href="#">Automations</a></li>
-                        <li><a class="profile member" href="#">Members</a></li>
-                        <hr>
-                        <li><a class="profile history" href="#">History</a></li>
-                        <li><a class="profile setting" href="#"></a></li>
-                        <li><a class="profile help" href="#">help</a></li>
-      
-                          
-                    </ul>
-                   
-             
+
+                <ul id="menuBurger" class="menu">
+
+                    <li><a class="profile avatar" href="#">Micheal Rand</a></li>
+                    <li>
+
+                        <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
+                            My Homes
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
+                                data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
+                        </button>
+
+                        <div class="collapse" id="homes">
+
+                            <ul>
+                                <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
+                                <li><a class="profile addplace homeList" href="#">Add place</a></li>
+
+                            </ul>
+
+
+                        </div>
+                    </li>
+                    <hr>
+                    <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
+                    <li><a class="profile devicesButton" href="#">Devices</a></li>
+                    <li><a class="profile automationButton" href="#">Automations</a></li>
+                    <li><a class="profile member" href="#">Members</a></li>
+                    <hr>
+                    <li><a class="profile history" href="#">History</a></li>
+                    <li><a class="profile setting" href="#"></a></li>
+                    <li><a class="profile help" href="#">help</a></li>
+
+
+                </ul>
+
+
             </div>
         </nav>
 
@@ -97,8 +96,10 @@
         <div class="container-fluid"></div>
 
         <a id="logo" href="index.html"></a>
+
+        <div id="burgerBlur" class="screenBlur"></div>
+
         <div class="btn-group">
-            <!-- <button type="button" class="btn btn-danger">Action</button> -->
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon noti"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
@@ -126,105 +127,42 @@
 
 
         </div>
-        <!-- <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon search" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-          </ul>
-        </div> -->
+
 
 
 
 
     </header>
     <div class="content">
-        <nav role="navigation" id="navDesktop">
 
-            <ul class="menu">
-
-                <li><a class="profile avatar" href="#">Micheal Rand</a></li>
-                <li>
-
-                    <button class="btn btn-primary home" type="button" data-bs-toggle="collapse" data-bs-target="#homes"
-                        aria-expanded="false" aria-controls="homes">
-                        My Homes
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
-                            data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-                    </button>
-
-                    <div class="collapse" id="homes">
-
-                        <ul>
-                            <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
-                            <li><a class="profile addplace homeList" href="#">Add place</a></li>
-
-                        </ul>
-
-
-                    </div>
-                </li>
-                <hr>
-                <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
-                <li><a class="profile devicesButton" href="#">Devices</a></li>
-                <li><a class="profile automationButton" href="#">Automations</a></li>
-                <li><a class="profile member" href="#">Members</a></li>
-                <hr>
-                <li><a class="profile history" href="#">History</a></li>
-
-
-                <li><a class="profile setting" href="#"></a></li>
-                <li><a class="profile help" href="#">help</a></li>
-
-
-            </ul>
-        </nav>
         <div id="wrapper">
+            <nav id="breadNav"
+                style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+                aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page"><a href="#">Home</a></li>
+                </ol>
+            </nav>
             <h1>My Home</h1>
             <main>
                 <section class="sectionContainer" id="previewSection">
-                    <!-- <div class="d-flex selector">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-secondary btnClickable dropDown">Media</button>
-                            <button type="button"
-                                class="btn btn-secondary dropdown-toggle dropdown-toggle-split btnClickable dropDownToggle"
-                                id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false"
-                                data-bs-reference="parent">
-                                <span class="visually-hidden">Cameras</span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-                                <li><a class="dropdown-item" href="#">Cameras</a></li>
-                                <li><a class="dropdown-item" href="#">Media</a></li>
-                                <li><a class="dropdown-item" href="#">History</a></li>
-                            </ul>
-                        </div>
-                    </div> -->
-                    <!-- <div class="rectangle preview">
-                    <iframe class="rectangle preview" src="https://www.youtube.com/embed/jqHufpLFiZ8"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div> -->
-                <select id="previewSelector" class="form-select selector" aria-label="Default select example">
-                    <option value="Admin">Cameras</option>
-                    <option value="Guest" selected>Media</option>
-                    <option value="Normal">History</option>
-                </select>
-                <div id="mediaSection">
-                    <iframe src="https://open.spotify.com/embed/playlist/285PNHjb9ou7HkVJAgYw9Z" width="340" height="170" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                </div>
-                    <div id="cameraFeeds" class="carousel carousel-dark slide d-none" data-bs-ride="carousel"
+
+                    <select id="previewSelector" class="form-select selector" aria-label="Default select example">
+                        <option value="cameras">Cameras</option>
+                        <option value="media" selected>Media</option>
+                    </select>
+                    <div id="mediaSection">
+                        <iframe src="https://open.spotify.com/embed/playlist/285PNHjb9ou7HkVJAgYw9Z" width="340"
+                            height="170" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                    <div id="cameraSection" class="carousel carousel-dark slide d-none" data-bs-ride="carousel"
                         data-bs-interval="false">
                         <div class="carousel-indicators" id="camera-indicator">
-                            <button type="button" data-bs-target="#cameraFeeds" data-bs-slide-to="0" class="active"
+                            <button type="button" data-bs-target="#cameraSection" data-bs-slide-to="0" class="active"
                                 aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#cameraFeeds" data-bs-slide-to="1"
+                            <button type="button" data-bs-target="#cameraSection" data-bs-slide-to="1"
                                 aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#cameraFeeds" data-bs-slide-to="2"
+                            <button type="button" data-bs-target="#cameraSection" data-bs-slide-to="2"
                                 aria-label="Slide 3"></button>
                         </div>
                         <div class="carousel-inner">
@@ -238,12 +176,12 @@
                                 <img src="images/backyard.png" class="d-block w-100" alt="...">
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#cameraFeeds"
+                        <button class="carousel-control-prev" type="button" data-bs-target="#cameraSection"
                             data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#cameraFeeds"
+                        <button class="carousel-control-next" type="button" data-bs-target="#cameraSection"
                             data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
@@ -262,7 +200,7 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="rowContainer">
-                                    <a class="rectangle btnClickable shortcut" href="#">
+                                    <a class="rectangle btnClickable shortcut" href="object.html?objID=1">
                                         <span class="vac-bg"></span>
                                         <h5>iVaccum</h5>
                                         <div>
@@ -273,23 +211,23 @@
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
-                                        <button class="functionalButton star star-full"></button>
+                                        <button class="functional functionalButton star star-full"></button>
                                     </a>
-                                    <a class="rectangle btnClickable shortcut" href="#">
+                                    <a class="rectangle btnClickable shortcut" href="object.html?objID=2">
                                         <span class="tv-bg"></span>
                                         <h5>TV</h5>
                                         <div>
                                             <span class="location-sm">Living Room</span>
                                             <div class="centered">
-                                                <button class="functionalButton previousBtn"></button>
-                                                <button class="functionalButton nextBtn"></button>
+                                                <button class="functional functionalButton previousBtn"></button>
+                                                <button class="functional functionalButton nextBtn"></button>
                                             </div>
                                         </div>
                                         <label class="switch">
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
-                                        <button class="functionalButton star star-full"></button>
+                                        <button class="functional functionalButton star star-full"></button>
                                     </a>
                                 </div>
                             </div>
@@ -311,7 +249,7 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="rowContainer">
-                                    <a class="rectangle btnClickable shortcut" href="#">
+                                    <a class="rectangle btnClickable shortcut" href="object.html?objID=1">
                                         <span class="vac-bg"></span>
                                         <h5>iVaccum</h5>
                                         <div>
@@ -322,25 +260,9 @@
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
-                                        <button class="functionalButton star star-full"></button>
+                                        <button class="functional functionalButton star star-full"></button>
                                     </a>
-                                    <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="tv-bg"></span>
-                                        <h5>TV</h5>
-                                        <div>
-                                            <span class="location-sm">Living Room</span>
-                                            <div class="centered">
-                                                <button class="functionalButton previousBtn"></button>
-                                                <button class="functionalButton nextBtn"></button>
-                                            </div>
-                                        </div>
-                                        <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round"></span>
-                                        </label>
-                                        <button class="functionalButton star star-full"></button>
-                                    </a>
-                                    <a class="rectangle btnClickable shortcut" href="#">
+                                    <a class="rectangle btnClickable shortcut" href="object.html?objID=3">
                                         <span class="ac-bg"></span>
                                         <h5>AC</h5>
 
@@ -349,21 +271,59 @@
                                             <span class="location-sm">Living Room</span>
                                         </div>
                                         <div class="sideButtons">
-                                            <button class="functionalButton plusBtn"></button>
-                                            <button class="functionalButton minusBtn"></button>
+                                            <button class="functional functionalButton plusBtn"></button>
+                                            <button class="functional functionalButton minusBtn"></button>
                                         </div>
                                         <label class="switch">
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
-                                        <button class="functionalButton star star-empty"></button>
+                                        <button class="functional functionalButton star star-empty"></button>
+                                    </a>
+                                    <a class="rectangle btnClickable shortcut" href="object.html?objID=2">
+                                        <span class="tv-bg"></span>
+                                        <h5>TV</h5>
+                                        <div>
+                                            <span class="location-sm">Living Room</span>
+                                            <div class="centered">
+                                                <button class="functional functionalButton previousBtn"></button>
+                                                <button class="functional functionalButton nextBtn"></button>
+                                            </div>
+                                        </div>
+                                        <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <button class="functional functionalButton star star-full"></button>
                                     </a>
                                 </div>
                             </div>
                             <div class="carousel-item">
                                 <div class="rowContainer">
-                                    <a class="rectangle btnClickable shortcut"></a>
-                                    <a class="rectangle btnClickable shortcut"></a>
+                                    <a class="rectangle btnClickable shortcut" href="object.html?objID=5">
+                                        <span class="lights-upside-bg"></span>
+                                        <h5>Lights</h5>
+                                        <div>
+                                            <input type="range" disabled>
+                                        </div>
+                                        <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <button class="functional functionalButton star star-empty"></button>
+                                    </a>
+                                    <a class="rectangle btnClickable shortcut" href="object.html?objID=4">
+                                        <span class="speakers-bg"></span>
+                                        <h5>Speakers</h5>
+                                        <div>
+                                            <input type="range" disabled>
+                                        </div>
+                                        <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <button class="functional functionalButton star star-empty"></button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -388,7 +348,7 @@
                                         <div class="automationShortcut">
                                             <span>Schedule: Daily at 7:00am</span>
                                         </div>
-                                        <button class="functionalButton star star-empty"></button>
+                                        <button class="functional functionalButton star star-full"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
                                         <span class="home-bg"></span>
@@ -396,7 +356,7 @@
                                         <div class="automationShortcut">
                                             <span>Schedule: on Arrival</span>
                                         </div>
-                                        <button class="functionalButton star star-empty"></button>
+                                        <button class="functional functionalButton star star-full"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
                                         <span class="shield-bg"></span>
@@ -404,7 +364,7 @@
                                         <div class="automationShortcut">
                                             <span>Schedule: on Leave</span>
                                         </div>
-                                        <button class="functionalButton star star-empty"></button>
+                                        <button class="functional functionalButton star star-full"></button>
                                     </a>
                                 </div>
                             </div>

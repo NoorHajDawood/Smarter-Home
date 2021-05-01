@@ -23,7 +23,7 @@
 
 </head>
 
-<body id="listHTML">
+<body>
 
     <header>
         <nav role="navigation" id="navBurger">
@@ -32,7 +32,7 @@
                   A fake / hidden checkbox is used as click reciever,
                   so you can use the :checked selector on it.
                   -->
-                <input type="checkbox" />
+                <input id="burgerInput" type="checkbox" />
 
                 <!--
                   Some spans to act as a hamburger.
@@ -48,32 +48,24 @@
                   Too bad the menu has to be inside of the button
                   but hey, it's pure CSS magic.
                   -->
-
                 <ul id="menuBurger" class="menu">
-
                     <li><a class="profile avatar" href="#">Micheal Rand</a></li>
                     <li>
-
-                        <button class="btn btn-primary home" type="button" data-bs-toggle="collapse"
+                        <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse"
                             data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
                                 data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
                         </button>
-
                         <div class="collapse" id="homes">
-
                             <ul>
-                                <li><a class="profile myhome homeList" href="#">My Home</a></li>
+                                <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
                                 <li><a class="profile addplace homeList" href="#">Add place</a></li>
-
                             </ul>
-
-
                         </div>
                     </li>
                     <hr>
-                    <li><a class="profile roomsButton" href="#">Rooms</a></li>
+                    <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
                     <li><a class="profile devicesButton" href="#">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
                     <li><a class="profile member" href="#">Members</a></li>
@@ -84,25 +76,16 @@
                 </ul>
             </div>
         </nav>
-
-
         <div class="container-fluid"></div>
-
-        <a id="logo" href="#"></a>
+        <a id="logo" href="index.html"></a>
+        <div id="burgerBlur" class="screenBlur"></div>
         <div class="btn-group">
-            <!-- <button type="button" class="btn btn-danger">Action</button> -->
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon noti"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                <li><a class="dropdown-item" href="#">You have no notifications</a></li>
             </ul>
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon search"
                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -115,142 +98,87 @@
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li><a class="dropdown-item" href="#">Security</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
             </ul>
 
 
 
 
         </div>
-        <!-- <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon search" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-          </ul>
-        </div> -->
+   
 
 
 
 
     </header>
     <div class="content">
-        <nav role="navigation" id="navDesktop">
-
-            <ul class="menu">
-
-                <li><a class="profile avatar" href="#">Micheal Rand</a></li>
-                <li>
-
-                    <button class="btn btn-primary home" type="button" data-bs-toggle="collapse" data-bs-target="#homes"
-                        aria-expanded="false" aria-controls="homes">
-                        My Homes
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
-                            data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-                    </button>
-
-                    <div class="collapse" id="homes">
-
-                        <ul>
-                            <li><a class="profile myhome homeList" href="#">My Home</a></li>
-                            <li><a class="profile addplace homeList" href="#">Add place</a></li>
-
-                        </ul>
-
-
-                    </div>
-                </li>
-                <hr>
-                <li><a class="profile roomsButton" href="#">Rooms</a></li>
-                <li><a class="profile devicesButton" href="#">Devices</a></li>
-                <li><a class="profile automationButton" href="#">Automations</a></li>
-                <li><a class="profile member" href="#">Members</a></li>
-                <hr>
-                <li><a class="profile history" href="#">History</a></li>
-                <li><a class="profile setting" href="#"></a></li>
-                <li><a class="profile help" href="#">help</a></li>
-            </ul>
-        </nav>
         <div id="wrapper">
+            <nav id="breadNav"
+                style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+                aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Rooms</li>
+                </ol>
+            </nav>
             <h1>Rooms</h1>
             <button class="functionalButton toolsBtn"></button>
             <main id="rooms">
                 <section class="listContaier">
-                    <!-- <div class="d-flex">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-secondary btnClickable dropDown">Sort: Cameras</button>
-                            <button type="button"
-                                class="btn btn-secondary dropdown-toggle dropdown-toggle-split btnClickable dropDownToggle"
-                                id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false"
-                                data-bs-reference="parent">
-                                <span class="visually-hidden">Cameras</span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-                                <li><a class="dropdown-item" href="#">Cameras</a></li>
-                                <li><a class="dropdown-item" href="#">Favorites</a></li>
-                                <li><a class="dropdown-item" href="#">Media</a></li>
-                            </ul>
-                        </div>
-                    </div> -->
-                    <select id="previewSelector" class="form-select selector" aria-label="Default select example">
-                        <option value="Admin">Alphabetical</option>
-                        <option value="Guest" selected>Frequently Used</option>
-                        <option value="Normal">Favorites</option>
+
+                    <span>Sort: </span>
+                    <select id="previewSelector" class="form-select selector d-inline"
+                        aria-label="Default select example">
+                        <option value="power">Power Consumption</option>
+                        <option value="count" selected>Device Count</option>
+                        <option value="name">Alphabetically</option>
                     </select>
                     <div class="rowContainer listItems">
-                        <a class="rectangle btnClickable listItem" href="#">
+                        <a class="rectangle btnClickable listItem" href="devicesList.html?roomID=1">
                             <span class="livingroom-bg"></span>
                             <h5>Living Room</h5>
                             <div>
-                                <span>15 Devices</span>
+                                <span>5 Devices</span>
                                 <span class="temp-md">22 ℃</span>
                             </div>
                         </a>
-                        <a class="rectangle btnClickable listItem" href="#">
+                        <a class="rectangle btnClickable listItem" href="devicesList.html?roomID=2">
                             <span class="kitchen-bg"></span>
                             <h5>Kitchen</h5>
                             <div>
-                                <span>15 Devices</span>
+                                <span>5 Devices</span>
                                 <span class="temp-md">22 ℃</span>
                             </div>
                         </a>
-                        <a class="rectangle btnClickable listItem" href="#">
+                        <a class="rectangle btnClickable listItem" href="devicesList.html?roomID=3">
                             <span class="bedroom-bg"></span>
                             <h5>Bedroom 1</h5>
                             <div>
-                                <span>15 Devices</span>
+                                <span>3 Devices</span>
                                 <span class="temp-md">22 ℃</span>
                             </div>
                         </a>
-                        <a class="rectangle btnClickable listItem" href="#">
+                        <a class="rectangle btnClickable listItem" href="devicesList.html?roomID=4">
                             <span class="bedroom-bg"></span>
                             <h5>Bedroom 2</h5>
                             <div>
-                                <span>15 Devices</span>
+                                <span>2 Devices</span>
                                 <span class="temp-md">22 ℃</span>
                             </div>
                         </a>
-                        <a class="rectangle btnClickable listItem" href="#">
-                            <span class="bedroom-bg"></span>
+                        <a class="rectangle btnClickable listItem" href="devicesList.html?roomID=5">
+                            <span class="bathroom-bg"></span>
                             <h5>Bathroom</h5>
                             <div>
-                                <span>15 Devices</span>
+                                <span>1 Devices</span>
                                 <span class="temp-md">22 ℃</span>
                             </div>
                         </a>
                     </div>
                 </section>
-                
+
             </main>
         </div>
     </div>
@@ -258,7 +186,7 @@
         <nav>
             <ul>
                 <li><a class="homeButton-gray" href="index.html"><span>Home</span></a></li>
-                <li  class="selected"><a class="roomsButton" href="roomsList.html"><span>Rooms</span></a></li>
+                <li class="selected"><a class="roomsButton" href="roomsList.html"><span>Rooms</span></a></li>
                 <li><a class="devicesButton-gray" href="#"><span>Devices</span></a></li>
                 <li><a class="automationButton-gray" href="#"><span>Automation</span></a></li>
             </ul>

@@ -28,10 +28,11 @@
 	<body>
 
         <div id="wrapper">
-        <section class="addDevice">
+            
+            <form class="addDevice" action="http://se.shenkar.ac.il/teach/web1/2021/get_form3.php" method="GET">
                <h2>Add Device</h3>
                 <h6>Category:</h6>
-                <select class="form-select" aria-label="Default select example">
+                <select name="category" class="form-select" aria-label="Default select example">
                     <option value="" disabled selected>Category</option>
                   
                     <option value="Cleaning">Cleaning</option>
@@ -41,7 +42,7 @@
 
                 </select>
                 <h6>Device Type:</h6>
-                <select class="form-select" aria-label="Default select example" >
+                <select name="type" class="form-select" aria-label="Default select example" >
                     <option value="" disabled selected>Device Type</option>
                   
                     <option value="Admin">Light</option>
@@ -53,9 +54,9 @@
                     
                 </select>
                 <h6>Device Name:</h6>
-                <input class="form-control" type="text" placeholder="Device Name">
+                <input name="name" class="form-control" type="text" placeholder="Device Name">
                 <h6>Location:</h6>
-                <select class="form-select" aria-label="Default select example">
+                <select name="location" class="form-select" aria-label="Default select example">
                     <option value="" disabled selected>Location</option>
                  
                     <option value="Admin">Living Room</option>
@@ -70,12 +71,12 @@
                 
                 <section class="submite-cancel">
                     
-                    <button type="button" class="btn btn-dark ">Cancel</button>
+                    <button type="button" class="btn btn-dark">Cancel</button>
                        <div class="vertical-line-1"></div>
-                    <button type="button" class="btn btn-success">Add</button>
+                    <input type="submit" value="Add" class="btn btn-success"></button>
                 </section>
                 
-        </section>
+            </form>
     </div>
 
 	</body>

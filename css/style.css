@@ -11,8 +11,9 @@ body {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     padding-bottom: 40px;
     padding-top: 50px;
-    /* height: 100%; */
-    /* min-height: 1000px; */
+    position: relative;
+    height: 100%;
+    min-height: 100vh;
 }
 
 header {
@@ -22,8 +23,7 @@ header {
     background-color: #f7f6f6;
     height: 50px;
     display: flex;
-    /* margin-bottom: 50px; */
-    z-index: 999;
+    z-index: 990;
 }
 
 #logo {
@@ -34,7 +34,6 @@ header {
     height: 46px;
     background-size: cover;
     background-repeat: no-repeat;
-    /* top: 50%; */
     left: 50%;
     transform: translate(-50%);
     z-index: 9999;
@@ -119,7 +118,6 @@ h1 {
 }
 
 .homeList {
-    /* height: 31px; */
     line-height: 31px;
     text-indent: 40px;
 }
@@ -133,7 +131,6 @@ h1 {
     display: block;
     margin-bottom: 10px;
 }
-
 .preview {
     height: 170px;
     margin-top: 10px;
@@ -142,7 +139,6 @@ h1 {
 .rowContainer {
     display: flex;
     width: 100%;
-    /* flex-wrap: wrap; */
 }
 
 .ham {
@@ -218,24 +214,31 @@ footer .selected>a {
 .homeButton {
     background-image: url(../images/home_icon.png);
 }
+
 .roomsButton {
     background-image: url(../images/rooms_icon.png);
 }
+
 .devicesButton {
     background-image: url(../images/devices_icon.png);
 }
+
 .automationButton {
     background-image: url(../images/automation_icon.png);
 }
+
 .homeButton-gray {
     background-image: url(../images/home_icon_gray.png);
 }
+
 .roomsButton-gray {
     background-image: url(../images/rooms_icon_gray.png);
 }
+
 .devicesButton-gray {
     background-image: url(../images/devices_icon_gray.png);
 }
+
 .automationButton-gray {
     background-image: url(../images/automation_icon_gray.png);
 }
@@ -306,9 +309,7 @@ main hr {
 
 .shortcut {
     display: flex;
-    /* width: 30%; */
     width: 105px;
-    /* background-color: white; */
     flex-flow: column;
     position: relative;
 }
@@ -326,7 +327,6 @@ main hr {
     position: absolute;
     top: 5px;
     left: 20px;
-    /* float: left; */
 }
 
 .listBtn {
@@ -334,7 +334,6 @@ main hr {
     position: absolute;
     top: 5px;
     left: 20px;
-    /* float: left; */
 }
 
 .toolsBtn {
@@ -342,7 +341,7 @@ main hr {
     position: absolute;
     top: 5px;
     right: 20px;
-    /* float: right; */
+    background-size: 24px 24px;
 }
 
 .star {
@@ -421,9 +420,15 @@ main hr {
 .carousel-item {
     padding: 2px;
 }
+
 .selector {
     margin-bottom: 10px;
     width: 200px;
+}
+
+.small-hr {
+    width: 80%;
+    margin: 5px auto;
 }
 
 .home {
@@ -439,6 +444,13 @@ main hr {
     padding: 0;
 }
 
+.clearToggle:focus {
+    background-color: transparent;
+    border: none;
+    color: black;
+    box-shadow: none;
+}
+
 .myhome {
     background-image: url(../images/full_home_icon.png);
     background-repeat: no-repeat;
@@ -447,7 +459,7 @@ main hr {
     color: black;
 }
 
-#mediaSection>iframe{
+#mediaSection>iframe {
     border-radius: 10px;
 }
 
@@ -460,15 +472,11 @@ main hr {
     right: 5px;
 }
 
-/* Hide default HTML checkbox */
-
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-
-/* The slider */
 
 .slider {
     position: absolute;
@@ -507,8 +515,6 @@ input:checked+.slider:before {
     -ms-transform: translateX(13px);
     transform: translateX(13px);
 }
-
-/* Rounded sliders */
 
 .slider.round {
     border-radius: 34px;
@@ -584,8 +590,6 @@ input:checked+.slider:before {
     flex-flow: column;
     justify-content: space-between;
     height: 40px;
-    /* width: 100%;
-    height: 100%; */
     right: 5px;
     top: 30px;
 }
@@ -593,8 +597,6 @@ input:checked+.slider:before {
 #menuToggle {
     width: 30px;
     height: 30px;
-    /* width: 300px;
-    height: 100vh; */
     display: block;
     position: absolute;
     top: 15px;
@@ -623,15 +625,9 @@ input:checked+.slider:before {
     left: -5px;
     cursor: pointer;
     opacity: 0;
-    /* hide this */
     z-index: 2;
-    /* and place it over the hamburger */
     -webkit-touch-callout: none;
 }
-
-/*
- * Just a quick hamburger
- */
 
 #menuToggle span {
     display: block;
@@ -654,54 +650,28 @@ input:checked+.slider:before {
     transform-origin: 0% 100%;
 }
 
-/* 
- * Transform all the slices of hamburger
- * into a crossmark.
- */
-
 #menuToggle input:checked~span {
     opacity: 1;
     transform: rotate(45deg) translate(-2px, -1px);
     background: #232323;
 }
 
-/*
- * But let's hide the middle one.
- */
-
 #menuToggle input:checked~span:nth-last-child(3) {
     opacity: 0;
     transform: rotate(0deg) scale(0.2, 0.2);
 }
 
-/*
- * Ohyeah and the last one should go the other direction
- */
-
 #menuToggle input:checked~span:nth-last-child(2) {
     transform: rotate(-45deg) translate(0, -1px);
 }
 
-/*
- * Make this absolute positioned
- * at the top left of the screen
- */
-
-/* 
- .abs{
-    position: absolute;
-    top: 15px;
-    left: 15px;
-} */
-
 #menuBurger {
-    /* height: 100vh; */
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     width: 300px;
     -webkit-font-smoothing: antialiased;
     position: absolute;
     margin: -35px 0 0 -15px;
-    /* padding: 50px; */
     padding-top: 60px;
     background: white;
     border-right: solid 1px #ebebeb;
@@ -709,33 +679,18 @@ input:checked+.slider:before {
     transform: translate(-100%, 0);
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
     overflow: auto;
-    /* display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start; */
 }
 
 #menuBurger>li {
     width: 100%;
 }
 
-/* #menuBurger>hr {
-    display: block;
-    width: 100%;
-} */
-
 .help-setting {
     width: 100%;
     height: 40px;
-    /* display: flex; */
-    /* height: auto; */
     position: absolute;
     bottom: 0px;
     left: 0px;
-    /* display:flex;
-    justify-content: space-between; */
-    /* flex-wrap: wrap; */
-    /* justify-content: flex-end; */
-    /* align-content:flex-end ; */
     background-color: red;
 }
 
@@ -746,8 +701,6 @@ input:checked+.slider:before {
     position: absolute;
     bottom: 5px;
     left: 10px;
-    /* align-self: flex-end;
-    justify-self: flex-start; */
 }
 
 .help {
@@ -757,8 +710,6 @@ input:checked+.slider:before {
     right: 10px;
     text-indent: 30px;
     line-height: 24px;
-    /* align-self: flex-end; */
-    /* justify-self: flex-end; */
 }
 
 .menu li {
@@ -780,17 +731,13 @@ input:checked+.slider:before {
     box-shadow: none;
 }
 
-/*
- * And let's slide it in from the left
- */
-
 #menuToggle input:checked~ul {
     transform: none;
 }
 
 #navBurger {
     display: block;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
     z-index: 1000;
@@ -810,13 +757,7 @@ input:checked+.slider:before {
     max-width: 340px;
 }
 
-#navDesktop {
-    display: none;
-}
-
 .listContaier {
-    /* display: flex; */
-    /* flex-flow: wrap; */
     margin-top: 10px;
     width: 100%;
     min-width: 300px;
@@ -827,8 +768,6 @@ input:checked+.slider:before {
     flex-flow: wrap;
     margin-top: 10px;
 }
-
-/* obj version */
 
 .infoSection {
     font-weight: bold;
@@ -877,7 +816,15 @@ input:checked+.slider:before {
 .edit {
     background-image: url(../images/edit_icon.png);
 }
-
+.trash {
+    background-image: url(../images/delete_icon.png);
+}
+#tools-menu {
+    width: 30px;
+    min-width: 0;
+    border: solid 2px;
+    border-radius: 20px;
+}
 #objectMain .plusBtn {
     float: right;
 }
@@ -901,12 +848,9 @@ input:checked+.slider:before {
 }
 
 .buttonautomation {
-    /* background-color: #04AA6D; */
     border: none;
-    /* padding: 10px; */
     text-align: center;
     text-decoration: none;
-    /* display: block; */
     color: #7a7a7a;
     text-indent: -5px;
     font-weight: bold;
@@ -964,7 +908,7 @@ input:checked+.slider:before {
     color: #7a7a7a;
 }
 
-.volume>.form-range {
+.volume>input {
     width: 140px;
     position: absolute;
     top: -3px;
@@ -980,7 +924,6 @@ input:checked+.slider:before {
     background-image: url(../images/temp_md.png);
     text-indent: 15px;
     height: 20px;
-    /* background-position-x: -5px; */
 }
 
 .livingroom-bg {
@@ -995,7 +938,7 @@ input:checked+.slider:before {
     background-image: url(../images/bedroom_big_icon.png);
 }
 
-.bedroom-bg {
+.bathroom-bg {
     background-image: url(../images/bathroom_big_icon.png);
 }
 
@@ -1075,11 +1018,9 @@ input:checked+.slider:before {
 
 .submite-cancel {
     display: flex;
-    /* margin: 0 auto; */
     width: 100%;
     justify-content: space-evenly;
     margin-top: 20px;
-    /* margin-left: 10px ; */
 }
 
 .ac-buttons {
@@ -1121,8 +1062,41 @@ input:checked+.slider:before {
 .ac-cycle {
     background-image: url(../images/ac_cycle.png);
 }
-.automationShortcut{
-    display: none;;
+
+.automationShortcut {
+    display: none;
+    ;
+}
+
+#breadNav {
+    display: none;
+    position: absolute;
+    top: 10px;
+    font-size: 14px;
+}
+
+#breadNav a:hover {
+    text-decoration: underline;
+}
+
+.headerIcon:hover {
+    background-color: transparent;
+}
+
+.screenBlur {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    opacity: 0%;
+    z-index: 1;
+}
+.addDevice {
+    position: absolute;
+    z-index: 2000;
 }
 @media screen and (max-width: 800px) {
     #automationSection a>span {
@@ -1149,6 +1123,9 @@ input:checked+.slider:before {
         width: 24px;
         background-size: 24px 24px;
     }
+    .shortcut>div input {
+        width: 70%;
+    }
 }
 
 @media screen and (min-width: 800px) {
@@ -1166,11 +1143,9 @@ input:checked+.slider:before {
     }
     #favoriteSection {
         float: right;
-        /* margin-left: 70px; */
     }
     #automationSection {
         float: right;
-        /* margin-left: 70px; */
     }
     .rowContainer {
         flex-wrap: wrap;
@@ -1218,9 +1193,23 @@ input:checked+.slider:before {
         margin-top: 2px;
         color: #7a7a7a;
     }
-    .automationShortcut
-    {
+    .shortcut .star {
+        left: auto;
+        right: 40px;
+    }
+    .automationShortcut {
         display: block;
+    }
+    #breadNav {
+        display: block;
+    }
+    .gridBtn {
+        left: auto;
+        right: 60px;
+    }
+    .listBtn {
+        left: auto;
+        right: 60px
     }
 }
 
@@ -1231,33 +1220,33 @@ input:checked+.slider:before {
     .content {
         height: 100%;
         display: flex;
+        padding-left: 300px;
     }
     #wrapper {
         width: 1000px;
+        opacity: 1;
     }
     header {
         border-bottom: solid 1px #ebebeb;
     }
-    #navBuger, #menuToggle {
-        display: none;
+    #menuBurger {
+        top: 35px;
+        left: 15px;
+        transform: translate(0%, 0);
     }
-    #navDesktop {
-        position: sticky;
-        top: 0;
-        left: 0;
-        display: block;
-        width: 300px;
-        height: 94vh;
-        min-height: 750px;
-        background-color: #f7f6f6;
-        border-right: solid 1px #ebebeb;
-        z-index: 1000;
-        /* overflow: auto; */
+    #menuToggle {
+        position: unset;
+    }
+    #menuToggle>span, #menuToggle>input {
+        display: none;
     }
     .menu {
         height: 100%;
     }
     footer {
         display: none;
+    }
+    .screenBlur {
+        display: none !important;
     }
 }

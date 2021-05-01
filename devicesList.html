@@ -23,7 +23,7 @@
 
 </head>
 
-<body id="listHTML">
+<body>
 
     <header>
         <nav role="navigation" id="navBurger">
@@ -32,7 +32,7 @@
                   A fake / hidden checkbox is used as click reciever,
                   so you can use the :checked selector on it.
                   -->
-                <input type="checkbox" />
+                <input id="burgerInput" type="checkbox" />
 
                 <!--
                   Some spans to act as a hamburger.
@@ -49,12 +49,15 @@
                   but hey, it's pure CSS magic.
                   -->
 
+
+
+
                 <ul id="menuBurger" class="menu">
 
                     <li><a class="profile avatar" href="#">Micheal Rand</a></li>
                     <li>
 
-                        <button class="btn btn-primary home" type="button" data-bs-toggle="collapse"
+                        <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse"
                             data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
@@ -64,7 +67,7 @@
                         <div class="collapse" id="homes">
 
                             <ul>
-                                <li><a class="profile myhome homeList" href="#">My Home</a></li>
+                                <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
                                 <li><a class="profile addplace homeList" href="#">Add place</a></li>
 
                             </ul>
@@ -73,7 +76,7 @@
                         </div>
                     </li>
                     <hr>
-                    <li><a class="profile roomsButton" href="#">Rooms</a></li>
+                    <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
                     <li><a class="profile devicesButton" href="#">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
                     <li><a class="profile member" href="#">Members</a></li>
@@ -81,28 +84,28 @@
                     <li><a class="profile history" href="#">History</a></li>
                     <li><a class="profile setting" href="#"></a></li>
                     <li><a class="profile help" href="#">help</a></li>
+
+
                 </ul>
+
+
             </div>
         </nav>
 
 
         <div class="container-fluid"></div>
 
-        <a id="logo" href="#"></a>
+        <a id="logo" href="index.html"></a>
+
+        <div id="burgerBlur" class="screenBlur"></div>
+
         <div class="btn-group">
-            <!-- <button type="button" class="btn btn-danger">Action</button> -->
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon noti"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                <li><a class="dropdown-item" href="#">You have no notifications</a></li>
             </ul>
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon search"
                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -115,103 +118,61 @@
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li><a class="dropdown-item" href="#">Security</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
             </ul>
 
 
 
 
         </div>
-        <!-- <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon search" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-          </ul>
-        </div> -->
+   
 
 
 
 
     </header>
     <div class="content">
-        <nav role="navigation" id="navDesktop">
-
-            <ul class="menu">
-
-                <li><a class="profile avatar" href="#">Micheal Rand</a></li>
-                <li>
-
-                    <button class="btn btn-primary home" type="button" data-bs-toggle="collapse" data-bs-target="#homes"
-                        aria-expanded="false" aria-controls="homes">
-                        My Homes
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
-                            data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-                    </button>
-
-                    <div class="collapse" id="homes">
-
-                        <ul>
-                            <li><a class="profile myhome homeList" href="#">My Home</a></li>
-                            <li><a class="profile addplace homeList" href="#">Add place</a></li>
-
-                        </ul>
-
-
-                    </div>
-                </li>
-                <hr>
-                <li><a class="profile roomsButton" href="#">Rooms</a></li>
-                <li><a class="profile devicesButton" href="#">Devices</a></li>
-                <li><a class="profile automationButton" href="#">Automations</a></li>
-                <li><a class="profile member" href="#">Members</a></li>
-                <hr>
-                <li><a class="profile history" href="#">History</a></li>
-                <li><a class="profile setting" href="#"></a></li>
-                <li><a class="profile help" href="#">help</a></li>
-            </ul>
-        </nav>
         <div id="wrapper">
+            <nav id="breadNav"
+                style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+                aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="roomsList.html">Rooms</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Living Room</li>
+                </ol>
+            </nav>
             <h1>Living Room</h1>
-            <button class="functionalButton toolsBtn"></button>
-            <button class="functionalButton listBtn"></button>
+            <!-- <button id="tools" class="functional functionalButton toolsBtn"></button> -->
+            <button id="tools" type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon toolsBtn"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul id="tools-menu" class="dropdown-menu">
+                <li> <button type="button" class="functionalButton edit " ></button></li>
+                <li> <button type="button" class="functionalButton trash " ></button></li>
+                <li> <button type="button" class="functionalButton plusBtn " ></button></li>
+            </ul>
+            <button class="functional functionalButton listBtn"></button>
             <main id="devicesList">
                 <section class="listContaier">
-                    <div class="d-flex">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-secondary btnClickable dropDown">Sort: Cameras</button>
-                            <button type="button"
-                                class="btn btn-secondary dropdown-toggle dropdown-toggle-split btnClickable dropDownToggle"
-                                id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false"
-                                data-bs-reference="parent">
-                                <span class="visually-hidden">Cameras</span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-                                <li><a class="dropdown-item" href="#">Cameras</a></li>
-                                <li><a class="dropdown-item" href="#">Favorites</a></li>
-                                <li><a class="dropdown-item" href="#">Media</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <span>Sort: </span>
+                    <select id="previewSelector" class="form-select selector d-inline" aria-label="Default select example">
+                        <option value="power">Power Consumption</option>
+                        <option value="count" selected>Frequently Used</option>
+                        <option value="name">Favorite</option>
+                    </select>
                     <div class="rowContainer listItems">
-                        <a class="rectangle btnClickable listItem" href="#">
+                        <a class="rectangle btnClickable listItem" href="object.html?objID=2">
                             <span class="tv-bg"></span>
-                            <h5>Samsung 27"</h5>
+                            <h5>TV</h5>
                             <div>
                                 <span class="remote-md">Yes Action</span>
-                                <div class="position-relative volume">
+                                <div class="functional position-relative volume">
                                     <span class="speakers-md"></span>
-                                    <input type="range" class="form-range" id="customRange1">
+                                    <input type="range" class="functional">
                                 </div>
 
                             </div>
@@ -219,37 +180,37 @@
                                 <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
-                            <button class="functionalButton star star-empty"></button>
+                            <button class="functional functional functionalButton star star-full"></button>
                             <div class="sideButtons">
-                                <button class="functionalButton nextVertical"></button>
-                                <button class="functionalButton previousVertical"></button>
+                                <button class="functional functional functionalButton nextVertical"></button>
+                                <button class="functional functional functionalButton previousVertical"></button>
                             </div>
                         </a>
-                        <a class="rectangle btnClickable listItem" href="#">
+                        <a class="rectangle btnClickable listItem" href="object.html?objID=3">
                             <span class="ac-bg"></span>
-                            <h5>Tadiran</h5>
+                            <h5>AC</h5>
                             <div>
                                 <span class="temp-md">22 ℃</span>
                                 <div class="ac-buttons">
-                                    <button class="ac-night"></button>
-                                    <button class="ac-clock"></button>
-                                    <button class="ac-hot"></button>
-                                    <button class="ac-cold"></button>
-                                    <button class="ac-water"></button>
-                                    <button class="ac-cycle"></button>
+                                    <button class="functional ac-night"></button>
+                                    <button class="functional ac-clock"></button>
+                                    <button class="functional ac-hot"></button>
+                                    <button class="functional ac-cold"></button>
+                                    <button class="functional ac-water"></button>
+                                    <button class="functional ac-cycle"></button>
                                 </div>
                             </div>
                             <label class="switch">
                                 <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
-                            <button class="functionalButton star star-empty"></button>
+                            <button class="functional functional functionalButton star star-empty"></button>
                             <div class="sideButtons">
-                                <button class="functionalButton plusBtn"></button>
-                                <button class="functionalButton minusBtn"></button>
+                                <button class="functional functional functionalButton plusBtn"></button>
+                                <button class="functional functional functionalButton minusBtn"></button>
                             </div>
                         </a>
-                        <a class="rectangle btnClickable listItem" href="#">
+                        <a class="rectangle btnClickable listItem" href="object.html?objID=1">
                             <span class="vac-bg"></span>
                             <h5>iVacuum</h5>
                             <div class="tighter">
@@ -260,35 +221,83 @@
                                 <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
-                            <button class="functionalButton star star-empty"></button>
+                            <button class="functional functional functionalButton star star-full"></button>
                         </a>
-                        <a class="rectangle btnClickable listItem" href="#">
+                        <a class="rectangle btnClickable listItem" href="object.html?objID=5">
                             <span class="lights-upside-bg"></span>
-                            <h5>Main Lights</h5>
+                            <h5>Lights</h5>
                             <div>
-                                <input type="range" class="form-range" id="customRange1">
+                                <input type="range" class="functional" disabled>
                             </div>
                             <label class="switch">
                                 <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
-                            <button class="functionalButton star star-empty"></button>
+                            <button class="functional functional functionalButton star star-empty"></button>
                         </a>
-                        <a class="rectangle btnClickable listItem" href="#">
+                        <a class="rectangle btnClickable listItem" href="object.html?objID=46">
                             <span class="speakers-bg"></span>
                             <h5>Speakers</h5>
                             <div>
-                                <input type="range" class="form-range" id="customRange1">
+                                <input type="range" class="functional" disabled>
                             </div>
                             <label class="switch">
                                 <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
-                            <button class="functionalButton star star-empty"></button>
+                            <button class="functional functional functionalButton star star-empty"></button>
                         </a>
                     </div>
                 </section>
-
+                <div id="formBlur" class="screenBlur"></div>
+                <form class="addDevice d-none" action="http://se.shenkar.ac.il/teach/web1/2021/get_form3.php" method="GET">
+                    <h2>Add Device</h3>
+                     <h6>Category:</h6>
+                     <select name="category" class="form-select" aria-label="Default select example">
+                         <option value="" disabled selected>Category</option>
+                       
+                         <option value="Cleaning">Cleaning</option>
+                         <option value="Televisions">Televisions</option>
+                         <option value="Lights">Lights</option>
+                         <option value="Lights">New Category</option>
+     
+                     </select>
+                     <h6>Device Type:</h6>
+                     <select name="type" class="form-select" aria-label="Default select example" >
+                         <option value="" disabled selected>Device Type</option>
+                       
+                         <option value="Admin">Light</option>
+                         <option value="Guest">Smart Lock</option>
+                         <option value="Normal">Speakers</option>
+                         <option value="Normal">Vacuum</option>
+                         
+     
+                         
+                     </select>
+                     <h6>Device Name:</h6>
+                     <input name="name" class="form-control" type="text" placeholder="Device Name">
+                     <h6>Location:</h6>
+                     <select name="location" class="form-select" aria-label="Default select example">
+                         <option value="" disabled selected>Location</option>
+                      
+                         <option value="Admin">Living Room</option>
+                         <option value="Guest">Bedroom 1</option>
+                         <option value="Normal">Bedroom 2</option>
+                         <option value="Normal">Kitchen</option>
+                         <option value="Normal">none</option>
+     
+                     </select>
+     
+                  
+                     
+                     <section class="submite-cancel">
+                         
+                         <button type="button" class="btn btn-dark">Cancel</button>
+                            <div class="vertical-line-1"></div>
+                         <input type="submit" value="Add" class="btn btn-success"></button>
+                     </section>
+                     
+                 </form>
             </main>
         </div>
     </div>

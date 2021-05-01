@@ -32,7 +32,7 @@
                   A fake / hidden checkbox is used as click reciever,
                   so you can use the :checked selector on it.
                   -->
-                <input type="checkbox" />
+                <input id="burgerInput" type="checkbox" />
 
                 <!--
                   Some spans to act as a hamburger.
@@ -49,12 +49,15 @@
                   but hey, it's pure CSS magic.
                   -->
 
+
+
+
                 <ul id="menuBurger" class="menu">
 
                     <li><a class="profile avatar" href="#">Micheal Rand</a></li>
                     <li>
 
-                        <button class="btn btn-primary home" type="button" data-bs-toggle="collapse"
+                        <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse"
                             data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
@@ -64,7 +67,7 @@
                         <div class="collapse" id="homes">
 
                             <ul>
-                                <li><a class="profile myhome homeList" href="#">My Home</a></li>
+                                <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
                                 <li><a class="profile addplace homeList" href="#">Add place</a></li>
 
                             </ul>
@@ -73,7 +76,7 @@
                         </div>
                     </li>
                     <hr>
-                    <li><a class="profile roomsButton" href="#">Rooms</a></li>
+                    <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
                     <li><a class="profile devicesButton" href="#">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
                     <li><a class="profile member" href="#">Members</a></li>
@@ -81,28 +84,28 @@
                     <li><a class="profile history" href="#">History</a></li>
                     <li><a class="profile setting" href="#"></a></li>
                     <li><a class="profile help" href="#">help</a></li>
+
+
                 </ul>
+
+
             </div>
         </nav>
 
 
         <div class="container-fluid"></div>
 
-        <a id="logo" href="#"></a>
+        <a id="logo" href="index.html"></a>
+
+        <div id="burgerBlur" class="screenBlur"></div>
+
         <div class="btn-group">
-            <!-- <button type="button" class="btn btn-danger">Action</button> -->
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon noti"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                <li><a class="dropdown-item" href="#">You have no notifications</a></li>
             </ul>
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon search"
                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -115,74 +118,34 @@
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li><a class="dropdown-item" href="#">Security</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
             </ul>
 
 
 
 
         </div>
-        <!-- <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon search" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-          </ul>
-        </div> -->
+   
 
 
 
 
     </header>
     <div class="content">
-        <nav role="navigation" id="navDesktop">
-
-            <ul class="menu">
-
-                <li><a class="profile avatar" href="#">Micheal Rand</a></li>
-                <li>
-
-                    <button class="btn btn-primary home" type="button" data-bs-toggle="collapse" data-bs-target="#homes"
-                        aria-expanded="false" aria-controls="homes">
-                        My Homes
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
-                            data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-                    </button>
-
-                    <div class="collapse" id="homes">
-
-                        <ul>
-                            <li><a class="profile myhome homeList" href="#">My Home</a></li>
-                            <li><a class="profile addplace homeList" href="#">Add place</a></li>
-
-                        </ul>
-
-
-                    </div>
-                </li>
-                <hr>
-                <li><a class="profile roomsButton" href="#">Rooms</a></li>
-                <li><a class="profile devicesButton" href="#">Devices</a></li>
-                <li><a class="profile automationButton" href="#">Automations</a></li>
-                <li><a class="profile member" href="#">Members</a></li>
-                <hr>
-                <li><a class="profile history" href="#">History</a></li>
-                <li><a class="profile setting" href="#"></a></li>
-                <li><a class="profile help" href="#">help</a></li>
-            </ul>
-        </nav>
         <div id="wrapper">
-            <h1>Vacuum</h1>
+            <nav id="breadNav"
+                style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+                aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="roomsList.html">Rooms</a></li>
+                    <li class="breadcrumb-item active"><a href="devicesList.html">Living Room</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">iVacuum</li>
+                </ol>
+            </nav>
+            <h1>iVacuum</h1>
             <main id="objectMain">
                 <section class="infoSection">
                     <span>Status: off</span>
@@ -200,14 +163,14 @@
                 <hr>
                 <section class="autosection">
                     <h4>Automation</h4>
-                    <button class="functionalButton edit"></button>
-                    <button class="functionalButton plusBtn"></button>
+                    <button class="functional functionalButton edit"></button>
+                    <button class="functional functionalButton plusBtn"></button>
                     <div class="clear"></div>
 
                     <div class="position-relative">
 
 
-                        <button class="btn btn-primary clearToggle" type="button" data-bs-toggle="collapse"
+                        <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse"
                             data-bs-target="#automation1" aria-expanded="false" aria-controls="automation1">
                             Quick clean
                             <button type="button" class="btn btn-secondary dropdown-toggle clearToggle"
@@ -219,23 +182,19 @@
 
                             <div class="checkboxList">
                                 <div class="form-check">
-                                    <input type="checkbox"  class="form-check-input"
-                                        value="volunteering" id="interest1">
+                                    <input type="checkbox" class="form-check-input" value="volunteering" id="interest1">
                                     <label for="interest1" class="form-check-label">Living Room.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox"  class="form-check-input" value="community"
-                                        id="interest2">
+                                    <input type="checkbox" class="form-check-input" value="community" id="interest2">
                                     <label for="interest2" class="form-check-label">Bedroom 1.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox"  class="form-check-input" value="reading"
-                                        id="interest3">
+                                    <input type="checkbox" class="form-check-input" value="reading" id="interest3">
                                     <label for="interest3" class="form-check-label">Bedroom 2.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox"  class="form-check-input" value="hiking"
-                                        id="interest4">
+                                    <input type="checkbox" class="form-check-input" value="hiking" id="interest4">
                                     <label for="interest4" class="form-check-label">Kitchen.</label>
                                 </div>
                             </div>
@@ -248,18 +207,21 @@
                         </label>
 
                     </div>
-                    <hr>
+                    <hr class="small-hr">
                     <div class="position-relative">
 
 
-                        <button class="btn btn-primary clearToggle" type="button" data-bs-toggle="collapse"
+                        <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse"
                             data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2">
                             My schedule
                             <button type="button" class="btn btn-secondary dropdown-toggle clearToggle"
                                 data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false"
                                 aria-controls="automation2"></button>
                         </button>
-
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
                         <div class="collapse" id="automation2">
 
                             <div class="checkboxList">
@@ -276,37 +238,30 @@
                                     <div class="form-group row">
                                         <label for="example-time-input" class="col-2 col-form-label">Time:</label>
                                         <div class="col-5">
-                                          <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                                            <input class="form-control" type="time" value="13:45:00"
+                                                id="example-time-input">
                                         </div>
-                                      </div>
-                                    
+                                    </div>
+
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox"  class="form-check-input"
-                                        value="volunteering" id="interest1">
+                                    <input type="checkbox" class="form-check-input" value="volunteering" id="interest1">
                                     <label for="interest1" class="form-check-label">Living Room.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox"  class="form-check-input"
-                                        value="community" id="interest2">
+                                    <input type="checkbox" class="form-check-input" value="community" id="interest2">
                                     <label for="interest2" class="form-check-label">Bedroom 1.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox"  class="form-check-input"
-                                        value="reading" id="interest3">
+                                    <input type="checkbox" class="form-check-input" value="reading" id="interest3">
                                     <label for="interest3" class="form-check-label">Bedroom 2.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox"  class="form-check-input"
-                                        value="hiking" id="interest4">
+                                    <input type="checkbox" class="form-check-input" value="hiking" id="interest4">
                                     <label for="interest4" class="form-check-label">Kitchen.</label>
                                 </div>
 
                             </div>
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
                         </div>
                         <hr>
 
@@ -320,24 +275,8 @@
                                 <option value="Guest">Guest</option>
                                 <option value="Normal">Normal</option>
                             </select>
-
-
-
-                            
-                                <!-- <label >Permission:</label>
-                                <select >
-                                  <option value="Admin">Admin</option>
-                                  <option value="Guest">Guest</option>
-                                  <option value="Normal">Normal</option>
-                                  
-                                </select>  -->
-
-
-
                         </section>
-
                 </section>
-               
             </main>
         </div>
     </div>
