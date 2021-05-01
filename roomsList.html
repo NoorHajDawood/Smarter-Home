@@ -186,7 +186,7 @@
             <button class="functionalButton toolsBtn"></button>
             <main id="rooms">
                 <section class="listContaier">
-                    <div class="d-flex">
+                    <!-- <div class="d-flex">
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary btnClickable dropDown">Sort: Cameras</button>
                             <button type="button"
@@ -201,7 +201,12 @@
                                 <li><a class="dropdown-item" href="#">Media</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
+                    <select id="previewSelector" class="form-select selector" aria-label="Default select example">
+                        <option value="Admin">Alphabetical</option>
+                        <option value="Guest" selected>Frequently Used</option>
+                        <option value="Normal">Favorites</option>
+                    </select>
                     <div class="rowContainer listItems">
                         <a class="rectangle btnClickable listItem" href="#">
                             <span class="livingroom-bg"></span>
@@ -252,10 +257,10 @@
     <footer>
         <nav>
             <ul>
-                <li class="selected"><a class="homeButton" href=""><span>Home</span></a></li>
-                <li><a class="roomsButton" href=""><span>Rooms</span></a></li>
-                <li><a class="devicesButton" href=""><span>Devices</span></a></li>
-                <li><a class="automationButton" href=""><span>Automation</span></a></li>
+                <li><a class="homeButton-gray" href="index.html"><span>Home</span></a></li>
+                <li  class="selected"><a class="roomsButton" href="roomsList.html"><span>Rooms</span></a></li>
+                <li><a class="devicesButton-gray" href="#"><span>Devices</span></a></li>
+                <li><a class="automationButton-gray" href="#"><span>Automation</span></a></li>
             </ul>
         </nav>
     </footer>

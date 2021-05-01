@@ -68,7 +68,7 @@
                             <div class="collapse" id="homes">
 
                                 <ul>
-                                    <li><a class="profile myhome homeList" href="#">My Home</a></li>
+                                    <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
                                     <li><a class="profile addplace homeList" href="#">Add place</a></li>
 
                                 </ul>
@@ -77,7 +77,7 @@
                             </div>
                         </li>
                         <hr>
-                        <li><a class="profile roomsButton" href="#">Rooms</a></li>
+                        <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
                         <li><a class="profile devicesButton" href="#">Devices</a></li>
                         <li><a class="profile automationButton" href="#">Automations</a></li>
                         <li><a class="profile member" href="#">Members</a></li>
@@ -96,7 +96,7 @@
 
         <div class="container-fluid"></div>
 
-        <a id="logo" href="#"></a>
+        <a id="logo" href="index.html"></a>
         <div class="btn-group">
             <!-- <button type="button" class="btn btn-danger">Action</button> -->
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon noti"
@@ -104,13 +104,7 @@
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                <li><a class="dropdown-item" href="#">You have no notifications</a></li>
             </ul>
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon search"
                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -123,13 +117,9 @@
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li><a class="dropdown-item" href="#">Security</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
             </ul>
 
 
@@ -170,7 +160,7 @@
                     <div class="collapse" id="homes">
 
                         <ul>
-                            <li><a class="profile myhome homeList" href="#">My Home</a></li>
+                            <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
                             <li><a class="profile addplace homeList" href="#">Add place</a></li>
 
                         </ul>
@@ -179,7 +169,7 @@
                     </div>
                 </li>
                 <hr>
-                <li><a class="profile roomsButton" href="#">Rooms</a></li>
+                <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
                 <li><a class="profile devicesButton" href="#">Devices</a></li>
                 <li><a class="profile automationButton" href="#">Automations</a></li>
                 <li><a class="profile member" href="#">Members</a></li>
@@ -197,9 +187,9 @@
             <h1>My Home</h1>
             <main>
                 <section class="sectionContainer" id="previewSection">
-                    <div class="d-flex">
+                    <!-- <div class="d-flex selector">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-secondary btnClickable dropDown">Cameras</button>
+                            <button type="button" class="btn btn-secondary btnClickable dropDown">Media</button>
                             <button type="button"
                                 class="btn btn-secondary dropdown-toggle dropdown-toggle-split btnClickable dropDownToggle"
                                 id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false"
@@ -208,18 +198,26 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuReference">
                                 <li><a class="dropdown-item" href="#">Cameras</a></li>
-                                <li><a class="dropdown-item" href="#">Favorites</a></li>
                                 <li><a class="dropdown-item" href="#">Media</a></li>
+                                <li><a class="dropdown-item" href="#">History</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="rectangle preview">
                     <iframe class="rectangle preview" src="https://www.youtube.com/embed/jqHufpLFiZ8"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                 </div> -->
-                    <div id="cameraFeeds" class="carousel carousel-dark slide" data-bs-ride="carousel"
+                <select id="previewSelector" class="form-select selector" aria-label="Default select example">
+                    <option value="Admin">Cameras</option>
+                    <option value="Guest" selected>Media</option>
+                    <option value="Normal">History</option>
+                </select>
+                <div id="mediaSection">
+                    <iframe src="https://open.spotify.com/embed/playlist/285PNHjb9ou7HkVJAgYw9Z" width="340" height="170" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                </div>
+                    <div id="cameraFeeds" class="carousel carousel-dark slide d-none" data-bs-ride="carousel"
                         data-bs-interval="false">
                         <div class="carousel-indicators" id="camera-indicator">
                             <button type="button" data-bs-target="#cameraFeeds" data-bs-slide-to="0" class="active"
@@ -255,17 +253,17 @@
                 <hr>
                 <section class="sectionContainer" id="favoriteSection">
                     <h3>Favorites</h3>
-                    <div id="frequent" class="carousel carousel-dark slide" data-bs-ride="carousel"
+                    <div id="favorite" class="carousel carousel-dark slide" data-bs-ride="carousel"
                         data-bs-interval="false">
-                        <div class="carousel-indicators" id="camera-indicator">
-                            <button type="button" data-bs-target="#frequent" data-bs-slide-to="0" class="active"
+                        <div class="carousel-indicators" id="favorite-indicator">
+                            <button type="button" data-bs-target="#favorite" data-bs-slide-to="0" class="active"
                                 aria-current="true" aria-label="Slide 1"></button>
                         </div>
-                        <div class="carousel-inner ">
+                        <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="rowContainer">
                                     <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="vac-sm"></span>
+                                        <span class="vac-bg"></span>
                                         <h5>iVaccum</h5>
                                         <div>
                                             <span class="time-sm">Off</span>
@@ -278,7 +276,7 @@
                                         <button class="functionalButton star star-full"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="tv-sm"></span>
+                                        <span class="tv-bg"></span>
                                         <h5>TV</h5>
                                         <div>
                                             <span class="location-sm">Living Room</span>
@@ -304,19 +302,17 @@
                     <h3>Frequently Used</h3>
                     <div id="frequent" class="carousel carousel-dark slide" data-bs-ride="carousel"
                         data-bs-interval="false">
-                        <div class="carousel-indicators" id="camera-indicator">
+                        <div class="carousel-indicators" id="frequent-indicator">
                             <button type="button" data-bs-target="#frequent" data-bs-slide-to="0" class="active"
                                 aria-current="true" aria-label="Slide 1"></button>
                             <button type="button" data-bs-target="#frequent" data-bs-slide-to="1"
                                 aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#frequent" data-bs-slide-to="2"
-                                aria-label="Slide 3"></button>
                         </div>
-                        <div class="carousel-inner ">
+                        <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="rowContainer">
                                     <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="vac-sm"></span>
+                                        <span class="vac-bg"></span>
                                         <h5>iVaccum</h5>
                                         <div>
                                             <span class="time-sm">Off</span>
@@ -326,10 +322,10 @@
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
-                                        <button class="functionalButton star star-empty"></button>
+                                        <button class="functionalButton star star-full"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="tv-sm"></span>
+                                        <span class="tv-bg"></span>
                                         <h5>TV</h5>
                                         <div>
                                             <span class="location-sm">Living Room</span>
@@ -342,10 +338,10 @@
                                             <input type="checkbox">
                                             <span class="slider round"></span>
                                         </label>
-                                        <button class="functionalButton star star-empty"></button>
+                                        <button class="functionalButton star star-full"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="ac-sm"></span>
+                                        <span class="ac-bg"></span>
                                         <h5>AC</h5>
 
                                         <div>
@@ -366,16 +362,8 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="rowContainer">
-                                    <div class="rectangle btnClickable shortcut"></div>
-                                    <div class="rectangle btnClickable shortcut"></div>
-                                    <div class="rectangle btnClickable shortcut"></div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="rowContainer">
-                                    <div class="rectangle btnClickable shortcut"></div>
-                                    <div class="rectangle btnClickable shortcut"></div>
-                                    <div class="rectangle btnClickable shortcut"></div>
+                                    <a class="rectangle btnClickable shortcut"></a>
+                                    <a class="rectangle btnClickable shortcut"></a>
                                 </div>
                             </div>
                         </div>
@@ -390,34 +378,33 @@
                         <div class="carousel-indicators" id="camera-indicator">
                             <button type="button" data-bs-target="#automation" data-bs-slide-to="0" class="active"
                                 aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#automation" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="rowContainer">
                                     <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="sun-sm"></span>
-                                        <h5>iVaccum</h5>
+                                        <span class="sun-bg"></span>
+                                        <h5>Morning</h5>
+                                        <div class="automationShortcut">
+                                            <span>Schedule: Daily at 7:00am</span>
+                                        </div>
                                         <button class="functionalButton star star-empty"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="homeButton"></span>
-                                        <h5>iVaccum</h5>
+                                        <span class="home-bg"></span>
+                                        <h5>Home</h5>
+                                        <div class="automationShortcut">
+                                            <span>Schedule: on Arrival</span>
+                                        </div>
                                         <button class="functionalButton star star-empty"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="shield-sm"></span>
-                                        <h5>iVaccum</h5>
+                                        <span class="shield-bg"></span>
+                                        <h5>Lock</h5>
+                                        <div class="automationShortcut">
+                                            <span>Schedule: on Leave</span>
+                                        </div>
                                         <button class="functionalButton star star-empty"></button>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="rowContainer">
-                                    <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="vac-sm"></span>
-                                        <h5>iVaccum</h5>
                                     </a>
                                 </div>
                             </div>
@@ -431,10 +418,10 @@
     <footer>
         <nav>
             <ul>
-                <li class="selected"><a class="homeButton" href=""><span>Home</span></a></li>
-                <li><a class="roomsButton" href=""><span>Rooms</span></a></li>
-                <li><a class="devicesButton" href=""><span>Devices</span></a></li>
-                <li><a class="automationButton" href=""><span>Automation</span></a></li>
+                <li class="selected"><a class="homeButton" href="index.html"><span>Home</span></a></li>
+                <li><a class="roomsButton-gray" href="roomsList.html"><span>Rooms</span></a></li>
+                <li><a class="devicesButton-gray" href="#"><span>Devices</span></a></li>
+                <li><a class="automationButton-gray" href="#"><span>Automation</span></a></li>
             </ul>
         </nav>
     </footer>
