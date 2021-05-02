@@ -1266,9 +1266,6 @@ input:checked+.slider:before {
     .automationShortcut {
         display: block;
     }
-    #breadNav {
-        display: block;
-    }
     .gridBtn {
         left: auto;
         right: 60px;
@@ -1319,5 +1316,8 @@ input:checked+.slider:before {
     }
     #burgerBlur {
         display: none !important;
+    }
+    #breadNav {
+        display: block;
     }
 }

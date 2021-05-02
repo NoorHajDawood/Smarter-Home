@@ -20,6 +20,10 @@
 </head>
 
 <body>
+    <?php $deviceName = $_GET["deviceName"]; ?>
+    <?php $deviceCategory = $_GET["deviceCategory"]; ?>
+    <?php $deviceType = $_GET["deviceType"]; ?>
+    <?php $deviceLocation = $_GET["deviceLocation"]; ?>
     <header>
         <nav role="navigation" id="navBurger">
             <div id="menuToggle">
