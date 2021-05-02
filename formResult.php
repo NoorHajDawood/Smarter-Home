@@ -16,86 +16,49 @@
     <!-- Local Includes -->
     <script src="js/scripts.js"></script>
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="icon" type="image/png" href="favicon.ico">
 </head>
 
 <body>
-    <?php $deviceName = $_GET["deviceName"]; ?>
-    <?php $deviceCategory = $_GET["deviceCategory"]; ?>
-    <?php $deviceType = $_GET["deviceType"]; ?>
-    <?php $deviceLocation = $_GET["deviceLocation"]; ?>
     <header>
         <nav role="navigation" id="navBurger">
             <div id="menuToggle">
-                <!--
-                  A fake / hidden checkbox is used as click reciever,
-                  so you can use the :checked selector on it.
-                  -->
                 <input id="burgerInput" type="checkbox" />
-
-                <!--
-                  Some spans to act as a hamburger.
-                  
-                  They are acting like a real hamburger,
-                  not that McDonalds stuff.
-                  -->
                 <span></span>
                 <span></span>
                 <span></span>
-
-                <!--
-                  Too bad the menu has to be inside of the button
-                  but hey, it's pure CSS magic.
-                  -->
-
-
-
-
                 <ul id="menuBurger" class="menu">
-
                     <li><a class="profile avatar" href="#">Micheal Rand</a></li>
                     <li>
-
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
                         </button>
-
                         <div class="collapse" id="homes">
-
                             <ul>
                                 <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
                                 <li><a class="profile addplace homeList" href="#">Add place</a></li>
-
                             </ul>
-
-
                         </div>
                     </li>
                     <hr>
                     <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
-                    <li><a class="profile devicesButton" href="#">Devices</a></li>
+                    <li><a class="profile devicesButton" href="devicesList.html?roomID=0">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
                     <li><a class="profile member" href="#">Members</a></li>
                     <hr>
                     <li><a class="profile history" href="#">History</a></li>
                     <li><a class="profile setting" href="#"></a></li>
                     <li><a class="profile help" href="#">help</a></li>
-
-
+                    <li>
+                        <h6>Noor & Bader &copy;</h6>
+                    </li>
                 </ul>
-
-
             </div>
         </nav>
-
-
         <div class="container-fluid"></div>
-
         <a id="logo" href="index.html"></a>
-
         <div id="burgerBlur" class="screenBlur"></div>
-
         <div class="btn-group">
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon noti" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
@@ -116,16 +79,7 @@
                 <li><a class="dropdown-item" href="#">Security</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
             </ul>
-
-
-
-
         </div>
-
-
-
-
-
     </header>
     <div class="content">
         <div id="wrapper">
@@ -215,7 +169,7 @@
 
                                 </div>
                             </div>
-                            
+
                 </section>
                 <hr class="d-block">
                 <section class="Permission">
@@ -237,7 +191,7 @@
             <ul>
                 <li><a class="homeButton-gray" href="index.html"><span>Home</span></a></li>
                 <li><a class="roomsButton-gray" href="roomsList.html"><span>Rooms</span></a></li>
-                <li><a class="devicesButton-gray" href="#"><span>Devices</span></a></li>
+                <li><a class="devicesButton-gray" href="devicesList.html?roomID=0"><span>Devices</span></a></li>
                 <li><a class="automationButton-gray" href="#"><span>Automation</span></a></li>
             </ul>
         </nav>

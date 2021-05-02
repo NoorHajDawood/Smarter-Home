@@ -1025,11 +1025,11 @@ input:checked+.slider:before {
 .vertical-line-1 {
     width: 1px;
     height: 40px;
-    border-color: #b31e1e;
+    border-color: #ebebeb;
     border-width: 1px;
     border-style: solid;
     display: block;
-    background-color: red;
+    background-color: #ebebeb;
 }
 
 .submite-cancel {
@@ -1291,7 +1291,12 @@ input:checked+.slider:before {
         right: 60px
     }
 }
-
+#menuBurger h6 {
+    position: absolute;
+    bottom: 8px;
+    left: 25%;
+    font-size: 16px;
+}
 @media screen and (min-width: 1300px) {
     body {
         padding-bottom: 0;
