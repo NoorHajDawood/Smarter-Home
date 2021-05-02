@@ -554,7 +554,9 @@ input:checked+.slider:before {
 }
 
 .clear {
+    display: none;
     clear: both;
+    height: 30px;
 }
 
 .nextBtn {
@@ -740,7 +742,6 @@ input:checked+.slider:before {
 
 #navBurger {
     display: block;
-    /* position: fixed; */
     top: 0;
     left: 0;
     z-index: 1000;
@@ -1107,8 +1108,6 @@ input:checked+.slider:before {
     outline: none;
     font-size: 15px;
     border-radius: 25px;
-    /* border-top-left-radius: 25px;
-    border-top-right-radius: 25px; */
     border: solid 2px;
     position: absolute;
     top: 5px;
@@ -1155,10 +1154,12 @@ input:checked+.slider:before {
     text-indent: 25px;
     background-repeat: no-repeat;
 }
+
 .clearRec>div>input[type=range] {
     width: 80%;
     margin: 0 10%;
 }
+
 .information {
     background-image: url(../images/information.png);
 }
@@ -1200,6 +1201,9 @@ input:checked+.slider:before {
     main hr {
         display: none;
         width: 100%;
+    }
+    .clear {
+        display: block;
     }
     #previewSection {
         float: left;
@@ -1287,12 +1291,14 @@ input:checked+.slider:before {
         right: 60px
     }
 }
+
 #menuBurger h6 {
     position: absolute;
     bottom: 8px;
     left: 25%;
     font-size: 16px;
 }
+
 @media screen and (min-width: 1300px) {
     body {
         padding-bottom: 0;
