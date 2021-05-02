@@ -25,7 +25,7 @@
 
 <body>
     <header>
-        <nav role="navigation" id="navBurger">
+        <nav id="navBurger">
             <div id="menuToggle">
                 <input id="burgerInput" type="checkbox" />
                 <span></span>
@@ -36,10 +36,10 @@
                     <li>
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse"
                             data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
-                            My Homes
+                            My Homes</button>
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
                                 data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-                        </button>
+                        
                         <div class="collapse" id="homes">
                             <ul>
                                 <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
@@ -47,12 +47,12 @@
                             </ul>
                         </div>
                     </li>
-                    <hr>
+                    <li><hr></li>
                     <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
                     <li><a class="profile devicesButton" href="devicesList.html?roomID=0">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
                     <li><a class="profile member" href="#">Members</a></li>
-                    <hr>
+                    <li><hr></li>
                     <li><a class="profile history" href="#">History</a></li>
                     <li><a class="profile setting" href="#"></a></li>
                     <li><a class="profile help" href="#">help</a></li>

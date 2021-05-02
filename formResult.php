@@ -25,7 +25,7 @@
     <?php $deviceType = $_GET["deviceType"]; ?>
     <?php $deviceLocation = $_GET["deviceLocation"]; ?>
     <header>
-        <nav role="navigation" id="navBurger">
+        <nav id="navBurger">
             <div id="menuToggle">
                 <input id="burgerInput" type="checkbox" />
                 <span></span>
@@ -35,9 +35,9 @@
                     <li><a class="profile avatar" href="#">Micheal Rand</a></li>
                     <li>
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
-                            My Homes
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-                        </button>
+                            My Homes</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
+
                         <div class="collapse" id="homes">
                             <ul>
                                 <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
@@ -45,12 +45,16 @@
                             </ul>
                         </div>
                     </li>
-                    <hr>
+                    <li>
+                        <hr>
+                    </li>
                     <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
                     <li><a class="profile devicesButton" href="devicesList.html?roomID=0">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
                     <li><a class="profile member" href="#">Members</a></li>
-                    <hr>
+                    <li>
+                        <hr>
+                    </li>
                     <li><a class="profile history" href="#">History</a></li>
                     <li><a class="profile setting" href="#"></a></li>
                     <li><a class="profile help" href="#">help</a></li>
@@ -118,61 +122,58 @@
                     <button class="functional functionalButton edit"></button>
                     <button class="functional functionalButton plusBtn"></button>
                     <div class="clear"></div>
-
                     <div class="position-relative">
 
 
-                        <div class="position-relative">
+                        <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2">
+                            My schedule</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle clearToggle" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2"></button>
 
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <div class="collapse" id="automation2">
 
-                            <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2">
-                                My schedule
-                                <button type="button" class="btn btn-secondary dropdown-toggle clearToggle" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2"></button>
-                            </button>
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                            <div class="collapse" id="automation2">
-
-                                <div class="checkboxList">
-                                    <div class="row mb-4">
-                                        <div class="row">
-                                            <button class="buttonautomation buttonweek">S</button>
-                                            <button class="buttonautomation buttonweek">M</button>
-                                            <button class="buttonautomation buttonweek">T</button>
-                                            <button class="buttonautomation buttonweek">W</button>
-                                            <button class="buttonautomation buttonweek">T</button>
-                                            <button class="buttonautomation buttonweek">F</button>
-                                            <button class="buttonautomation buttonweek">S</button>
+                            <div class="checkboxList">
+                                <div class="row mb-4">
+                                    <div class="row">
+                                        <button class="buttonautomation buttonweek">S</button>
+                                        <button class="buttonautomation buttonweek">M</button>
+                                        <button class="buttonautomation buttonweek">T</button>
+                                        <button class="buttonautomation buttonweek">W</button>
+                                        <button class="buttonautomation buttonweek">T</button>
+                                        <button class="buttonautomation buttonweek">F</button>
+                                        <button class="buttonautomation buttonweek">S</button>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="example-time-input" class="col-2 col-form-label">Time:</label>
+                                        <div class="col-5">
+                                            <input class="form-control" type="time" value="13:45:00" id="example-time-input">
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="example-time-input" class="col-2 col-form-label">Time:</label>
-                                            <div class="col-5">
-                                                <input class="form-control" type="time" value="13:45:00" id="example-time-input">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" value="volunteering" id="interest1">
-                                        <label for="interest1" class="form-check-label">Living Room.</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" value="community" id="interest2">
-                                        <label for="interest2" class="form-check-label">Bedroom 1.</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" value="reading" id="interest3">
-                                        <label for="interest3" class="form-check-label">Bedroom 2.</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" value="hiking" id="interest4">
-                                        <label for="interest4" class="form-check-label">Kitchen.</label>
                                     </div>
 
                                 </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" value="volunteering" id="interest1">
+                                    <label for="interest1" class="form-check-label">Living Room.</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" value="community" id="interest2">
+                                    <label for="interest2" class="form-check-label">Bedroom 1.</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" value="reading" id="interest3">
+                                    <label for="interest3" class="form-check-label">Bedroom 2.</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" value="hiking" id="interest4">
+                                    <label for="interest4" class="form-check-label">Kitchen.</label>
+                                </div>
+
                             </div>
+                        </div>
+                    </div>
 
                 </section>
                 <hr class="d-block">

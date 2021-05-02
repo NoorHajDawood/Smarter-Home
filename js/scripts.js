@@ -46,7 +46,7 @@ function Arrow() {
 
     for (var elemnt of array) {
         elemnt.onclick = function () {
-            var child = this.nextSibling;
+            var child = this.nextElementSibling;
             if (child.style.transform == 'rotate(180deg)')
                 child.style.transform = 'none';
             else
@@ -66,7 +66,6 @@ function toolsClick() {
         content.style.borderTop = "none";
         content.style.maxHeight = content.scrollHeight + "px";
         $('#toolsBlur').css('display', 'block');
-        console.log()
     }
 }
 
@@ -74,15 +73,6 @@ function addDeviceForm() {
     $('#toolsBlur').click();
     $('#addDevice').show();
     $('#formBlur').show();
-}
-
-function getParameterByName(name, url = window.location.href) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
 $(document).ready(function () {

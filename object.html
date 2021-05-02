@@ -25,7 +25,7 @@
 
 <body>
     <header>
-        <nav role="navigation" id="navBurger">
+        <nav id="navBurger">
             <div id="menuToggle">
                 <input id="burgerInput" type="checkbox" />
                 <span></span>
@@ -36,10 +36,10 @@
                     <li>
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse"
                             data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
-                            My Homes
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
-                                data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-                        </button>
+                            My Homes</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse"
+                            data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
+
                         <div class="collapse" id="homes">
                             <ul>
                                 <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
@@ -47,12 +47,16 @@
                             </ul>
                         </div>
                     </li>
-                    <hr>
+                    <li>
+                        <hr>
+                    </li>
                     <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
                     <li><a class="profile devicesButton" href="devicesList.html?roomID=0">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
                     <li><a class="profile member" href="#">Members</a></li>
-                    <hr>
+                    <li>
+                        <hr>
+                    </li>
                     <li><a class="profile history" href="#">History</a></li>
                     <li><a class="profile setting" href="#"></a></li>
                     <li><a class="profile help" href="#">help</a></li>
@@ -123,66 +127,53 @@
                     <button class="functional functionalButton edit"></button>
                     <button class="functional functionalButton plusBtn"></button>
                     <div class="clear"></div>
-
                     <div class="position-relative">
-
-
                         <button class="btn btn-primary dropdown-parent clearToggle" type="button"
                             data-bs-toggle="collapse" data-bs-target="#automation1" aria-expanded="false"
                             aria-controls="automation1">
-                            Quick clean
-                            <button type="button" class="btn btn-secondary dropdown-toggle clearToggle"
-                                data-bs-toggle="collapse" data-bs-target="#automation1" aria-expanded="false"
-                                aria-controls="automation1"></button>
-                        </button>
-
+                            Quick clean</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle clearToggle"
+                            data-bs-toggle="collapse" data-bs-target="#automation1" aria-expanded="false"
+                            aria-controls="automation1"></button>
                         <div class="collapse" id="automation1">
-
                             <div class="checkboxList">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" value="volunteering" id="interest1">
-                                    <label for="interest1" class="form-check-label">Living Room.</label>
+                                    <input type="checkbox" class="form-check-input" value="volunteering" id="location1">
+                                    <label for="location1" class="form-check-label">Living Room.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" value="community" id="interest2">
-                                    <label for="interest2" class="form-check-label">Bedroom 1.</label>
+                                    <input type="checkbox" class="form-check-input" value="community" id="location2">
+                                    <label for="location2" class="form-check-label">Bedroom 1.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" value="reading" id="interest3">
-                                    <label for="interest3" class="form-check-label">Bedroom 2.</label>
+                                    <input type="checkbox" class="form-check-input" value="reading" id="location3">
+                                    <label for="location3" class="form-check-label">Bedroom 2.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" value="hiking" id="interest4">
-                                    <label for="interest4" class="form-check-label">Kitchen.</label>
+                                    <input type="checkbox" class="form-check-input" value="hiking" id="location4">
+                                    <label for="location4" class="form-check-label">Kitchen.</label>
                                 </div>
                             </div>
-
-
                         </div>
                         <label class="switch">
                             <input type="checkbox">
                             <span class="slider round"></span>
                         </label>
-
                     </div>
                     <hr class="small-hr">
                     <div class="position-relative">
-
-
                         <button class="btn btn-primary dropdown-parent clearToggle" type="button"
                             data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false"
                             aria-controls="automation2">
-                            My schedule
-                            <button type="button" class="btn btn-secondary dropdown-toggle clearToggle"
-                                data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false"
-                                aria-controls="automation2"></button>
-                        </button>
+                            My schedule</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle clearToggle"
+                            data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false"
+                            aria-controls="automation2"></button>
                         <label class="switch">
                             <input type="checkbox">
                             <span class="slider round"></span>
                         </label>
                         <div class="collapse" id="automation2">
-
                             <div class="checkboxList">
                                 <div class="row mb-4">
                                     <div class="row">
@@ -201,41 +192,40 @@
                                                 id="example-time-input">
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" value="volunteering" id="interest1">
-                                    <label for="interest1" class="form-check-label">Living Room.</label>
+                                    <input type="checkbox" class="form-check-input" value="volunteering" id="location5">
+                                    <label for="location5" class="form-check-label">Living Room.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" value="community" id="interest2">
-                                    <label for="interest2" class="form-check-label">Bedroom 1.</label>
+                                    <input type="checkbox" class="form-check-input" value="community" id="location6">
+                                    <label for="location6" class="form-check-label">Bedroom 1.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" value="reading" id="interest3">
-                                    <label for="interest3" class="form-check-label">Bedroom 2.</label>
+                                    <input type="checkbox" class="form-check-input" value="reading" id="location7">
+                                    <label for="location7" class="form-check-label">Bedroom 2.</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" value="hiking" id="interest4">
-                                    <label for="interest4" class="form-check-label">Kitchen.</label>
+                                    <input type="checkbox" class="form-check-input" value="hiking" id="location8">
+                                    <label for="location8" class="form-check-label">Kitchen.</label>
                                 </div>
-
                             </div>
                         </div>
-                        <hr>
-
-                        <section class="Permission">
-
-
-                            <h4>Permission:</h4>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Permission:</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Guest">Guest</option>
-                                <option value="Normal">Normal</option>
-                            </select>
-                        </section>
+                    </div>
                 </section>
+                <hr>
+                <section class="Permission">
+
+
+                    <h4>Permission:</h4>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Permission:</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Guest">Guest</option>
+                        <option value="Normal">Normal</option>
+                    </select>
+                </section>
+
             </main>
         </div>
     </div>
