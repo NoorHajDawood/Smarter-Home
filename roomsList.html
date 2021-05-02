@@ -107,7 +107,7 @@
 
 
         </div>
-   
+
 
 
 
@@ -124,7 +124,14 @@
                 </ol>
             </nav>
             <h1>Rooms</h1>
-            <button class="functionalButton toolsBtn"></button>
+            <button type="button" id="collapsibleTools" class="functionalButton toolsBtn"></button>
+            <ul id="toolsContent">
+                <li></li>
+                <li> <button id="roomsEdit" type="button" class="functionalButton edit"></button></li>
+                <li> <button id="roomsDelete" type="button" class="functionalButton trash "></button></li>
+                <li> <button id="roomsAdd" type="button" class="functionalButton plusBtn "></button></li>
+            </ul>
+            <div id="toolsBlur" class="screenBlur"></div>
             <main id="rooms">
                 <section class="listContaier">
 

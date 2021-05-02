@@ -127,7 +127,7 @@
 
 
         </div>
-   
+
 
 
 
@@ -146,20 +146,20 @@
             </nav>
             <h1>Living Room</h1>
             <!-- <button id="tools" class="functional functionalButton toolsBtn"></button> -->
-            <button id="tools" type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon toolsBtn"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-            </button>
-            <ul id="tools-menu" class="dropdown-menu">
-                <li> <button type="button" class="functionalButton edit " ></button></li>
-                <li> <button type="button" class="functionalButton trash " ></button></li>
-                <li> <button type="button" class="functionalButton plusBtn " ></button></li>
+            <button type="button" id="collapsibleTools" class="functionalButton toolsBtn"></button>
+            <ul id="toolsContent">
+                <li></li>
+                <li> <button id="deviceEdit" type="button" class="functionalButton edit"></button></li>
+                <li> <button id="deviceDelete" type="button" class="functionalButton trash "></button></li>
+                <li> <button id="deviceAdd" type="button" class="functionalButton plusBtn "></button></li>
             </ul>
+            <div id="toolsBlur" class="screenBlur"></div>
             <button class="functional functionalButton listBtn"></button>
             <main id="devicesList">
                 <section class="listContaier">
                     <span>Sort: </span>
-                    <select id="previewSelector" class="form-select selector d-inline" aria-label="Default select example">
+                    <select id="previewSelector" class="form-select selector d-inline"
+                        aria-label="Default select example">
                         <option value="power">Power Consumption</option>
                         <option value="count" selected>Frequently Used</option>
                         <option value="name">Favorite</option>
@@ -250,54 +250,55 @@
                     </div>
                 </section>
                 <div id="formBlur" class="screenBlur"></div>
-                <form class="addDevice d-none" action="http://se.shenkar.ac.il/teach/web1/2021/get_form3.php" method="GET">
+                <form id="addDevice" class="formBox" action="./formResult.php"
+                    method="GET">
                     <h2>Add Device</h3>
-                     <h6>Category:</h6>
-                     <select name="category" class="form-select" aria-label="Default select example">
-                         <option value="" disabled selected>Category</option>
-                       
-                         <option value="Cleaning">Cleaning</option>
-                         <option value="Televisions">Televisions</option>
-                         <option value="Lights">Lights</option>
-                         <option value="Lights">New Category</option>
-     
-                     </select>
-                     <h6>Device Type:</h6>
-                     <select name="type" class="form-select" aria-label="Default select example" >
-                         <option value="" disabled selected>Device Type</option>
-                       
-                         <option value="Admin">Light</option>
-                         <option value="Guest">Smart Lock</option>
-                         <option value="Normal">Speakers</option>
-                         <option value="Normal">Vacuum</option>
-                         
-     
-                         
-                     </select>
-                     <h6>Device Name:</h6>
-                     <input name="name" class="form-control" type="text" placeholder="Device Name">
-                     <h6>Location:</h6>
-                     <select name="location" class="form-select" aria-label="Default select example">
-                         <option value="" disabled selected>Location</option>
-                      
-                         <option value="Admin">Living Room</option>
-                         <option value="Guest">Bedroom 1</option>
-                         <option value="Normal">Bedroom 2</option>
-                         <option value="Normal">Kitchen</option>
-                         <option value="Normal">none</option>
-     
-                     </select>
-     
-                  
-                     
-                     <section class="submite-cancel">
-                         
-                         <button type="button" class="btn btn-dark">Cancel</button>
+                        <h6>Category:</h6>
+                        <select name="deviceCategory" class="form-select" aria-label="Default select example">
+                            <option value="" disabled selected>Category</option>
+
+                            <option value="Cleaning">Cleaning</option>
+                            <option value="Televisions">Televisions</option>
+                            <option value="Lights">Lights</option>
+                            <option value="Lights">New Category</option>
+
+                        </select>
+                        <h6>Device Type:</h6>
+                        <select name="deviceType" class="form-select" aria-label="Default select example">
+                            <option value="" disabled selected>Device Type</option>
+
+                            <option value="Admin">Light</option>
+                            <option value="Guest">Smart Lock</option>
+                            <option value="Normal">Speakers</option>
+                            <option value="Normal">Vacuum</option>
+
+
+
+                        </select>
+                        <h6>Device Name:</h6>
+                        <input name="deviceName" class="form-control" type="text" placeholder="Device Name">
+                        <h6>Location:</h6>
+                        <select name="deviceLocation" class="form-select" aria-label="Default select example">
+                            <option value="" disabled selected>Location</option>
+
+                            <option value="Living Room">Living Room</option>
+                            <option value="Bedroom 1">Bedroom 1</option>
+                            <option value="Bedroom 2">Bedroom 2</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="none">none</option>
+
+                        </select>
+
+
+
+                        <section class="submite-cancel">
+
+                            <button type="button" class="btn btn-dark cancelForm">Cancel</button>
                             <div class="vertical-line-1"></div>
-                         <input type="submit" value="Add" class="btn btn-success"></button>
-                     </section>
-                     
-                 </form>
+                            <input type="submit" value="Add" class="btn btn-success"></button>
+                        </section>
+
+                </form>
             </main>
         </div>
     </div>

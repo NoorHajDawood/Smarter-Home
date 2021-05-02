@@ -1,12 +1,12 @@
 var burgerHidden = true;
 function burgerToggle() {
     if (burgerHidden) {
-        $('#burgerBlur').css('opacity', '60%');
+        // $('#burgerBlur').css('opacity', '60%');
         $('#burgerBlur').css('display', 'block');
         burgerHidden = false;
     }
     else {
-        $('#burgerBlur').css('opacity', '0%');
+        // $('#burgerBlur').css('opacity', '0%');
         $('#burgerBlur').css('display', 'none');
         burgerHidden = true;
     }
@@ -55,7 +55,35 @@ function Arrow() {
     }
 }
 
+function toolsClick() {
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight) {
+        content.style.border = "none";
+        content.style.maxHeight = null;
+        $('#toolsBlur').css('display', 'none');
+    } else {
+        content.style.border = "solid 2px";
+        content.style.borderTop = "none";
+        content.style.maxHeight = content.scrollHeight + "px";
+        $('#toolsBlur').css('display', 'block');
+        console.log()
+    }
+}
 
+function addDeviceForm() {
+    $('#toolsBlur').click();
+    $('#addDevice').show();
+    $('#formBlur').show();
+}
+
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 
 $(document).ready(function () {
     $('#burgerInput').click(burgerToggle);
@@ -65,14 +93,23 @@ $(document).ready(function () {
         $('#burgerInput').click();
     });
     Arrow();
-
-    // $('#tools').click(function(){
-    //     var child = this.nextSibling;
-    //     child.style.top = "35px";
-    //     child.style.right = '25px';
-    //     // $('#tools-menu').css('rig' ,'25px');
-        
-    // });
+    var tools = document.getElementById("collapsibleTools");
+    $('#collapsibleTools').click(toolsClick);
+    $('#toolsBlur').click(function () {
+        tools.click();
+    });
+    $('#deviceAdd').click(addDeviceForm);
+    $('#formBlur').click(function () {
+        $('#formBlur').hide();
+        $('.formBox').each(function () {
+            $(this).hide();
+        })
+    });
+    $('.cancelForm').each(function () {
+        $(this).click(function() {
+            $('#formBlur').click();
+        });
+    })
 });
 
 
