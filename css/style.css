@@ -1206,12 +1206,24 @@ input:checked+.slider:before {
     }
     #frequentlySection {
         float: left;
+        height: 407px;
+    }
+    #frequent {
+        height: 334px;
     }
     #favoriteSection {
         float: right;
+        height: 407px;
+    }
+    #favorite {
+        height: 334px;
     }
     #automationSection {
         float: right;
+        height: 407px;
+    }
+    #automation {
+        height: 334px;
     }
     .rowContainer {
         flex-wrap: wrap;
