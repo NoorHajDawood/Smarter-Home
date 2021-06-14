@@ -462,7 +462,7 @@ main hr {
     color: black;
 }
 
-#mediaSection>iframe {
+.media>iframe {
     border-radius: 10px;
 }
 
@@ -554,9 +554,12 @@ input:checked+.slider:before {
 }
 
 .clear {
-    display: none;
     clear: both;
-    height: 30px;
+    /* height: 30px; */
+}
+.autosection iframe{
+    margin-left: -30px;
+
 }
 
 .nextBtn {
@@ -686,6 +689,13 @@ input:checked+.slider:before {
     overflow: auto;
 }
 
+#menuBurger h6 {
+    position: absolute;
+    bottom: 8px;
+    left: 25%;
+    font-size: 16px;
+}
+
 #menuBurger>li {
     width: 100%;
 }
@@ -768,9 +778,9 @@ input:checked+.slider:before {
     font-weight: bold;
 }
 
-.infoSection span {
+/* .infoSection span {
     display: block;
-}
+} */
 
 .infoSection ul {
     margin-top: 10px;
@@ -917,6 +927,11 @@ input:checked+.slider:before {
     height: 20px;
 }
 
+.temp-bg {
+    background-image: url(../images/temp_bg.png);
+    height: 24px;
+}
+
 .livingroom-bg {
     background-image: url(../images/livingroom_big_icon.png);
 }
@@ -965,21 +980,46 @@ input:checked+.slider:before {
     background-image: url(../images/speakers_bg_icon.png);
 }
 
+.volume-bg {
+    background-image: url(../images/volume-bg.png);
+}
+
 .remote-md {
     background-image: url(../images/remote_md_icon.png);
 }
 
+.remote-bg {
+    background-image: url(../images/remote_bg.png);
+}
+
 .speakers-md {
     background-image: url(../images/speakers_md_icon.png);
-    display: inline;
+    /* display: inline; */
     min-width: 14px;
     min-height: 15px;
 }
 
-#devicesList .star {
+.icons {
+    background-repeat: no-repeat;
+    min-width: 24px;
+    height: 24px;
+    line-height: 22px;
+    text-indent: 25px;
+    /* background-size: 20px 20px; */
+    /* background-position: center; */
+}
+
+#objectMain .sideButtons {
+    height: 70px;
+    top: 50px;
+}
+
+#devicesList .star, #objectMain .star{
     left: auto;
     right: 40px;
 }
+
+
 
 #addDevice {
     width: 360px;
@@ -1034,12 +1074,12 @@ input:checked+.slider:before {
 .ac-buttons>button {
     border: solid 1px #7a7a7a;
     border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    margin-right: 9px;
-    ;
+    width: 20px;
+    height:20px;
+    margin-right: 5px;
+    
     background-position: center;
-    background-size: 9px 9px;
+    background-size: 15px 15px;
     background-repeat: no-repeat;
 }
 
@@ -1135,6 +1175,31 @@ input:checked+.slider:before {
     height: 6px;
 }
 
+.objectControls {
+    padding-left: 0;
+}
+
+.objectControls li .ac-buttons>button {
+    margin-right: 13px;
+    width: 24px;
+    height:24px;
+    background-size: 15px 15px;
+    
+}
+
+.objectControls li  {
+    margin-bottom: 10px;
+}
+
+.objectControls input {
+    width: 50%;
+}
+
+.objectControls input[type="number"] {
+    width: 35px;
+    text-align: center;
+}
+
 .clearRec {
     position: relative;
     background-color: transparent;
@@ -1162,6 +1227,161 @@ input:checked+.slider:before {
 
 .information {
     background-image: url(../images/information.png);
+}
+
+#loginPage {
+    position: relative;
+}
+
+.bg-img {
+    background: url("../images/bg2.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-img:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#loginPage header {
+    background: transparent;
+}
+
+#loginPage #logo {
+    background-image: url(../images/logo-white.png);
+}
+
+#loginPage .content {
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    text-align: center;
+    padding: 60px 32px;
+    width: 100%;
+    max-width: 370px;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
+}
+
+#loginPage .content h1 {
+    color: white;
+    font-size: 33px;
+    font-weight: 600;
+    margin: 0 0 35px 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+#loginPage .field {
+    position: relative;
+    height: 45px;
+    width: 100%;
+    display: flex;
+    background: rgba(255, 255, 255, 0.94);
+}
+
+#loginPage .field span {
+    color: #222;
+    width: 40px;
+    line-height: 45px;
+}
+
+#loginPage .field input {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #222;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+}
+
+.space {
+    margin-top: 16px;
+}
+
+#loginPage .show {
+    position: absolute;
+    right: 13px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    display: none;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+}
+
+.pass-key:valid~.show {
+    display: block;
+}
+
+.pass {
+    text-align: left;
+    margin: 10px 0;
+}
+
+.pass a {
+    color: white;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+}
+
+#loginPage .pass:hover a {
+    text-decoration: underline;
+}
+
+#loginPage .field input[type="submit"] {
+    background: #3498db;
+    border: 1px solid #2691d9;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+}
+
+#loginPage .field input[type="submit"]:hover {
+    background: #2691d9;
+}
+
+.login {
+    color: white;
+    margin: 20px 0;
+    font-family: "Poppins", sans-serif;
+}
+
+#loginPage i span {
+    margin-left: 8px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+}
+
+.signup {
+    font-size: 15px;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+
+.signup a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.signup a:hover {
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 800px) {
@@ -1198,7 +1418,7 @@ input:checked+.slider:before {
     #wrapper {
         width: 800px;
     }
-    main hr {
+    main:not("objectMain") hr {
         display: none;
         width: 100%;
     }
@@ -1292,18 +1512,11 @@ input:checked+.slider:before {
     }
 }
 
-#menuBurger h6 {
-    position: absolute;
-    bottom: 8px;
-    left: 25%;
-    font-size: 16px;
-}
-
 @media screen and (min-width: 1300px) {
     body {
         padding-bottom: 0;
     }
-    .content {
+    .content:not(#loginPage .content) {
         height: 100%;
         display: flex;
         padding-left: 300px;
@@ -1312,7 +1525,7 @@ input:checked+.slider:before {
         width: 1000px;
         opacity: 1;
     }
-    header {
+    header:not(#loginPage header) {
         border-bottom: solid 1px #ebebeb;
     }
     #menuBurger {

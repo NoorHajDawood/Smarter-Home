@@ -1,0 +1,70 @@
+{
+	"devices": [
+		{
+			"type": 1,
+			"name": "Television",
+			"params": [
+				{
+					"name": "channel", 
+					"value": "Yes Action"
+				},
+				{
+					"name": "volume",
+					"value": "25"
+				}
+			]
+		},
+		{
+			"type": 2,
+			"name": "Air Conditioner",
+			"params": [
+				{
+					"name": "temps", 
+					"value": "22"
+				},
+				{
+					"name": "mode",
+					"value": "cold"
+				}
+			]
+		},
+		{
+			"type": 3,
+			"name": "Vacuum",
+			"params": [
+				{
+					"name": "battery", 
+					"value": "0"
+				},
+				{
+					"name": "container",
+					"value": "40"
+				},
+				{
+					"name": "progress", 
+					"value": "60"
+				}
+			]
+		},
+		{
+			"type": 4,
+			"name": "Lights",
+			"params": [
+				{
+					"name": "brightness", 
+					"value": "80"
+				}
+			]
+		},
+		{
+			"type": 5,
+			"name": "Speakers",
+			"params": [
+				{
+					"name": "volume", 
+					"value": "30"
+				}
+			]
+		}
+	]
+}

@@ -96,10 +96,10 @@ $(document).ready(function () {
         })
     });
     $('.cancelForm').each(function () {
-        $(this).click(function() {
+        $(this).click(function () {
             $('#formBlur').click();
         });
-    })
+    });
 });
 
 

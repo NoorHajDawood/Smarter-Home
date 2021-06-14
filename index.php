@@ -1,3 +1,6 @@
+<?php
+    include "includes/db.php";
+?>
 <!DOCTYPE html>
 <html>
 
@@ -106,8 +109,8 @@
                         <option value="cameras">Cameras</option>
                         <option value="media" selected>Media</option>
                     </select>
-                    <div id="mediaSection">
-                        <iframe src="https://open.spotify.com/embed/playlist/285PNHjb9ou7HkVJAgYw9Z" width="340"
+                    <div id="mediaSection" class="media">
+                        <iframe src="https://open.spotify.com/embed/album/2iER5YPSsq4WpokLnnQGCO" width="340"
                             height="170" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                     </div>
                     <div id="cameraSection" class="carousel carousel-dark slide d-none" data-bs-ride="carousel"
@@ -342,3 +345,6 @@
 </body>
 
 </html>
+<?php
+    include "includes/disconnect.php";
+?>

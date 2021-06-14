@@ -1,0 +1,1590 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+header, main, footer, nav, section {
+  display: block;
+}
+
+body {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  padding-bottom: 40px;
+  padding-top: 50px;
+  position: relative;
+  height: 100%;
+  min-height: 100vh;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f7f6f6;
+  height: 50px;
+  display: flex;
+  z-index: 990;
+}
+
+.content {
+  height: 100%;
+}
+
+#logo {
+  position: absolute;
+  display: block;
+  background-image: url(../images/logo.png);
+  width: 95px;
+  height: 46px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 9999;
+}
+
+#wrapper {
+  width: 340px;
+  margin: 0 auto;
+  position: relative;
+  height: 100%;
+  min-height: 50vh;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+h1 {
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  margin: 5px auto;
+}
+
+.btnClickable {
+  border-style: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+}
+
+.dropDown {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.dropDownToggle {
+  background-color: #ebebeb;
+  color: #444444;
+}
+
+.headerIcon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  font-size: 0;
+  background-color: transparent;
+  border-style: none;
+  align-self: center;
+  margin-right: 5px;
+}
+
+.noti {
+  background-image: url(../images/notifications_active_icon.png);
+}
+
+.search {
+  background-image: url(../images/search_icon.png);
+}
+
+.profile {
+  display: block;
+  background-repeat: no-repeat;
+  text-indent: 40px;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  background-image: url(../images/userID1.png);
+  min-width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.homeList {
+  line-height: 31px;
+  text-indent: 40px;
+}
+
+.rectangle {
+  border-radius: 10px;
+  width: 100%;
+  max-width: 300px;
+  height: 100px;
+  background-color: white;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.preview {
+  height: 170px;
+  margin-top: 10px;
+}
+
+.rowContainer {
+  display: flex;
+  width: 100%;
+}
+
+.ham {
+  background-image: url(../images/hamburger.png);
+}
+
+footer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  background-color: #f7f6f6;
+  z-index: 800;
+}
+
+footer nav {
+  width: 100%;
+  height: 40px;
+  align-self: center;
+}
+
+footer ul {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+footer li {
+  width: 100%;
+  display: flex;
+  align-content: center;
+}
+
+footer a {
+  position: relative;
+  display: block;
+  margin: auto 0;
+  background-color: transparent;
+  width: 100%;
+  height: 32px;
+  border-style: none;
+  background-position: top;
+  background-repeat: no-repeat;
+  color: #929292;
+}
+
+footer span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: block;
+  font-size: 8px;
+  text-align: center;
+}
+
+footer .selected {
+  background-color: #ebebeb;
+  color: black;
+}
+
+footer .selected>a {
+  color: black;
+}
+
+.home-bg {
+  background-image: url(../images/home_bg.png);
+}
+
+.homeButton {
+  background-image: url(../images/home_icon.png);
+}
+
+.roomsButton {
+  background-image: url(../images/rooms_icon.png);
+}
+
+.devicesButton {
+  background-image: url(../images/devices_icon.png);
+}
+
+.automationButton {
+  background-image: url(../images/automation_icon.png);
+}
+
+.homeButton-gray {
+  background-image: url(../images/home_icon_gray.png);
+}
+
+.roomsButton-gray {
+  background-image: url(../images/rooms_icon_gray.png);
+}
+
+.devicesButton-gray {
+  background-image: url(../images/devices_icon_gray.png);
+}
+
+.automationButton-gray {
+  background-image: url(../images/automation_icon_gray.png);
+}
+
+.btn-primary:focus {
+  background-color: transparent;
+  color: black;
+  border-style: none;
+  box-shadow: none;
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: black;
+  border-style: none;
+  box-shadow: none;
+  text-decoration: underline;
+}
+
+.btn-primary:active:focus {
+  background-color: transparent;
+  color: black;
+  border-style: none;
+  box-shadow: none;
+}
+
+.clearToggle:active:focus {
+  background-color: transparent;
+  color: black;
+  border-style: none;
+  box-shadow: none;
+}
+
+.menu hr {
+  margin-right: 10%;
+}
+
+main hr {
+  display: block;
+  width: 340px;
+}
+
+.menu a {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.carousel {
+  margin-top: 10px;
+}
+
+.carousel-indicators {
+  bottom: -40px;
+}
+
+.carousel-inner {
+  margin-bottom: 30px;
+  color: black;
+}
+
+.carousel>button {
+  background-color: #f7f6f6bd;
+}
+
+.shortcut {
+  display: flex;
+  width: 105px;
+  flex-flow: column;
+  position: relative;
+}
+
+.shortcut>span {
+  display: block;
+  align-self: center;
+  margin-top: 5px;
+  height: 20px;
+  background-repeat: no-repeat;
+}
+
+.gridBtn {
+  background-image: url(../images/grid_icon.png);
+  position: absolute;
+  top: 5px;
+  left: 20px;
+}
+
+.listBtn {
+  background-image: url(../images/list_icon.png);
+  position: absolute;
+  top: 5px;
+  left: 20px;
+}
+
+.toolsBtn {
+  background-image: url(../images/dots.png);
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  background-size: 24px 24px;
+}
+
+.star {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.star-full {
+  background-image: url(../images/full_star_icon.png);
+}
+
+.star-empty {
+  background-image: url(../images/star_icon.png);
+}
+
+.vac-sm {
+  background-image: url(../images/vaccum_sm.png);
+}
+
+.temp-sm {
+  background-image: url(../images/temp_sm.png);
+}
+
+.sun-sm {
+  background-image: url(../images/sun_sm.png);
+}
+
+.shield-sm {
+  background-image: url(../images/shield_sm.png);
+}
+
+.sun-bg {
+  background-image: url(../images/sun_bg.png);
+}
+
+.shield-bg {
+  background-image: url(../images/shield_bg.png);
+}
+
+.tv-sm {
+  background-image: url(../images/tv_sm.png);
+}
+
+.ac-sm {
+  background-image: url(../images/ac_bg.png);
+}
+
+.shortcut>h5 {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.shortcut>div {
+  margin-left: 5px;
+  text-indent: 15px;
+}
+
+.shortcut>div>span {
+  display: block;
+  text-align: left;
+  font-size: 10px;
+  background-repeat: no-repeat;
+  margin-top: 2px
+}
+
+.time-sm {
+  background-image: url(../images/time_sm.png);
+}
+
+.location-sm {
+  background-image: url(../images/location_sm.png);
+}
+
+.carousel-item {
+  padding: 2px;
+}
+
+.selector {
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+.small-hr {
+  width: 80%;
+  margin: 5px auto;
+}
+
+.home {
+  background-image: url(../images/homes_icon.png);
+  background-repeat: no-repeat;
+  text-indent: 40px;
+  font-size: 18px;
+  font-weight: bold;
+  height: 24px;
+  background-color: transparent;
+  border-style: none;
+  color: black;
+  padding: 0;
+}
+
+.clearToggle:focus {
+  background-color: transparent;
+  border: none;
+  color: black;
+  box-shadow: none;
+}
+
+.myhome {
+  background-image: url(../images/full_home_icon.png);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border-style: none;
+  color: black;
+}
+
+#mediaSection>iframe {
+  border-radius: 10px;
+}
+
+.switch {
+  position: absolute;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  top: 5px;
+  right: 5px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #2196F3;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.addplace {
+  background-image: url(../images/full_plus_icon.png);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border-style: none;
+  color: black;
+}
+
+.member {
+  background-image: url(../images/members_icon.png);
+}
+
+.history {
+  background-image: url(../images/history_icon.png);
+}
+
+.functionalButton {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  border-style: none;
+  background-color: transparent;
+  background-position: center;
+}
+
+.clear {
+  clear: both;
+  /* height: 30px; */
+}
+
+.nextBtn {
+  background-image: url(../images/next_icon.png);
+}
+
+.previousBtn {
+  background-image: url(../images/previous_icon.png);
+}
+
+.nextVertical {
+  background-image: url(../images/next_vertical.png);
+}
+
+.previousVertical {
+  background-image: url(../images/previous_vertical.png);
+}
+
+.minusBtn {
+  background-image: url(../images/minus_icon.png);
+}
+
+.plusBtn {
+  background-image: url(../images/plus_icon.png);
+}
+
+.centered {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.sideButtons {
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  height: 40px;
+  right: 5px;
+  top: 30px;
+}
+
+#menuToggle {
+  width: 30px;
+  height: 30px;
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 1000;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle a {
+  text-decoration: none;
+  color: #232323;
+  transition: color 0.3s ease;
+}
+
+#menuToggle a:hover {
+  text-decoration: underline;
+}
+
+#menuToggle input {
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+  -webkit-touch-callout: none;
+}
+
+#menuToggle span {
+  display: block;
+  width: 24px;
+  height: 4px;
+  margin-bottom: 2px;
+  position: relative;
+  background: black;
+  border-radius: 3px;
+  z-index: 1;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+#menuToggle input:checked~span {
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+#menuToggle input:checked~span:nth-last-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuToggle input:checked~span:nth-last-child(2) {
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menuBurger {
+  height: 100%;
+  min-height: 100vh;
+  width: 300px;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  margin: -35px 0 0 -15px;
+  padding-top: 60px;
+  background: white;
+  border-right: solid 1px #ebebeb;
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+  overflow: auto;
+}
+
+#menuBurger>li {
+  width: 100%;
+}
+
+.help-setting {
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background-color: red;
+}
+
+.setting {
+  background-image: url(../images/settings_icon.png);
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+}
+
+.help {
+  background-image: url(../images/full_help_icon.png);
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  text-indent: 30px;
+  line-height: 24px;
+}
+
+.menu li {
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+.menu button, .menu .btn-secondary:focus {
+  background-color: transparent;
+  color: black;
+  border-style: none;
+  box-shadow: none;
+}
+
+.clearToggle {
+  background-color: transparent;
+  color: black;
+  border-style: none;
+  box-shadow: none;
+}
+
+#menuToggle input:checked~ul {
+  transform: none;
+}
+
+#navBurger {
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.sectionContainer {
+  width: 100%;
+  max-width: 340px;
+}
+
+.listContaier {
+  margin-top: 10px;
+  width: 100%;
+  min-width: 300px;
+}
+
+.listItems {
+  display: flex;
+  flex-flow: wrap;
+  margin-top: 10px;
+}
+
+.infoSection {
+  font-weight: bold;
+}
+
+.infoSection span {
+  display: block;
+}
+
+.infoSection ul {
+  margin-top: 10px;
+}
+
+.infoSection ul li {
+  margin-top: 5px;
+}
+
+.battery {
+  background-image: url(../images/battery_icon.png);
+  background-repeat: no-repeat;
+  min-width: 24px;
+  height: 24px;
+  line-height: 30px;
+  text-indent: 25px;
+}
+
+.cont {
+  background-image: url(../images/disc_icon.png);
+  background-repeat: no-repeat;
+  min-width: 24px;
+  height: 24px;
+  line-height: 30px;
+  text-indent: 25px;
+  background-position: 4px;
+}
+
+.location {
+  background-image: url(../images/location-md.png);
+  background-repeat: no-repeat;
+  min-width: 24px;
+  height: 24px;
+  line-height: 30px;
+  text-indent: 25px;
+}
+
+.edit {
+  background-image: url(../images/edit_icon.png);
+}
+
+.trash {
+  background-image: url(../images/delete_icon.png);
+}
+
+#objectMain .plusBtn {
+  float: right;
+}
+
+#objectMain .edit {
+  float: right;
+}
+
+#objectMain h4 {
+  float: left;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#objectMain {
+  font-weight: bold;
+}
+
+.checkboxList {
+  margin-left: 40px
+}
+
+.buttonautomation {
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  color: #7a7a7a;
+  text-indent: -5px;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 4px 4px;
+}
+
+.buttonweek {
+  border-radius: 50%;
+  width: 20px;
+}
+
+.listItem {
+  position: relative;
+}
+
+.listItem>span {
+  display: block;
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+}
+
+.listItem>h5 {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 100px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.listItem>div {
+  display: block;
+  position: absolute;
+  top: 45px;
+  left: 100px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.listItem>div span {
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  text-indent: 20px;
+  margin-bottom: 10px;
+  background-repeat: no-repeat;
+  margin-top: 2px;
+  color: #7a7a7a;
+}
+
+.volume>input {
+  width: 140px;
+  position: absolute;
+  top: -3px;
+  left: 20px
+}
+
+#devicesList .sideButtons {
+  left: auto;
+  top: 30px;
+}
+
+.temp-md {
+  background-image: url(../images/temp_md.png);
+  text-indent: 15px;
+  height: 20px;
+}
+
+.livingroom-bg {
+  background-image: url(../images/livingroom_big_icon.png);
+}
+
+.kitchen-bg {
+  background-image: url(../images/kitchen_big_icon.png);
+}
+
+.bedroom-bg {
+  background-image: url(../images/bedroom_big_icon.png);
+}
+
+.bathroom-bg {
+  background-image: url(../images/bathroom_big_icon.png);
+}
+
+.tv-bg {
+  background-image: url(../images/tv_bg.png);
+}
+
+.ac-bg {
+  background-image: url(../images/ac_bg.png);
+}
+
+.lights-upside-bg {
+  background-image: url(../images/light_upside_bg.png);
+}
+
+.vac-bg {
+  background-image: url(../images/vaccum_bg.png);
+}
+
+.battery-md {
+  background-image: url(../images/battery_md_icon.png);
+}
+
+.time-md {
+  background-image: url(../images/time_md.png);
+}
+
+.disc-md {
+  background-image: url(../images/disc_md_icon.png);
+}
+
+.speakers-bg {
+  background-image: url(../images/speakers_bg_icon.png);
+}
+
+.remote-md {
+  background-image: url(../images/remote_md_icon.png);
+}
+
+.speakers-md {
+  background-image: url(../images/speakers_md_icon.png);
+  display: inline;
+  min-width: 14px;
+  min-height: 15px;
+}
+
+#devicesList .star {
+  left: auto;
+  right: 40px;
+}
+
+#addDevice {
+  width: 360px;
+  height: 425px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: solid 2px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  z-index: 5;
+  display: none;
+}
+
+#formBlur {
+  z-index: 4;
+}
+
+#addDevice h2 {
+  font-weight: bold;
+  text-align: center;
+}
+
+#addDevice h6 {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.vertical-line-1 {
+  width: 1px;
+  height: 40px;
+  border-color: #ebebeb;
+  border-width: 1px;
+  border-style: solid;
+  display: block;
+  background-color: #ebebeb;
+}
+
+.submite-cancel {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.ac-buttons {
+  margin-top: -5px;
+}
+
+.ac-buttons>button {
+  border: solid 1px #7a7a7a;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  margin-right: 9px;
+  ;
+  background-position: center;
+  background-size: 9px 9px;
+  background-repeat: no-repeat;
+}
+
+.ac-night {
+  background-image: url(../images/ac_night.png);
+}
+
+.ac-clock {
+  background-image: url(../images/ac_clock.png);
+}
+
+.ac-hot {
+  background-image: url(../images/ac_hot.png);
+}
+
+.ac-cold {
+  background-image: url(../images/ac_cold.png);
+}
+
+.ac-water {
+  background-image: url(../images/ac_water.png);
+}
+
+.ac-cycle {
+  background-image: url(../images/ac_cycle.png);
+}
+
+.automationShortcut {
+  display: none;
+  ;
+}
+
+#breadNav {
+  display: none;
+  position: absolute;
+  top: 10px;
+  font-size: 14px;
+}
+
+#breadNav a:hover {
+  text-decoration: underline;
+}
+
+.headerIcon:hover {
+  background-color: transparent;
+}
+
+.screenBlur {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  opacity: 60%;
+  z-index: 1;
+}
+
+#collapsibleTools {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  outline: none;
+  font-size: 15px;
+  border-radius: 25px;
+  border: solid 2px;
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  z-index: 3;
+}
+
+#toolsContent {
+  padding: 0;
+  width: 24px;
+  overflow: hidden;
+  background-color: white;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  z-index: 2;
+}
+
+#toolsContent>li:first-child {
+  height: 6px;
+}
+
+.clearRec {
+  position: relative;
+  background-color: transparent;
+  max-width: 100%;
+  height: auto;
+}
+
+.clearRec>.star {
+  left: auto;
+  right: 40px;
+}
+
+.clearRec>div>span {
+  display: block;
+  background-size: 18px 18px;
+  font-size: 16px;
+  text-indent: 25px;
+  background-repeat: no-repeat;
+}
+
+.clearRec>div>input[type=range] {
+  width: 80%;
+  margin: 0 10%;
+}
+
+.information {
+  background-image: url(../images/information.png);
+}
+
+/*   ........................ */
+
+/*   ........................ */
+
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+  box-sizing: border-box;
+} */
+
+#loginPage {
+  font-family: 'Montserrat', sans-serif;
+  background: #f6f5f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: -20px 0 50px;
+  margin-top: 20px;
+}
+
+.mobileHidden {
+  display: none;
+}
+
+#loginPage p {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: .5px;
+  margin: 20px 0 30px;
+}
+
+#loginPage span {
+  font-size: 12px;
+}
+
+#loginPage a {
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+#loginPage .container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .2), 0 10px 10px rgba(0, 0, 0, .2);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 768px;
+  min-height: 480px;
+}
+
+#loginPage .form-container form {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#loginPage .social-container {
+  margin: 20px 0;
+}
+
+#loginPage .social-container a {
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+}
+
+#loginPage .form-container input {
+  background: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+}
+
+#loginPage button {
+  border-radius: 20px;
+  border: 1px solid #ff4b2b;
+  background: #ff445c;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+#loginPage button:focus {
+  outline: none;
+}
+
+#loginPage button.ghost {
+  background: transparent;
+  border-color: #fff;
+}
+
+#loginPage .form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+#loginPage .sign-in-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+#loginPage .sign-up-container {
+  left: 0;
+  width: 50%;
+  z-index: 1;
+  opacity: 0;
+}
+
+#loginPage .overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 100;
+}
+
+#loginPage .overlay {
+  background: #ff416c;
+  background: linear-gradient(to right, #ff4b2b, #ff416c) no-repeat 0 0 / cover;
+  color: #fff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+}
+
+#loginPage .overlay-panel {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+  height: 100%;
+  width: 50%;
+  text-align: center;
+}
+
+/*   ........................ */
+
+/*   ........................ */
+
+@media screen and (max-width: 800px) {
+  #automationSection a>span {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    width: 24px;
+    height: 24px;
+  }
+  #automationSection a>h5 {
+    font-size: 18px;
+  }
+  .sectionContainer .shortcut:first-child, .sectionContainer .shortcut:nth-child(2) {
+    margin-right: 12.5px;
+  }
+  .listContaier {
+    width: 300px;
+    margin: 0 auto;
+  }
+  .shortcut:not(#automation .shortcut)>span:first-child {
+    width: 20px;
+    background-size: 20px 20px;
+  }
+  .shortcut>span:first-child {
+    width: 24px;
+    background-size: 24px 24px;
+  }
+  .shortcut>div input {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  #wrapper {
+    width: 800px;
+  }
+  main:not("objectMain") hr {
+    display: none;
+    width: 100%;
+  }
+  .clear {
+    display: block;
+  }
+  #previewSection {
+    float: left;
+  }
+  #frequentlySection {
+    float: left;
+    height: 407px;
+  }
+  #frequent {
+    height: 334px;
+  }
+  #favoriteSection {
+    float: right;
+    height: 407px;
+  }
+  #favorite {
+    height: 334px;
+  }
+  #automationSection {
+    float: right;
+    height: 407px;
+  }
+  #automation {
+    height: 334px;
+  }
+  .rowContainer {
+    flex-wrap: wrap;
+  }
+  .shortcut {
+    width: 300px;
+  }
+  .listItem {
+    margin-right: 20px;
+  }
+  .shortcut>span {
+    display: block;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+  }
+  .shortcut>h5 {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 100px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .shortcut>div:nth-child(3) {
+    display: block;
+    position: absolute;
+    top: 45px;
+    left: 100px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .shortcut>div span {
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    text-indent: 20px;
+    margin-bottom: 10px;
+    background-repeat: no-repeat;
+    margin-top: 2px;
+    color: #7a7a7a;
+  }
+  .shortcut .star {
+    left: auto;
+    right: 40px;
+  }
+  .automationShortcut {
+    display: block;
+  }
+  .gridBtn {
+    left: auto;
+    right: 60px;
+  }
+  .listBtn {
+    left: auto;
+    right: 60px
+  }
+   /* ................. */
+  /*.................. */
+  #loginPage button {
+
+    transition: transform 80ms ease-in;
+  }
+  
+  #loginPage button:active {
+    transform: scale(.95);
+  }
+  
+
+  
+  #loginPage .form-container {
+    transition: all .6s ease-in-out;
+  }
+  
+
+  
+  #loginPage .overlay-container {
+
+    transition: transform .6s ease-in-out;
+  }
+  
+  #loginPage .overlay {
+
+    transform: translateY(0);
+    transition: transform .6s ease-in-out;
+  }
+  
+  #loginPage .overlay-panel {
+
+    transform: translateY(0);
+    transition: transform .6s ease-in-out;
+  }
+  
+  #loginPage .overlay-right {
+    right: 0;
+    transform: translateY(0);
+  }
+  
+  #loginPage .overlay-left {
+    transform: translateY(-20%);
+  }
+  
+  /* Move signin to right */
+  #loginPage .container.right-panel-active .sign-in-container {
+    transform: translateY(100%);
+  }
+  
+  /* Move overlay to left */
+  #loginPage .container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+  }
+  
+  /* Bring signup over signin */
+  #loginPage .container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+  }
+  
+  /* Move overlay back to right */
+  #loginPage .container.right-panel-active .overlay {
+    transform: translateX(50%);
+  }
+  
+  /* Bring back the text to center */
+  #loginPage .container.right-panel-active .overlay-left {
+    transform: translateY(0);
+  }
+  
+  /* Same effect for right */
+  #loginPage .container.right-panel-active .overlay-right {
+    transform: translateY(20%);
+  } 
+  
+  .mobileHidden {
+    display: block;
+  }
+  
+  /*   ........................ */
+  /*   ........................ */
+}
+
+#menuBurger h6 {
+  position: absolute;
+  bottom: 8px;
+  left: 25%;
+  font-size: 16px;
+}
+
+@media screen and (min-width: 1300px) {
+  body {
+    padding-bottom: 0;
+  }
+  .content {
+    height: 100%;
+    display: flex;
+    padding-left: 300px;
+  }
+  #wrapper {
+    width: 1000px;
+    opacity: 1;
+  }
+  header {
+    border-bottom: solid 1px #ebebeb;
+  }
+  #menuBurger {
+    top: 35px;
+    left: 15px;
+    transform: translate(0%, 0);
+  }
+  #menuToggle {
+    position: unset;
+  }
+  #menuToggle>span, #menuToggle>input {
+    display: none;
+  }
+  .menu {
+    height: 100%;
+  }
+  footer {
+    display: none;
+  }
+  #burgerBlur {
+    display: none !important;
+  }
+  #breadNav {
+    display: block;
+  }
+}
