@@ -1,8 +1,8 @@
 <?php
-include "includes/db.php";
 session_start();
-$query = "SELECT * FROM tbl_213_device" . (isset($_GET["room"]) ? " where device_location='" . $_GET["room"] . "'" : "");
-$result = mysqli_query($connection, $query);
+if (!isset($_SESSION["userID"]) || $_SESSION["userID"] == 0)
+    header("Location: login.php");
+include "includes/db.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,7 +34,7 @@ $result = mysqli_query($connection, $query);
                 <span></span>
                 <span></span>
                 <ul id="menuBurger" class="menu">
-                    <li><a class="profile avatar" href="#">Micheal Rand</a></li>
+                    <li> <a href="#"> <i class="avatar">.</i> <?php echo $_SESSION["userName"]; ?> </a></li>
                     <li>
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes</button>
@@ -42,7 +42,33 @@ $result = mysqli_query($connection, $query);
 
                         <div class="collapse" id="homes">
                             <ul>
-                                <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
+                                <?php
+                                $query = "SELECT * FROM tbl_213_home WHERE home_id = " . $_SESSION["homeID"];
+                                $result = mysqli_query($connection, $query);
+                                $row = mysqli_fetch_assoc($result);
+                                ?>
+                                <li><a class="profile myhome homeList" href="index.html?homeID=" <?php echo $_SESSION["homeID"] . ">" . $row["home_name"]; ?></a></li>
+                                <?php
+                                mysqli_free_result($result);
+                                $query = "SELECT * FROM tbl_213_home WHERE user_id = " . $_SESSION["userID"] . " and home_id != " . $_SESSION["homeID"];
+                                $result = mysqli_query($connection, $query);
+                                if (!is_bool($result)) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '<li><a class="profile myhome homeList" href="index.html?homeID=' .  $row["home_id"] . '">' . $row["home_name"] . '</a></li>';
+                                    }
+                                }
+                                mysqli_free_result($result);
+                                $query = "SELECT * FROM tbl_213_device where home_id = " . $_SESSION["homeID"] . (isset($_GET["room"]) ? " and device_location='" . $_GET["room"] . "'" : "");
+                                if (isset($_GET["sort"])) {
+                                    if ($_GET["sort"] == "Favorite")
+                                        $query = $query . " order by device_fav desc";
+                                    else if ($_GET["sort"] == "Power Consumption")
+                                        $query = $query . " order by power_consumption desc";
+                                    else if ($_GET["sort"] == "Frequently Used")
+                                        $query = $query . " order by device_usage desc";
+                                }
+                                $result = mysqli_query($connection, $query);
+                                ?>
                                 <li><a class="profile addplace homeList" href="#">Add place</a></li>
                             </ul>
                         </div>
@@ -113,30 +139,36 @@ $result = mysqli_query($connection, $query);
             <button class="functional functionalButton listBtn"></button>
             <main id="devicesList">
                 <section class="listContaier">
-                    <span>Sort: </span>
-                    <select id="previewSelector" class="form-select selector d-inline" aria-label="Default select example">
-                        <option value="power">Power Consumption</option>
-                        <option value="count" selected>Frequently Used</option>
-                        <option value="name">Favorite</option>
-                    </select>
+                    <form>
+                        <span>Sort: </span>
+                        <select id="previewSelector" class="form-select selector d-inline" aria-label="Default select example">
+                            <option value="0" selected disabled>Sort by</option>
+                            <option value="All Device">All Device</option>
+                            <option value="Favorite">Favorite</option>
+                            <option value="Power Consumption">Power Consumption</option>
+                            <option value="Frequently Used">Frequently Used</option>
+                        </select>
+
+                    </form>
                     <div class="rowContainer listItems">
                         <?php
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo '<a class="rectangle btnClickable listItem" href="object.php?deviceID=' . $row["device_id"] . '">
                                 <label class="switch">
-                                    <input type="checkbox" value="' . $row["device_id"] . '">
+                                    <input class="slider-checkbox" type="checkbox" value="' . $row["device_id"] . '" '.($row["device_status"]?'checked':'').'>
                                     <span class="slider round"></span>
                                 </label>
-                                <button class="functional functional functionalButton star star-'.($row["device_fav"]==1?"full":"empty").'"></button>';
+                                <button class="functional functional functionalButton star star-' . ($row["device_fav"] == 1 ? "full" : "empty") . '" value="'.$row["device_id"].'"
+                                        value="'.$row["device_type"].'"></button>';
                             switch ($row["device_type"]) {
                                 case 1:
                                     echo '<span class="tv-bg"></span>
                                             <h5>' . $row["device_name"] . '</h5>
                                             <div>
-                                                <span class="remote-md">Yes Action</span>
+                                                <span class="remote-md tv-channel">Yes Action</span>
                                                 <div class="functional position-relative volume">
                                                     <span class="speakers-md"></span>
-                                                    <input type="range" class="functional">
+                                                    <input type="range" class="functional tv-volume" device-id="' . $row["device_id"] . '" '.($row["device_status"]?'':'disabled').'>
                                                 </div>
                                             </div>
                                             
@@ -149,7 +181,7 @@ $result = mysqli_query($connection, $query);
                                     echo '<span class="ac-bg"></span>';
                                     echo '<h5>' . $row["device_name"] . '</h5>
                                         <div>
-                                            <span class="temp-md">22 ℃</span>
+                                            <span class="temp-md ac-temp">22 ℃</span>
                                             <div class="ac-buttons">
                                                 <button class="functional ac-night"></button>
                                                 <button class="functional ac-clock"></button>
@@ -169,22 +201,22 @@ $result = mysqli_query($connection, $query);
                                     echo '<span class="vac-bg"></span>
                                         <h5>' . $row["device_name"] . '</h5>
                                         <div class="tighter">
-                                            <span class="time-md">Off - 99%</span>
-                                            <span class="battery-md">Battery 0%</span>
+                                            <span class="time-md vac-progress">Off - 99%</span>
+                                            <span class="battery-md vac-battery">Battery 0%</span>
                                         </div>';
                                     break;
                                 case 4:
                                     echo '<span class="lights-upside-bg"></span>';
                                     echo '<h5>' . $row["device_name"] . '</h5>
                                         <div>
-                                            <input type="range" class="functional" disabled>
+                                            <input type="range" class="functional light-brightness" device-id="' . $row["device_id"] . '" '.($row["device_status"]?'':'disabled').'>
                                         </div>';
                                     break;
                                 case 5:
                                     echo '<span class="speakers-bg"></span>';
                                     echo '<h5>' . $row["device_name"] . '</h5>
                                         <div>
-                                            <input type="range" class="functional" disabled>
+                                            <input type="range" class="functional speaker-volume" device-id="' . $row["device_id"] . '" '.($row["device_status"]?'':'disabled').'>
                                         </div>';
                                     break;
                             }
@@ -340,6 +372,7 @@ $result = mysqli_query($connection, $query);
             </ul>
         </nav>
     </footer>
+    <span id="profilePicture" class="visually-hidden"><?php echo $_SESSION["userPicture"]; ?></span>
 </body>
 
 </html>

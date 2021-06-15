@@ -1,57 +1,63 @@
 <?php
-    include "includes/db.php";
+include "includes/db.php";
+// session_start();
+// if (isset($_GET["state"]) and $_GET["state"] == "logout")  {
+//     $_SESSION["userID"] = 0;
+//     session_destroy();
+// }
 
-    if (!empty($_POST["userEmail"])) { // true if form was submitted
-        $query  = "SELECT * FROM tbl_213_user WHERE user_email='"
-            . $_POST["userEmail"]
-            . "'";
+if (!empty($_POST["userEmail"])) { // true if form was submitted
+    $query  = "SELECT * FROM tbl_213_user WHERE user_email='"
+        . $_POST["userEmail"]
+        . "'";
 
-        $result = mysqli_query($connection, $query);
-        $row = mysqli_fetch_array($result);
+    $result = mysqli_query($connection, $query);
+    $row = mysqli_fetch_assoc($result);
 
-        if (isset($_GET["state"]) and $_GET["state"] == "signup") {
-            if (is_array($row)) {
-                $message = "Email is already in use!";  // ****** just replay email
-            } else {
-                $query =   "INSERT INTO tbl_213_user (user_name, user_email, user_pass, user_picture) 
+    if (isset($_GET["state"]) && $_GET["state"] == "signup") {
+        if (is_array($row)) {
+            $message = "Email is already in use!";  // ****** just replay email
+        } else {
+            $query =   "INSERT INTO tbl_213_user (user_name, user_email, user_pass, user_picture) 
                             VALUES ('" . $_POST["userName"] . "','" . $_POST["userEmail"] . "','" . $_POST["userPassword"] . "','" . $_POST["userPicture"] . "')";
-                $result = mysqli_query($connection, $query);
+            $result = mysqli_query($connection, $query);
 
-                $userid = $connection->insert_id;
-                if ($result) {
-                    $query = "INSERT INTO tbl_213_home (user_id, home_name, home_permission) 
+            $userid = $connection->insert_id;
+            $query = "INSERT INTO tbl_213_home (user_id, home_name, home_permission) 
                             VALUES ('" .  $userid . "','" . $_POST["userHome"] . "','Owner')";
-                    $result = mysqli_query($connection, $query);
-                    header('Location: ./login.php');
-                }
+            echo $query;
+            $result = mysqli_query($connection, $query);
+            header('Location: ./login.php');
+        }
+    } else {
+        if (is_array($row)) {
+            if ($row["user_pass"] == $_POST["userPassword"]) {
+                if (session_status() != PHP_SESSION_ACTIVE)
+                    session_start();
+                $_SESSION["userID"] = $row["user_id"];
+                $_SESSION["userName"] = $row["user_name"];
+                $_SESSION["userEmail"] = $row["user_email"];
+                $_SESSION["userPicture"] = $row["user_picture"];
+
+                $query  = "SELECT * FROM tbl_213_home WHERE user_id='"
+                    . $_SESSION["userID"]
+                    . "' AND home_permission='Owner' LIMIT 1";
+
+                $result = mysqli_query($connection, $query);
+                $row = mysqli_fetch_array($result);
+
+                $_SESSION["homeID"] = $row["home_id"];
+                $_SESSION["homePermission"] = $row["home_permission"];
+
+                header('Location: ./index.php');
+            } else {
+                $message = "Incorrect Password!";
             }
         } else {
-            if (is_array($row)) {
-                if ($row["user_pass"] == $_POST["userPassword"]) {
-                    session_start();
-                    $_SESSION["userID"] = $row["user_id"];
-                    $_SESSION["userName"] = $row["user_name"];
-                    $_SESSION["userEmail"] = $row["user_email"];
-
-                    $query  = "SELECT * FROM tbl_213_home WHERE user_id='"
-                        . $_SESSION["userID"]
-                        . "' AND home_permission='Owner' LIMIT 1";
-
-                    $result = mysqli_query($connection, $query);
-                    $row = mysqli_fetch_array($result);
-
-                    $_SESSION["homeID"] = $row["home_id"];
-                    $_SESSION["homePermission"] = $row["home_permission"];
-
-                    header('Location: ./index.php');
-                } else {
-                    $message = "Incorrect Password!";
-                }
-            } else {
-                $message = "Incorrect Email!";
-            }
+            $message = "Incorrect Email!";
         }
     }
+}
 ?>
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <!DOCTYPE html>
@@ -72,7 +78,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <!-- Local Includes -->
-    <script src="js/login.js"></script>
+    <script src="js/scripts.js"></script>
     <link rel="icon" type="image/png" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -185,5 +191,5 @@
 
 </html>
 <?php
-    include "includes/disconnect.php";
+include "includes/disconnect.php";
 ?>

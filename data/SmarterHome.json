@@ -6,7 +6,7 @@
 			"params": [
 				{
 					"name": "channel", 
-					"value": "Yes Action"
+					"value": "MBC 2"
 				},
 				{
 					"name": "volume",
@@ -20,7 +20,7 @@
 			"params": [
 				{
 					"name": "temps", 
-					"value": "22"
+					"value": "18"
 				},
 				{
 					"name": "mode",

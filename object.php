@@ -1,6 +1,8 @@
 <?php
-include "includes/db.php";
 session_start();
+if (!isset($_SESSION["userID"]) || $_SESSION["userID"] == 0)
+    header("Location: login.php");
+include "includes/db.php";
 if (isset($_GET["status"])) {
     if ($_GET["status"] == "add") {
         $query =   "INSERT INTO tbl_213_device (device_type, device_name, device_location, power_consumption,home_id) 
@@ -17,10 +19,6 @@ if (isset($_GET["status"])) {
 if (!isset($deviceID)) {
     $deviceID = $_GET["deviceID"];
 }
-$query = "SELECT * FROM tbl_213_device where device_id='" . $deviceID . "'";
-$result = mysqli_query($connection, $query);
-$row = mysqli_fetch_array($result);
-
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +51,7 @@ $row = mysqli_fetch_array($result);
                 <span></span>
                 <span></span>
                 <ul id="menuBurger" class="menu">
-                    <li><a class="profile avatar" href="#">Micheal Rand</a></li>
+                    <li> <a href="#"> <i class="avatar">.</i> <?php echo $_SESSION["userName"]; ?> </a></li>
                     <li>
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes</button>
@@ -61,7 +59,26 @@ $row = mysqli_fetch_array($result);
 
                         <div class="collapse" id="homes">
                             <ul>
-                                <li><a class="profile myhome homeList" href="index.html?homeID=1">My Home</a></li>
+                                <?php
+                                $query = "SELECT * FROM tbl_213_home WHERE home_id = " . $_SESSION["homeID"];
+                                $result = mysqli_query($connection, $query);
+                                $row = mysqli_fetch_assoc($result);
+                                ?>
+                                <li><a class="profile myhome homeList" href="index.html?homeID=" <?php echo $_SESSION["homeID"] . ">" . $row["home_name"]; ?></a></li>
+                                <?php
+                                mysqli_free_result($result);
+                                $query = "SELECT * FROM tbl_213_home WHERE user_id = " . $_SESSION["userID"] . " and home_id != " . $_SESSION["homeID"];
+                                $result = mysqli_query($connection, $query);
+                                if (!is_bool($result)) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '<li><a class="profile myhome homeList" href="index.html?homeID=' .  $row["home_id"] . '">' . $row["home_name"] . '</a></li>';
+                                    }
+                                }
+                                mysqli_free_result($result);
+                                $query = "SELECT * FROM tbl_213_device where home_id = " . $_SESSION["homeID"] . " and device_id='" . $deviceID . "'";
+                                $result = mysqli_query($connection, $query);
+                                $row = mysqli_fetch_array($result);
+                                ?>
                                 <li><a class="profile addplace homeList" href="#">Add place</a></li>
                             </ul>
                         </div>
@@ -123,12 +140,12 @@ $row = mysqli_fetch_array($result);
             <h1><?php echo $row["device_name"]; ?></h1>
             <main id="objectMain">
                 <section class="infoSection position-relative">
-                    <span>Status: <?php echo ($row["device_status"] ? "On" : "Off"); ?></span>
+                    <span id="device-status">Status: <?php echo ($row["device_status"] ? "On" : "Off"); ?></span>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input class="slider-checkbox" type="checkbox" <?php echo ($row["device_status"]?'checked':'') ?>>
                         <span class="slider round"></span>
                     </label>
-                    <button class="functional functionalButton star star-<?php echo ($row["device_fav"]==1?"full":"empty")?>"></button>
+                    <button class="functional functionalButton star star-<?php echo ($row["device_fav"] == 1 ? "full" : "empty") . '" value=' . $row["device_id"] . "'" ?>></button>
                     <br>
                     <?php
                     // echo '<span>Information:</span>';
@@ -139,8 +156,8 @@ $row = mysqli_fetch_array($result);
                             <button class="functional functionalButton previousVertical"></button>
                         </div>
                                 <ul class="objectControls">
-                                    <li class="icons remote-bg">Channel: Yes Action <input type="number" placeholder="#"></li>
-                            <li class="icons volume-bg">Volume: <input type="range"></li>';
+                                    <li class="icons remote-bg tv-channel">Channel: Yes Action <input type="number" placeholder="#"></li>
+                            <li class="icons volume-bg tv-volume">Volume: <input type="range"  device-id="' . $row["device_id"] . '" '.($row["device_status"]?'':'disabled').'></li>';
                             break;
                         case 2:
                             echo '  
@@ -162,19 +179,19 @@ $row = mysqli_fetch_array($result);
                             </li>
 
 
-                            <li class="icons temp-bg">AC-Temp: 22 ℃</li>';
+                            <li class="icons temp-bg ac-temp">AC-Temp: 22 ℃</li>';
 
                             break;
                         case 3:
                             echo ' <ul class="objectControls">
-                                        <li>Cleaned: 99%</li>
-                                        <li class="battery"> Battery:  </li>
-                                        <li class="cont"> Container:  </li>
+                                        <li class="vac-progress">Cleaned: </li>
+                                        <li class="battery vac-battery"> Battery:  </li>
+                                        <li class="cont vac-container"> Container:  </li>
                                         ';
                             break;
                         case 4:
                             echo ' <ul class="objectControls">
-                                <li"><span>&#128161; Light:</span> <input type="range"></li>';
+                                <li "><span>&#128161; Light:</span> <input class="light-brightness" type="range"  device-id="' . $row["device_id"] . '" '.($row["device_status"]?'':'disabled').'></li>';
                             break;
                         case 5:
                             echo '<ul class="objectControls"> 
@@ -182,115 +199,116 @@ $row = mysqli_fetch_array($result);
                                 <iframe src="https://open.spotify.com/embed/album/2iER5YPSsq4WpokLnnQGCO" width="340"
                                     height="170" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                             </li>
-                                <li class="icons volume-bg">Volume: <input type="range"></li>';
+                                <li class="icons volume-bg">Volume: <input class="speaker-volume" type="range"  device-id="' . $row["device_id"] . '" '.($row["device_status"]?'':'disabled').'></li>';
                             break;
                     }
-                    echo '<li class="location"> Location: ' . $row["device_location"] . '</li>
+                    if ($row["device_location"] != "")
+                        echo '<li class="location"> Location: ' . $row["device_location"] . '</li>
                     </ul>';
                     ?>
 
 
                 </section>
                 <hr>
-                <section class="autosection">
-                    <h4>Automation</h4>
-                    <button class="functional functionalButton edit"></button>
-                    <button class="functional functionalButton plusBtn"></button>
-                    <div class="clear"></div>
-                    <?php
-                    switch ($row["device_type"]) {
-                        case 1:
+                <section class=" autosection">
+                        <h4>Automation</h4>
+                        <button class="functional functionalButton edit"></button>
+                        <button class="functional functionalButton plusBtn"></button>
+                        <div class="clear"></div>
+                        <?php
+                        switch ($row["device_type"]) {
+                            case 1:
 
 
-                            break;
-                        case 2:
-                            //     echo '  
+                                break;
+                            case 2:
+                                //     echo '  
 
-                            //     <ul class="objectControls">
-                            //     <li class="icons ">
-                            //     <div class="ac-buttons">
-                            //     <button class="functional ac-night"></button>
-                            //     <button class="functional ac-clock"></button>
-                            //     <button class="functional ac-hot"></button>
-                            //     <button class="functional ac-cold"></button>
-                            //     <button class="functional ac-water"></button>
-                            //     <button class="functional ac-cycle"></button>
-                            // </div>
+                                //     <ul class="objectControls">
+                                //     <li class="icons ">
+                                //     <div class="ac-buttons">
+                                //     <button class="functional ac-night"></button>
+                                //     <button class="functional ac-clock"></button>
+                                //     <button class="functional ac-hot"></button>
+                                //     <button class="functional ac-cold"></button>
+                                //     <button class="functional ac-water"></button>
+                                //     <button class="functional ac-cycle"></button>
+                                // </div>
 
-                            //     </li>
+                                //     </li>
 
 
-                            //     <li class="icons temp-bg">AC-Temp: <input type="number"></li>';
-                            break;
-                        case 3:
-                            echo '<div class="position-relative">
+                                //     <li class="icons temp-bg">AC-Temp: <input type="number"></li>';
+                                break;
+                            case 3:
+                                echo '<div class="position-relative">
                                     <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse" data-bs-target="#automation1" aria-expanded="false" aria-controls="automation1">
                                         Quick clean</button>
                                     <button type="button" class="btn btn-secondary dropdown-toggle clearToggle" data-bs-toggle="collapse" data-bs-target="#automation1" aria-expanded="false" aria-controls="automation1"></button>
                                     <div class="collapse" id="automation1">
                                         <div class="checkboxList">';
-                            $query = "SELECT device_location FROM tbl_213_device WHERE device_location !='' and device_location is not NULL GROUP BY device_location";
-                            $resultRooms = mysqli_query($connection, $query);
-                            $counter = 0;
-                            while ($rowRooms = mysqli_fetch_assoc($resultRooms)) {
-                                echo    '<div class="form-check">
+                                $query = "SELECT device_location FROM tbl_213_device WHERE home_id = " . $_SESSION["homeID"] . " and device_location !='' and device_location is not NULL GROUP BY device_location";
+                                $resultRooms = mysqli_query($connection, $query);
+                                $counter = 0;
+                                while ($rowRooms = mysqli_fetch_assoc($resultRooms)) {
+                                    echo    '<div class="form-check">
                                                 <input type="checkbox" class="form-check-input" value="volunteering" id="location' . ++$counter . '">
                                                 <label for="location' . $counter . '" class="form-check-label">' . $rowRooms["device_location"] . '.</label>
                                             </div>';
-                            }
-                            mysqli_free_result($resultRooms);
-                            echo
-                            '</div>
+                                }
+                                mysqli_free_result($resultRooms);
+                                echo
+                                '</div>
                                     </div>
                                     <label class="switch">
-                                        <input type="checkbox">
+                                        <input type="checkbox" >
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
                                 <hr class="small-hr">';
-                            break;
-                        case 4:
-                            
-                            break;
-                        case 5:
-                            break;
-                    }
-                    ?>
+                                break;
+                            case 4:
+
+                                break;
+                            case 5:
+                                break;
+                        }
+                        ?>
 
 
-                    <div class="position-relative">
-                        <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2">
-                            My schedule</button>
-                        <button type="button" class="btn btn-secondary dropdown-toggle clearToggle" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2"></button>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                        <div class="collapse" id="automation2">
-                            <div class="checkboxList">
-                                <div class="row mb-4">
-                                    <div class="row">
-                                        <button class="buttonautomation buttonweek">S</button>
-                                        <button class="buttonautomation buttonweek">M</button>
-                                        <button class="buttonautomation buttonweek">T</button>
-                                        <button class="buttonautomation buttonweek">W</button>
-                                        <button class="buttonautomation buttonweek">T</button>
-                                        <button class="buttonautomation buttonweek">F</button>
-                                        <button class="buttonautomation buttonweek">S</button>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="example-time-input" class="col-2 col-form-label">Time:</label>
-                                        <div class="col-5">
-                                            <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                        <div class="position-relative">
+                            <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2">
+                                My schedule</button>
+                            <button type="button" class="btn btn-secondary dropdown-toggle clearToggle" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2"></button>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                            <div class="collapse" id="automation2">
+                                <div class="checkboxList">
+                                    <div class="row mb-4">
+                                        <div class="row">
+                                            <button class="buttonautomation buttonweek">S</button>
+                                            <button class="buttonautomation buttonweek">M</button>
+                                            <button class="buttonautomation buttonweek">T</button>
+                                            <button class="buttonautomation buttonweek">W</button>
+                                            <button class="buttonautomation buttonweek">T</button>
+                                            <button class="buttonautomation buttonweek">F</button>
+                                            <button class="buttonautomation buttonweek">S</button>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="example-time-input" class="col-2 col-form-label">Time:</label>
+                                            <div class="col-5">
+                                                <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <?php
-                                switch ($row["device_type"]) {
-                                    case 1:
+                                    <?php
+                                    switch ($row["device_type"]) {
+                                        case 1:
 
-                                        echo '
+                                            echo '
 
                                         <ul class="objectControls">
                                         <li class="icons remote-bg">Channel: Netflix <input type="number" placeholder="#"></li>
@@ -299,9 +317,9 @@ $row = mysqli_fetch_array($result);
                                         </ul>
                                      
                                             ';
-                                        break;
-                                    case 2:
-                                        echo '  
+                                            break;
+                                        case 2:
+                                            echo '  
                                   
                                         <ul class="objectControls">
                                         <li class="icons ">
@@ -323,39 +341,39 @@ $row = mysqli_fetch_array($result);
                                      
                                  ';
 
-                                        break;
-                                    case 3:
-                                        $query = "SELECT device_location FROM tbl_213_device WHERE device_location !='' and device_location is not NULL GROUP BY device_location";
-                                        $resultRooms = mysqli_query($connection, $query);
-                                        while ($rowRooms = mysqli_fetch_assoc($resultRooms)) {
-                                            echo    '<div class="form-check">
+                                            break;
+                                        case 3:
+                                            $query = "SELECT device_location FROM tbl_213_device WHERE home_id = " . $_SESSION["homeID"] . " and device_location !='' and device_location is not NULL GROUP BY device_location";
+                                            $resultRooms = mysqli_query($connection, $query);
+                                            while ($rowRooms = mysqli_fetch_assoc($resultRooms)) {
+                                                echo    '<div class="form-check">
                                                 <input type="checkbox" class="form-check-input" value="volunteering" id="location' . ++$counter . '">
                                                 <label for="location' . $counter . '" class="form-check-label">' . $rowRooms["device_location"] . '.</label>
                                             </div>';
-                                        }
-                                        mysqli_free_result($resultRooms);
-                                        break;
-                                    case 4:
-                                        echo ' <ul class="objectControls">
+                                            }
+                                            mysqli_free_result($resultRooms);
+                                            break;
+                                        case 4:
+                                            echo ' <ul class="objectControls">
                                          <li"><span>&#128161; Light:</span> <input type="range"></li>';
-                                        break;
-                                    case 5:
-                                        echo '
+                                            break;
+                                        case 5:
+                                            echo '
                                         <div class="media">
                                         <iframe src="https://open.spotify.com/embed/album/2iER5YPSsq4WpokLnnQGCO" width="320"
                                             height="170" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                          </div>
                                         
                                         ';
-                                        break;
-                                }
-                                ?>
+                                            break;
+                                    }
+                                    ?>
 
 
 
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </section>
                 <hr>
                 <section class="Permission">
@@ -383,6 +401,7 @@ $row = mysqli_fetch_array($result);
             </ul>
         </nav>
     </footer>
+    <span id="profilePicture" class="visually-hidden"><?php echo $_SESSION["userPicture"]; ?></span>
 </body>
 
 </html>

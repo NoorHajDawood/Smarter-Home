@@ -117,10 +117,15 @@ h1 {
 }
 
 .avatar {
-    background-image: url(../images/userID1.png);
+    display: inline-block;
+    /* background-image: url(../images/userID1.png); */
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
     min-width: 30px;
     height: 30px;
     line-height: 30px;
+    color: transparent;
 }
 
 .homeList {
@@ -1418,7 +1423,7 @@ input:checked+.slider:before {
     #wrapper {
         width: 800px;
     }
-    main:not("objectMain") hr {
+    main:not(#objectMain) hr {
         display: none;
         width: 100%;
     }
