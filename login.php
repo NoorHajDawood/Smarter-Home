@@ -47,6 +47,7 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
 
                 $_SESSION["homeID"] = $row["home_id"];
                 $_SESSION["homePermission"] = $row["home_permission"];
+                $_SESSION["homeName"] = $row["home_name"];
 
                 header('Location: ./index.php');
             } else {

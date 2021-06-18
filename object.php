@@ -64,7 +64,7 @@ if (!isset($deviceID)) {
                                 $result = mysqli_query($connection, $query);
                                 $row = mysqli_fetch_assoc($result);
                                 ?>
-                                <li><a class="profile myhome homeList" href="index.php?homeID=" <?php echo $_SESSION["homeID"]; ?>> <?php echo $homeName = $row["home_name"]; ?></a></li>
+                                <li><a class="profile myhome homeList" href="index.php?homeID=" <?php echo $_SESSION["homeID"]; ?>> <?php echo $_SESSION["homeName"]; ?></a></li>
                                 <?php
                                 mysqli_free_result($result);
                                 $query = "SELECT * FROM tbl_213_home WHERE user_id = " . $_SESSION["userID"] . " and home_id != " . $_SESSION["homeID"];
@@ -96,7 +96,7 @@ if (!isset($deviceID)) {
                     <li><a class="profile roomsButton" href="roomsList.php">Rooms</a></li>
                     <li><a class="profile devicesButton" href="devicesList.php">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
-                    <li><a class="profile member" href="#">Members</a></li>
+                    <li><a class="profile member" href="memberList.php">Members</a></li>
                     <li>
                         <hr>
                     </li>

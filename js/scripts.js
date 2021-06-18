@@ -71,15 +71,17 @@ function toolsClick() {
 
 function addDeviceForm() {
     $('#toolsBlur').click();
-    $('#addDevice').show();
+    $(':input[name="memberEmail"]').prop('disabled', false);;
+    $('.formBox').show();
     $('#addDevice').attr('action', './object.php?status=add');
+    $('#addMember').attr('action', './memberList.php?status=add');
     $('#formBlur').show();
 }
 function editDeviceButton() {
     $('#toolsBlur').click();
     $('.listItem .edit').show();
     // $('#toolsBlur').css('display', 'block');
-    // $('#addDevice').show();
+    // $('.formBox').show();
     // $(':input[name="deviceType"]').val();
     $('#formBlur').show();
 }
@@ -87,7 +89,7 @@ function deleteDeviceButton() {
     $('#toolsBlur').click();
     $('.listItem .trash').show();
     // $('#toolsBlur').css('display', 'block');
-    // $('#addDevice').show();
+    // $('.formBox').show();
     // $(':input[name="deviceType"]').val();
     $('#formBlur').show();
 }
@@ -95,20 +97,35 @@ function deleteDeviceButton() {
 function editDeviceForm() {
     $('#formTitle').html('Edit Device');
     $('#addDevice').attr('action', './object.php?deviceID=' + this.value + '&status=edit');
+    $('#addMember').attr('action', './memberList.php?memberID=' + this.value + '&status=edit');
+    $(':input[name=memberEmail]').val($(this).parent().attr('member-email'));
+    $(':input[name=memberPermission]').val($(this).parent().attr('member-permission'));
     $(':input[name=deviceType]').val($(this).parent().attr('device-type'));
     $(':input[name=deviceName]').val($(this).parent().attr('device-name'));
     $(':input[name=deviceLocation]').val($(this).parent().attr('device-location'));
     $(':input[name=deviceConsumption]').val($(this).parent().attr('device-power'));
     $(':input[type=submit]').val("Edit");
+    $(':input[name="memberEmail"]').prop('disabled', true);
+    $('.formBox').show();
+}
 
-    $('#addDevice').show();
+function getPageName(url) {
+    var index = url.lastIndexOf("/") + 1;
+    var filenameWithExtension = url.substr(index);
+    var filename = filenameWithExtension.split(".")[0]; // <-- added this line
+    return filename;                                    // <-- added this line
 }
 
 function deleteDeviceForm() {
+    var page = getPageName(window.location.pathname);
     $('#formBlur').click();
+    if (page == "devicesList") {
+        callAjax("deviceID=" + this.value + "&delete=true");
+    }
+    else if (page == "memberList") {
+        callAjax("memberID=" + this.value + "&homeID=" + $('.listItems').attr('home-id') + "&delete=true");
+    }
     $(this).parent().remove();
-    callAjax("deviceID=" + this.value + "&delete=true");
-
 }
 
 function updateDeviceFromJson() {
@@ -168,7 +185,6 @@ function updateDeviceStatusSlider() {
 function updateDeviceFavorite() {
     $('.star').click(function () {
         var dataString = "deviceID=" + this.value + "&fav=";
-        console.log(this.value);
         if ($(this).hasClass("star-full")) {
             $(this).removeClass("star-full");
             $(this).addClass("star-empty");
@@ -179,7 +195,6 @@ function updateDeviceFavorite() {
             $(this).removeClass("star-empty");
             $(this).addClass("star-full");
         }
-        console.log(dataString);
         callAjax(dataString);
     });
 }
@@ -225,9 +240,9 @@ $(document).ready(function () {
             tools.click();
         });
 
-        $('#deviceAdd').click(addDeviceForm);
-        $('#deviceEdit').click(editDeviceButton);
-        $('#deviceDelete').click(deleteDeviceButton);
+        $('#addButton').click(addDeviceForm);
+        $('#editButton').click(editDeviceButton);
+        $('#deleteButton').click(deleteDeviceButton);
 
         $('.listItem .edit').click(editDeviceForm);
         $('.listItem .trash').click(deleteDeviceForm);
@@ -246,7 +261,6 @@ $(document).ready(function () {
             });
         });
         profilePicture = $('#profilePicture').text();
-        console.log(profilePicture);
         $('.avatar').each(function () {
             $(this).css('background-image', "url(" + profilePicture + ")");
             $(this).css('border-radius', "50%");
@@ -269,8 +283,8 @@ $(document).ready(function () {
         if (selectedOP)
             selectedOP.onchange = show;
 
-        $('#devicePermission').change(function(){
-            callAjax("deviceID=" + getDeviceID() + "&permission="+this.value);
+        $('#devicePermission').change(function () {
+            callAjax("deviceID=" + getDeviceID() + "&permission=" + this.value);
         })
 
         updateDeviceFromJson();
@@ -281,7 +295,21 @@ $(document).ready(function () {
             $('.hide').show();
             $('.shown').hide();
         });
-        // $('#ajaxForm').submit(ajaxFormOverride());
+
+        $('#newRoomButton').click(function myFunction() {
+
+            var x = document.getElementById("roomSelect");
+            var option = document.createElement("option");
+            option.text = $('#newRoomInput').val();
+            x.add(option);
+            $(option).prop('selected', true);
+            // var roomSelect = $(':input[name="deviceLocation"]');
+            // var option = document.createElement("option");
+            // option.text = $('#newRoomInput').value;
+            // $(roomSelect).add(option);
+            // $(roomSelect).val(option.text);
+            return false;
+        });
     }
 
 });

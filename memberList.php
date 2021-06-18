@@ -3,8 +3,20 @@ session_start();
 if (!isset($_SESSION["userID"]) || $_SESSION["userID"] == 0)
     header("Location: login.php");
 include "includes/db.php";
-
-
+if (isset($_GET["status"])) {
+    $query1 = "SELECT user_id from tbl_213_user where user_email='" . $_POST["memberEmail"] . "'";
+    $result1 =   mysqli_query($connection, $query1);
+    $row = mysqli_fetch_assoc($result1);
+    if ($_GET["status"] == "add") {
+        $query =   "INSERT INTO tbl_213_home (home_id, user_id, home_name, home_permission) 
+            VALUES (" .   $_SESSION["homeID"] . "," . $row["user_id"] . ",'" . strtok($_SESSION["userName"], " ") . "s Home" . "','" . $_POST["memberPermission"] . "')";
+        mysqli_query($connection, $query);
+    } else if ($_GET["status"] == "edit") {
+        $query = "UPDATE tbl_213_home SET home_permission='" . $_POST["memberPermission"] . "' 
+                     where user_id=" . $row["user_id"] . " and home_id=" .   $_SESSION["homeID"];
+        mysqli_query($connection, $query);
+    }
+}
 
 ?>
 
@@ -74,7 +86,7 @@ include "includes/db.php";
                     <li><a class="profile roomsButton" href="roomsList.php">Rooms</a></li>
                     <li><a class="profile devicesButton" href="devicesList.php">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
-                    <li><a class="profile member" href="memberList.php">Members</a></li>
+                    <li><a class="profile member" href="#">Members</a></li>
                     <li>
                         <hr>
                     </li>
@@ -122,15 +134,18 @@ include "includes/db.php";
                 </ol>
             </nav>
             <h1>Members</h1>
-            <!-- <button type="button" id="collapsibleTools" class="functionalButton toolsBtn"></button> -->
+            <?php
+            if ($_SESSION["homePermission"] == "Admin" || $_SESSION["homePermission"] == "Owner")
+                echo '<button type="button" id="collapsibleTools" class="functionalButton toolsBtn"></button>';
+            ?>
             <ul id="toolsContent">
                 <li></li>
-                <li> <button id="roomsEdit" type="button" class="functionalButton edit"></button></li>
-                <li> <button id="roomsDelete" type="button" class="functionalButton trash "></button></li>
-                <li> <button id="roomsAdd" type="button" class="functionalButton plusBtn "></button></li>
+                <li> <button id="editButton" type="button" class="functionalButton edit"></button></li>
+                <li> <button id="deleteButton" type="button" class="functionalButton trash "></button></li>
+                <li> <button id="addButton" type="button" class="functionalButton plusBtn "></button></li>
             </ul>
             <div id="toolsBlur" class="screenBlur"></div>
-            <main id="rooms">
+            <main id="memberMain">
                 <section class="listContaier">
                     <br>
                     <!-- <span>Sort: </span>
@@ -140,90 +155,60 @@ include "includes/db.php";
                             <option value="Power Consumption">Power Consumption</option>
                         </select> -->
                     <!-- //////////////////////////////////////////////////////// -->
-                    <div class="rowContainer listItems">
+                    <div class="rowContainer listItems" home-id="<?php echo $_SESSION["homeID"]; ?>">
                         <?php
-                        $query = "SELECT device_location , count(*) as sum_devices from tbl_213_device  WHERE home_id = " . $_SESSION["homeID"] . " AND device_location!=''   group by device_location order by device_location";
-                        $query2 = "SELECT device_location , count(*) as sum_active from tbl_213_device  WHERE home_id = " . $_SESSION["homeID"] . " AND device_location!='' AND device_status=1   group by device_location  order by device_location";
-
+                        $query = "SELECT * FROM tbl_213_user as user left join tbl_213_home as home on user.user_id = home.user_id where home_id=" . $_SESSION["homeID"];
                         $result = mysqli_query($connection, $query);
-                        $result2 = mysqli_query($connection, $query2);
                         if (!$result) {
 
                             die("failed:(");
                         }
-                        if (mysqli_num_rows($result2) == 0) {
-
-                            $row2["device_location"] = "";
-                            $row2["sum_active"] = 0;
-                        } else
-                            $row2 = mysqli_fetch_assoc($result2);
                         while ($row = mysqli_fetch_assoc($result)) {
-                            // $row2 = mysqli_fetch_assoc($result2);
-                            echo ' <a class="rectangle btnClickable listItem" href="devicesList.php?room=' . $row["device_location"] . '">
-
-                             <span class="room-bg"></span>
-                             <h5>' . $row["device_location"] . '</h5>
+                            echo ' <div class="rectangle btnClickable listItem" member-email="' . $row["user_email"] . '" member-permission="' . $row["home_permission"] . '">';
+                            echo '<button class="functional functional functionalButton trash" value="' . $row["user_id"] . '"></button>';
+                            echo '<button class="functional functional functionalButton edit" value="' . $row["user_id"] . '"></button>';
+                            echo '<img class="member-picture" src="' . $row["user_picture"] . '"> 
+                             <h5>' . $row["user_name"] . '</h5>
                              <div>
-                                 <span>' . $row["sum_devices"] . ' Devices</span>
-                                 <span>';
-                            if ($row2["device_location"] == $row["device_location"]) {
-                                echo $row2["sum_active"] . ' Active </span>';
-                                $row2 = mysqli_fetch_assoc($result2);
-                                if (!$row2)
-                                    $row2["device_location"] = "";
-                            } else {
-                                echo '<span>0 Devices</span>';
-                            }
+                                 <span>Permission: ' . $row["home_permission"] . '</span>';
                             echo '</div>
                              
-                             </a>
+                             </div>
                              ';
                         }
 
                         ?>
-                        <!-- <a class="rectangle btnClickable listItem" href="devicesList.php?room=$row[device_location]">
-                            <span class="livingroom-bg"></span>
-                            <h5>Living Room</h5>
-                            <div>
-                                <span>5 Devices</span>
-                                <span class="temp-md">22 ℃</span>
-                            </div>
-                        </a>
-                        <a class="rectangle btnClickable listItem" href="devicesList.php?roomID=2">
-                            <span class="kitchen-bg"></span>
-                            <h5>Kitchen</h5>
-                            <div>
-                                <span>5 Devices</span>
-                                <span class="temp-md">22 ℃</span>
-                            </div>
-                        </a>
-                        <a class="rectangle btnClickable listItem" href="devicesList.php?roomID=3">
-                            <span class="bedroom-bg"></span>
-                            <h5>Bedroom 1</h5>
-                            <div>
-                                <span>3 Devices</span>
-                                <span class="temp-md">22 ℃</span>
-                            </div>
-                        </a>
-                        <a class="rectangle btnClickable listItem" href="devicesList.php?roomID=4">
-                            <span class="bedroom-bg"></span>
-                            <h5>Bedroom 2</h5>
-                            <div>
-                                <span>2 Devices</span>
-                                <span class="temp-md">22 ℃</span>
-                            </div>
-                        </a>
-                        <a class="rectangle btnClickable listItem" href="devicesList.php?roomID=5">
-                            <span class="bathroom-bg"></span>
-                            <h5>Bathroom</h5>
-                            <div>
-                                <span>1 Devices</span>
-                                <span class="temp-md">22 ℃</span>
-                            </div>
-                        </a> -->
                     </div>
                 </section>
+                <div id="formBlur" class="screenBlur"></div>
+                <form id="addMember" class="formBox" action="#" method="POST">
+                    <h2 id="formTitle">Add Member</h2>
+                    <!-- <h6>Device Type:</h6> -->
+                    <!-- <select name="deviceType" class="form-select" aria-label="Default select example" required>
+                        <option value="" disabled selected>Type</option>
 
+                        <option id="deviceType1" value="1">Television</option>
+                        <option id="deviceType2" value="2">Air Conditioner</option>
+                        <option id="deviceType3" value="3">Vacuum</option>
+                        <option id="deviceType4" value="4">Lights</option>
+                        <option id="deviceType5" value="5">Speakers</option>
+                    </select>
+                    </select> -->
+                    <h6>Member Email:</h6>
+                    <input name="memberEmail" class="form-control" required type="text" placeholder="Member Email">
+                    <h6>Permission:</h6>
+                    <select name="memberPermission" class="form-select" required aria-label="Default select example">
+                        <option disabled>Select a Permission</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Guest">Guest</option>
+                    </select>
+                    <div class="submite-cancel">
+                        <button type="button" class="btn btn-dark cancelForm">Cancel</button>
+                        <div class="vertical-line-1"></div>
+                        <input type="submit" value="Add" class="btn btn-success"></input>
+                    </div>
+                </form>
             </main>
         </div>
     </div>
@@ -231,7 +216,7 @@ include "includes/db.php";
         <nav>
             <ul>
                 <li><a class="homeButton-gray" href="index.php"><span>Home</span></a></li>
-                <li class="selected"><a class="roomsButton" href="roomsList.php"><span>Rooms</span></a></li>
+                <li><a class="roomsButton-gray" href="roomsList.php"><span>Rooms</span></a></li>
                 <li><a class="devicesButton-gray" href="devicesList.php"><span>Devices</span></a></li>
                 <li><a class="automationButton-gray" href="#"><span>Automation</span></a></li>
             </ul>

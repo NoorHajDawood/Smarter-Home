@@ -47,7 +47,7 @@ include "includes/db.php";
                                 $result = mysqli_query($connection, $query);
                                 $row = mysqli_fetch_assoc($result);
                                 ?>
-                                <li><a class="profile myhome homeList" href="index.php?homeID=" <?php echo $_SESSION["homeID"]; ?>> <?php echo $homeName = $row["home_name"]; ?></a></li>
+                                <li><a class="profile myhome homeList" href="index.php?homeID=" <?php echo $_SESSION["homeID"]; ?>> <?php echo $_SESSION["homeName"]; ?></a></li>
                                 <?php
                                 mysqli_free_result($result);
                                 $query = "SELECT * FROM tbl_213_home WHERE user_id = " . $_SESSION["userID"] . " and home_id != " . $_SESSION["homeID"];
@@ -86,7 +86,7 @@ include "includes/db.php";
                     <li><a class="profile roomsButton" href="roomsList.php">Rooms</a></li>
                     <li><a class="profile devicesButton" href="devicesList.php">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
-                    <li><a class="profile member" href="#">Members</a></li>
+                    <li><a class="profile member" href="memberList.php">Members</a></li>
                     <li>
                         <hr>
                     </li>
@@ -142,9 +142,9 @@ include "includes/db.php";
             ?>
             <ul id="toolsContent">
                 <li></li>
-                <li> <button id="deviceEdit" type="button" class="functionalButton edit"></button></li>
-                <li> <button id="deviceDelete" type="button" class="functionalButton trash "></button></li>
-                <li> <button id="deviceAdd" type="button" class="functionalButton plusBtn "></button></li>
+                <li> <button id="editButton" type="button" class="functionalButton edit"></button></li>
+                <li> <button id="deleteButton" type="button" class="functionalButton trash "></button></li>
+                <li> <button id="addButton" type="button" class="functionalButton plusBtn "></button></li>
             </ul>
             <div id="toolsBlur" class="screenBlur"></div>
             <!-- <button class="functional functionalButton listBtn"></button> -->
@@ -253,14 +253,29 @@ include "includes/db.php";
                     <h6>Device Name:</h6>
                     <input name="deviceName" class="form-control" type="text" placeholder="Device Name">
                     <h6>Location:</h6>
-                    <select name="deviceLocation" class="form-select" aria-label="Default select example" required>
+                    <select id="roomSelect" name="deviceLocation" class="form-select" aria-label="Default select example" required>
                         <option value="" disabled selected>Location</option>
-                        <option value="Living Room">Living Room</option>
-                        <option value="Bedroom 1">Bedroom 1</option>
-                        <option value="Bedroom 2">Bedroom 2</option>
-                        <option value="Kitchen">Kitchen</option>
+                        <?php
+                        $query = "SELECT device_location from tbl_213_device  WHERE home_id = " . $_SESSION["homeID"] . " AND device_location!=''   group by device_location order by device_location";
+                        $result = mysqli_query($connection, $query);
+
+                        while(  $row = mysqli_fetch_assoc($result))
+                        {
+                            
+                            echo '<option value="'.$row["device_location"].'">'.$row["device_location"].'</option>';
+                        }
+
+
+
+
+                        ?>
+
                         <option value="">None</option>
                     </select>
+                    <h6>Or New Location:</h6>
+                    <div class="row">
+                        <input id="newRoomInput" type="text" class="form-control col"> <button id="newRoomButton" class="btn btn-light col">Add to List</button>
+                    </div>
                     <h6>Power Consumption:</h6>
                     <input name="deviceConsumption" class="form-control" type="number" placeholder="Power Consumption" required>
                     <div class="submite-cancel">

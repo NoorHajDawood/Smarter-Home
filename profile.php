@@ -71,7 +71,7 @@ if (isset($_POST["userEmail"])) {
                 <span></span>
                 <span></span>
                 <ul id="menuBurger" class="menu">
-                    <li> <a href="#"> <i class="avatar">.</i> <?php echo $_SESSION["userName"]; ?> </a></li>
+                <li> <a href="profile.php"> <i class="avatar">.</i> <?php echo $_SESSION["userName"]; ?> </a></li>
                     <li>
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes</button>
@@ -84,7 +84,7 @@ if (isset($_POST["userEmail"])) {
                                 $result = mysqli_query($connection, $query);
                                 $row = mysqli_fetch_assoc($result);
                                 ?>
-                                <li><a class="profile myhome homeList" href="index.php?homeID=" <?php echo $_SESSION["homeID"]; ?>> <?php echo $homeName = $row["home_name"]; ?></a></li>
+                                <li><a class="profile myhome homeList" href="index.php?homeID=" <?php echo $_SESSION["homeID"]; ?>> <?php echo $_SESSION["homeName"]; ?></a></li>
                                 <?php
                                 mysqli_free_result($result);
                                 $query = "SELECT * FROM tbl_213_home WHERE user_id = " . $_SESSION["userID"] . " and home_id != " . $_SESSION["homeID"];
@@ -106,7 +106,7 @@ if (isset($_POST["userEmail"])) {
                     <li><a class="profile roomsButton" href="roomsList.php">Rooms</a></li>
                     <li><a class="profile devicesButton" href="devicesList.php">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
-                    <li><a class="profile member" href="#">Members</a></li>
+                    <li><a class="profile member" href="memberList.php">Members</a></li>
                     <li>
                         <hr>
                     </li>
@@ -159,8 +159,8 @@ if (isset($_POST["userEmail"])) {
                     <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex flex-column align-items-center text-center">
-                                    <img src="<?php echo $_SESSION["userPicture"]; ?>" alt="Admin" class="rounded-circle" width="150">
+                                <div class="d-flex flex-column align-items-center text-center"> 
+                                    <img src="<?php echo $_SESSION["userPicture"]; ?>" alt="Admin" class="rounded-circle">
                                     <div class="mt-3">
                                         <h4><?php echo $_SESSION["userName"] ?></h4>
                                         <!-- <p class="text-secondary mb-1"><?php echo $homeName; ?></p>

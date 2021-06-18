@@ -14,6 +14,7 @@ if (isset($_GET["homeID"])) {
     if (is_array($row)) {
         $_SESSION["homeID"] = $row["home_id"];
         $_SESSION["homePermission"] = $row["home_permission"];
+        $_SESSION["homeName"] = $row["home_name"];
     }
 }
 ?>
@@ -60,7 +61,7 @@ if (isset($_GET["homeID"])) {
                                 $result = mysqli_query($connection, $query);
                                 $row = mysqli_fetch_assoc($result);
                                 ?>
-                                <li><a class="profile myhome homeList" href="index.php?homeID=" <?php echo $_SESSION["homeID"]; ?>> <?php echo $homeName = $row["home_name"]; ?></a></li>
+                                <li><a class="profile myhome homeList" href="index.php?homeID=" <?php echo $_SESSION["homeID"]; ?>> <?php echo $_SESSION["homeName"]; ?></a></li>
                                 <?php
                                 mysqli_free_result($result);
                                 $query = "SELECT * FROM tbl_213_home WHERE user_id = " . $_SESSION["userID"] . " and home_id != " . $_SESSION["homeID"];
@@ -82,7 +83,7 @@ if (isset($_GET["homeID"])) {
                     <li><a class="profile roomsButton" href="roomsList.php">Rooms</a></li>
                     <li><a class="profile devicesButton" href="devicesList.php">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
-                    <li><a class="profile member" href="#">Members</a></li>
+                    <li><a class="profile member" href="memberList.php">Members</a></li>
                     <li>
                         <hr>
                     </li>
@@ -129,7 +130,7 @@ if (isset($_GET["homeID"])) {
                     <li class="breadcrumb-item" aria-current="page"><a href="#">Home</a></li>
                 </ol>
             </nav>
-            <h1><?php echo $homeName; ?></h1>
+            <h1><?php echo $_SESSION["homeName"]; ?></h1>
             <main>
                 <section class="sectionContainer" id="previewSection">
                     <select id="previewSelector" class="form-select selector" aria-label="Default select example">

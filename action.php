@@ -7,7 +7,10 @@ if (isset($_POST['status'])) {
     $query = "update tbl_213_device set device_fav = " . $_POST['fav'] . " where device_id=" . $_POST['deviceID'];
     $result = mysqli_query($connection, $query);
 } else if (isset($_POST['delete'])) {
-    $query = "delete from tbl_213_device where device_id=" . $_POST['deviceID'];
+    if(isset($_POST['deviceID']))
+        $query = "delete from tbl_213_device where device_id=" . $_POST['deviceID'];
+    else if(isset($_POST['memberID']))
+        $query = "delete from tbl_213_home where user_id=" . $_POST['memberID'] . " and home_id=" . $_POST['homeID'];
     $result = mysqli_query($connection, $query);
 } else if (isset($_POST['permission'])) {
     $query = "update tbl_213_device set device_permission='" . $_POST['permission'] . "' where device_id=" . $_POST['deviceID'];
