@@ -1,10 +1,10 @@
 <?php
 include "includes/db.php";
-// session_start();
-// if (isset($_GET["state"]) and $_GET["state"] == "logout")  {
-//     $_SESSION["userID"] = 0;
-//     session_destroy();
-// }
+session_start();
+if (isset($_GET["state"]) and $_GET["state"] == "logout")  {
+    $_SESSION["userID"] = 0;
+    session_destroy();
+}
 
 if (!empty($_POST["userEmail"])) { // true if form was submitted
     $query  = "SELECT * FROM tbl_213_user WHERE user_email='"
@@ -25,7 +25,6 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
             $userid = $connection->insert_id;
             $query = "INSERT INTO tbl_213_home (user_id, home_name, home_permission) 
                             VALUES ('" .  $userid . "','" . $_POST["userHome"] . "','Owner')";
-            echo $query;
             $result = mysqli_query($connection, $query);
             header('Location: ./login.php');
         }
@@ -116,7 +115,7 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
 
                 <div class="field space">
                     <span class="fa fa-user"></span>
-                    <input name="userEmail" type="text" required placeholder="Email" value="<?php if (isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>">
+                    <input name="userEmail" spaceholder="Email Address" type="text" required placeholder="Email" value="<?php if (isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>">
                 </div>
                 <?php
                 if (isset($_GET["state"]) and $_GET["state"] == "signup" and isset($message))

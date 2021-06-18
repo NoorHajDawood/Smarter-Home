@@ -392,6 +392,8 @@ main hr {
 
 .tv-sm {
     background-image: url(../images/tv_sm.png);
+    width: 20px;
+    height: 20px;
 }
 
 .ac-sm {
@@ -914,6 +916,10 @@ input:checked+.slider:before {
     color: #7a7a7a;
 }
 
+#rooms .listItem>div span {
+    margin-bottom: 0;
+}
+
 .volume>input {
     width: 140px;
     position: absolute;
@@ -941,6 +947,10 @@ input:checked+.slider:before {
     background-image: url(../images/livingroom_big_icon.png);
 }
 
+.room-bg {
+    background-image: url(../images/door.png);
+}
+
 .kitchen-bg {
     background-image: url(../images/kitchen_big_icon.png);
 }
@@ -954,19 +964,19 @@ input:checked+.slider:before {
 }
 
 .tv-bg {
-    background-image: url(../images/tv_bg.png);
+    background-image: url(../images/smart-tv.png);
 }
 
 .ac-bg {
-    background-image: url(../images/ac_bg.png);
+    background-image: url(../images/air-conditioner.png);
 }
 
 .lights-upside-bg {
-    background-image: url(../images/light_upside_bg.png);
+    background-image: url(../images/smart-light.png);
 }
 
 .vac-bg {
-    background-image: url(../images/vaccum_bg.png);
+    background-image: url(../images/robot-vacuum.png);
 }
 
 .battery-md {
@@ -982,7 +992,7 @@ input:checked+.slider:before {
 }
 
 .speakers-bg {
-    background-image: url(../images/speakers_bg_icon.png);
+    background-image: url(../images/smart-speaker.png);
 }
 
 .volume-bg {
@@ -1024,7 +1034,30 @@ input:checked+.slider:before {
     right: 40px;
 }
 
+.listItem .trash {
+    position: absolute;
+    top: 2px;
+    right: 65px;
+    background-size: 20px 20px;
+}
 
+.listItem .trash {
+    position: absolute;
+    top: 2px;
+    right: 65px;
+    background-size: 20px 20px;
+    display: none;
+    z-index: 5;
+}
+
+.listItem .edit {
+    position: absolute;
+    top: 2px;
+    right: 65px;
+    background-size: 20px 20px;
+    display: none;
+    z-index: 5;
+}
 
 #addDevice {
     width: 360px;
@@ -1326,7 +1359,7 @@ input:checked+.slider:before {
     font-family: "Montserrat", sans-serif;
 }
 
-.pass-key:valid~.show {
+#loginPage .pass-key:valid~.show {
     display: block;
 }
 
@@ -1389,6 +1422,14 @@ input:checked+.slider:before {
     text-decoration: underline;
 }
 
+#profileMain hr {
+    width: auto;
+}
+
+.hide {
+    display: none;
+}
+
 @media screen and (max-width: 800px) {
     #automationSection a>span {
         margin-top: 15px;
@@ -1423,7 +1464,7 @@ input:checked+.slider:before {
     #wrapper {
         width: 800px;
     }
-    main:not(#objectMain) hr {
+    main:not(#objectMain, #profileMain) hr {
         display: none;
         width: 100%;
     }

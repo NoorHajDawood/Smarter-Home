@@ -11,8 +11,8 @@ if (isset($_GET["status"])) {
         mysqli_query($connection, $query);
         $deviceID = $connection->insert_id;
     } else if ($_GET["status"] == "edit") {
-        $query = "UPDATE TABLE tbl_213_device (device_type, device_name, device_location, power_consumption) 
-                        VALUES ('" . $_POST["deviceType"] . "','" . $_POST["deviceName"] . "','" . $_POST["deviceLocation"] . "','" . $_POST["deviceConsumption"] . "')";
+        $query = "UPDATE tbl_213_device set device_type=" . $_POST["deviceType"] . ", device_name='" . $_POST["deviceName"] . "',
+                             device_location='" . $_POST["deviceLocation"] . "', power_consumption=" . $_POST["deviceConsumption"] . " where device_id=" . $_GET["deviceID"];
         mysqli_query($connection, $query);
     }
 }
@@ -51,7 +51,7 @@ if (!isset($deviceID)) {
                 <span></span>
                 <span></span>
                 <ul id="menuBurger" class="menu">
-                    <li> <a href="#"> <i class="avatar">.</i> <?php echo $_SESSION["userName"]; ?> </a></li>
+                    <li> <a href="profile.php"> <i class="avatar">.</i> <?php echo $_SESSION["userName"]; ?> </a></li>
                     <li>
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes</button>
@@ -64,18 +64,25 @@ if (!isset($deviceID)) {
                                 $result = mysqli_query($connection, $query);
                                 $row = mysqli_fetch_assoc($result);
                                 ?>
-                                <li><a class="profile myhome homeList" href="index.html?homeID=" <?php echo $_SESSION["homeID"] . ">" . $row["home_name"]; ?></a></li>
+                                <li><a class="profile myhome homeList" href="index.php?homeID=" <?php echo $_SESSION["homeID"]; ?>> <?php echo $homeName = $row["home_name"]; ?></a></li>
                                 <?php
                                 mysqli_free_result($result);
                                 $query = "SELECT * FROM tbl_213_home WHERE user_id = " . $_SESSION["userID"] . " and home_id != " . $_SESSION["homeID"];
                                 $result = mysqli_query($connection, $query);
                                 if (!is_bool($result)) {
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '<li><a class="profile myhome homeList" href="index.html?homeID=' .  $row["home_id"] . '">' . $row["home_name"] . '</a></li>';
+                                        echo '<li><a class="profile myhome homeList" href="index.php?homeID=' .  $row["home_id"] . '">' . $row["home_name"] . '</a></li>';
                                     }
                                 }
                                 mysqli_free_result($result);
                                 $query = "SELECT * FROM tbl_213_device where home_id = " . $_SESSION["homeID"] . " and device_id='" . $deviceID . "'";
+                                $query = $query . " and (device_permission=";
+                                if ($_SESSION["homePermission"] == "Owner" || $_SESSION["homePermission"] == "Admin")
+                                    $query = $query . "'Admin' OR device_permission='Normal' OR device_permission='Guest')";
+                                else if ($_SESSION["homePermission"] == "Normal")
+                                    $query = $query . "'Normal' OR device_permission='Guest')";
+                                else if ($_SESSION["homePermission"] == "Guest")
+                                    $query = $query . "'Guest')";
                                 $result = mysqli_query($connection, $query);
                                 $row = mysqli_fetch_array($result);
                                 ?>
@@ -86,8 +93,8 @@ if (!isset($deviceID)) {
                     <li>
                         <hr>
                     </li>
-                    <li><a class="profile roomsButton" href="roomsList.html">Rooms</a></li>
-                    <li><a class="profile devicesButton" href="devicesList.html?roomID=0">Devices</a></li>
+                    <li><a class="profile roomsButton" href="roomsList.php">Rooms</a></li>
+                    <li><a class="profile devicesButton" href="devicesList.php">Devices</a></li>
                     <li><a class="profile automationButton" href="#">Automations</a></li>
                     <li><a class="profile member" href="#">Members</a></li>
                     <li>
@@ -103,7 +110,7 @@ if (!isset($deviceID)) {
             </div>
         </nav>
         <div class="container-fluid"></div>
-        <a id="logo" href="index.html"></a>
+        <a id="logo" href="index.php"></a>
         <div id="burgerBlur" class="screenBlur"></div>
         <div class="btn-group">
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon noti" data-bs-toggle="dropdown" aria-expanded="false">
@@ -121,9 +128,10 @@ if (!isset($deviceID)) {
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li><a class="dropdown-item" href="profile.php">My Profile</a></li>
                 <li><a class="dropdown-item" href="#">Security</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="login.php?state=logout">Log Out</a></li>
             </ul>
         </div>
     </header>
@@ -131,21 +139,25 @@ if (!isset($deviceID)) {
         <div id="wrapper">
             <nav id="breadNav" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="roomsList.html">Rooms</a></li>
-                    <li class="breadcrumb-item active"><a href="devicesList.html">Living Room</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">iVacuum</li>
+                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="roomsList.php">Rooms</a></li>
+                    <li class="breadcrumb-item active"><a href="devicesList.php<?php echo (isset($_GET["room"]) ? "?room=" . $_GET["room"] : ""); ?>"><?php echo (isset($_GET["room"]) ? $_GET["room"] : "Devices"); ?></a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?php echo $row["device_name"]; ?></li>
                 </ol>
             </nav>
             <h1><?php echo $row["device_name"]; ?></h1>
             <main id="objectMain">
+                <!-- <form id="ajaxForm" action="" method="post" class="">
+                    <span id="formData">deviceID=1&status=0</span>
+                    <button id="ajaxSubmit" type="submit" value="Submit"></button>
+                </form> -->
                 <section class="infoSection position-relative">
                     <span id="device-status">Status: <?php echo ($row["device_status"] ? "On" : "Off"); ?></span>
                     <label class="switch">
-                        <input class="slider-checkbox" type="checkbox" <?php echo ($row["device_status"]?'checked':'') ?>>
+                        <input class="slider-checkbox" type="checkbox" value=<?php echo '"' . $row["device_id"] . '" ' . ($row["device_status"] ? 'checked' : '') ?>>
                         <span class="slider round"></span>
                     </label>
-                    <button class="functional functionalButton star star-<?php echo ($row["device_fav"] == 1 ? "full" : "empty") . '" value=' . $row["device_id"] . "'" ?>></button>
+                    <button <?php echo 'class="functional functionalButton star star-' . ($row["device_fav"] == 1 ? "full" : "empty") . '" value="' . $row["device_id"] . '"' ?>></button>
                     <br>
                     <?php
                     // echo '<span>Information:</span>';
@@ -157,7 +169,7 @@ if (!isset($deviceID)) {
                         </div>
                                 <ul class="objectControls">
                                     <li class="icons remote-bg tv-channel">Channel: Yes Action <input type="number" placeholder="#"></li>
-                            <li class="icons volume-bg tv-volume">Volume: <input type="range"  device-id="' . $row["device_id"] . '" '.($row["device_status"]?'':'disabled').'></li>';
+                            <li class="icons volume-bg tv-volume">Volume: <input type="range"  device-id="' . $row["device_id"] . '" ' . ($row["device_status"] ? '' : 'disabled') . '></li>';
                             break;
                         case 2:
                             echo '  
@@ -191,7 +203,7 @@ if (!isset($deviceID)) {
                             break;
                         case 4:
                             echo ' <ul class="objectControls">
-                                <li "><span>&#128161; Light:</span> <input class="light-brightness" type="range"  device-id="' . $row["device_id"] . '" '.($row["device_status"]?'':'disabled').'></li>';
+                                <li "><span>&#128161; Light:</span> <input class="light-brightness" type="range"  device-id="' . $row["device_id"] . '" ' . ($row["device_status"] ? '' : 'disabled') . '></li>';
                             break;
                         case 5:
                             echo '<ul class="objectControls"> 
@@ -199,7 +211,7 @@ if (!isset($deviceID)) {
                                 <iframe src="https://open.spotify.com/embed/album/2iER5YPSsq4WpokLnnQGCO" width="340"
                                     height="170" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                             </li>
-                                <li class="icons volume-bg">Volume: <input class="speaker-volume" type="range"  device-id="' . $row["device_id"] . '" '.($row["device_status"]?'':'disabled').'></li>';
+                                <li class="icons volume-bg">Volume: <input class="speaker-volume" type="range"  device-id="' . $row["device_id"] . '" ' . ($row["device_status"] ? '' : 'disabled') . '></li>';
                             break;
                     }
                     if ($row["device_location"] != "")
@@ -211,54 +223,54 @@ if (!isset($deviceID)) {
                 </section>
                 <hr>
                 <section class=" autosection">
-                        <h4>Automation</h4>
-                        <button class="functional functionalButton edit"></button>
-                        <button class="functional functionalButton plusBtn"></button>
-                        <div class="clear"></div>
-                        <?php
-                        switch ($row["device_type"]) {
-                            case 1:
+                    <h4>Automation</h4>
+                    <button class="functional functionalButton edit"></button>
+                    <button class="functional functionalButton plusBtn"></button>
+                    <div class="clear"></div>
+                    <?php
+                    switch ($row["device_type"]) {
+                        case 1:
 
 
-                                break;
-                            case 2:
-                                //     echo '  
+                            break;
+                        case 2:
+                            //     echo '  
 
-                                //     <ul class="objectControls">
-                                //     <li class="icons ">
-                                //     <div class="ac-buttons">
-                                //     <button class="functional ac-night"></button>
-                                //     <button class="functional ac-clock"></button>
-                                //     <button class="functional ac-hot"></button>
-                                //     <button class="functional ac-cold"></button>
-                                //     <button class="functional ac-water"></button>
-                                //     <button class="functional ac-cycle"></button>
-                                // </div>
+                            //     <ul class="objectControls">
+                            //     <li class="icons ">
+                            //     <div class="ac-buttons">
+                            //     <button class="functional ac-night"></button>
+                            //     <button class="functional ac-clock"></button>
+                            //     <button class="functional ac-hot"></button>
+                            //     <button class="functional ac-cold"></button>
+                            //     <button class="functional ac-water"></button>
+                            //     <button class="functional ac-cycle"></button>
+                            // </div>
 
-                                //     </li>
+                            //     </li>
 
 
-                                //     <li class="icons temp-bg">AC-Temp: <input type="number"></li>';
-                                break;
-                            case 3:
-                                echo '<div class="position-relative">
+                            //     <li class="icons temp-bg">AC-Temp: <input type="number"></li>';
+                            break;
+                        case 3:
+                            echo '<div class="position-relative">
                                     <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse" data-bs-target="#automation1" aria-expanded="false" aria-controls="automation1">
                                         Quick clean</button>
                                     <button type="button" class="btn btn-secondary dropdown-toggle clearToggle" data-bs-toggle="collapse" data-bs-target="#automation1" aria-expanded="false" aria-controls="automation1"></button>
                                     <div class="collapse" id="automation1">
                                         <div class="checkboxList">';
-                                $query = "SELECT device_location FROM tbl_213_device WHERE home_id = " . $_SESSION["homeID"] . " and device_location !='' and device_location is not NULL GROUP BY device_location";
-                                $resultRooms = mysqli_query($connection, $query);
-                                $counter = 0;
-                                while ($rowRooms = mysqli_fetch_assoc($resultRooms)) {
-                                    echo    '<div class="form-check">
+                            $query = "SELECT device_location FROM tbl_213_device WHERE home_id = " . $_SESSION["homeID"] . " and device_location !='' and device_location is not NULL GROUP BY device_location";
+                            $resultRooms = mysqli_query($connection, $query);
+                            $counter = 0;
+                            while ($rowRooms = mysqli_fetch_assoc($resultRooms)) {
+                                echo    '<div class="form-check">
                                                 <input type="checkbox" class="form-check-input" value="volunteering" id="location' . ++$counter . '">
                                                 <label for="location' . $counter . '" class="form-check-label">' . $rowRooms["device_location"] . '.</label>
                                             </div>';
-                                }
-                                mysqli_free_result($resultRooms);
-                                echo
-                                '</div>
+                            }
+                            mysqli_free_result($resultRooms);
+                            echo
+                            '</div>
                                     </div>
                                     <label class="switch">
                                         <input type="checkbox" >
@@ -266,49 +278,49 @@ if (!isset($deviceID)) {
                                     </label>
                                 </div>
                                 <hr class="small-hr">';
-                                break;
-                            case 4:
+                            break;
+                        case 4:
 
-                                break;
-                            case 5:
-                                break;
-                        }
-                        ?>
+                            break;
+                        case 5:
+                            break;
+                    }
+                    ?>
 
 
-                        <div class="position-relative">
-                            <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2">
-                                My schedule</button>
-                            <button type="button" class="btn btn-secondary dropdown-toggle clearToggle" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2"></button>
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                            <div class="collapse" id="automation2">
-                                <div class="checkboxList">
-                                    <div class="row mb-4">
-                                        <div class="row">
-                                            <button class="buttonautomation buttonweek">S</button>
-                                            <button class="buttonautomation buttonweek">M</button>
-                                            <button class="buttonautomation buttonweek">T</button>
-                                            <button class="buttonautomation buttonweek">W</button>
-                                            <button class="buttonautomation buttonweek">T</button>
-                                            <button class="buttonautomation buttonweek">F</button>
-                                            <button class="buttonautomation buttonweek">S</button>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="example-time-input" class="col-2 col-form-label">Time:</label>
-                                            <div class="col-5">
-                                                <input class="form-control" type="time" value="13:45:00" id="example-time-input">
-                                            </div>
+                    <div class="position-relative">
+                        <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2">
+                            My schedule</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle clearToggle" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2"></button>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <div class="collapse" id="automation2">
+                            <div class="checkboxList">
+                                <div class="row mb-4">
+                                    <div class="row">
+                                        <button class="buttonautomation buttonweek">S</button>
+                                        <button class="buttonautomation buttonweek">M</button>
+                                        <button class="buttonautomation buttonweek">T</button>
+                                        <button class="buttonautomation buttonweek">W</button>
+                                        <button class="buttonautomation buttonweek">T</button>
+                                        <button class="buttonautomation buttonweek">F</button>
+                                        <button class="buttonautomation buttonweek">S</button>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="example-time-input" class="col-2 col-form-label">Time:</label>
+                                        <div class="col-5">
+                                            <input class="form-control" type="time" value="13:45:00" id="example-time-input">
                                         </div>
                                     </div>
+                                </div>
 
-                                    <?php
-                                    switch ($row["device_type"]) {
-                                        case 1:
+                                <?php
+                                switch ($row["device_type"]) {
+                                    case 1:
 
-                                            echo '
+                                        echo '
 
                                         <ul class="objectControls">
                                         <li class="icons remote-bg">Channel: Netflix <input type="number" placeholder="#"></li>
@@ -317,9 +329,9 @@ if (!isset($deviceID)) {
                                         </ul>
                                      
                                             ';
-                                            break;
-                                        case 2:
-                                            echo '  
+                                        break;
+                                    case 2:
+                                        echo '  
                                   
                                         <ul class="objectControls">
                                         <li class="icons ">
@@ -341,52 +353,56 @@ if (!isset($deviceID)) {
                                      
                                  ';
 
-                                            break;
-                                        case 3:
-                                            $query = "SELECT device_location FROM tbl_213_device WHERE home_id = " . $_SESSION["homeID"] . " and device_location !='' and device_location is not NULL GROUP BY device_location";
-                                            $resultRooms = mysqli_query($connection, $query);
-                                            while ($rowRooms = mysqli_fetch_assoc($resultRooms)) {
-                                                echo    '<div class="form-check">
+                                        break;
+                                    case 3:
+                                        $query = "SELECT device_location FROM tbl_213_device WHERE home_id = " . $_SESSION["homeID"] . " and device_location !='' and device_location is not NULL GROUP BY device_location";
+                                        $resultRooms = mysqli_query($connection, $query);
+                                        while ($rowRooms = mysqli_fetch_assoc($resultRooms)) {
+                                            echo    '<div class="form-check">
                                                 <input type="checkbox" class="form-check-input" value="volunteering" id="location' . ++$counter . '">
                                                 <label for="location' . $counter . '" class="form-check-label">' . $rowRooms["device_location"] . '.</label>
                                             </div>';
-                                            }
-                                            mysqli_free_result($resultRooms);
-                                            break;
-                                        case 4:
-                                            echo ' <ul class="objectControls">
+                                        }
+                                        mysqli_free_result($resultRooms);
+                                        break;
+                                    case 4:
+                                        echo ' <ul class="objectControls">
                                          <li"><span>&#128161; Light:</span> <input type="range"></li>';
-                                            break;
-                                        case 5:
-                                            echo '
+                                        break;
+                                    case 5:
+                                        echo '
                                         <div class="media">
                                         <iframe src="https://open.spotify.com/embed/album/2iER5YPSsq4WpokLnnQGCO" width="320"
                                             height="170" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                          </div>
                                         
                                         ';
-                                            break;
-                                    }
-                                    ?>
+                                        break;
+                                }
+                                ?>
 
 
 
-                                </div>
                             </div>
                         </div>
+                    </div>
                 </section>
-                <hr>
-                <section class="Permission">
-
-
-                    <h4>Permission:</h4>
-                    <select id="devicePermission" class="form-select" aria-label="Default select example" value="<?php echo $row["device_permission"] ?>">
-                        <option selected disabled>Select a Permission</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Guest">Guest</option>
-                    </select>
-                </section>
+                <?php
+                if ($_SESSION["homePermission"] == "Admin" || $_SESSION["homePermission"] == "Owner")
+                    echo '<hr>
+                    <section class="Permission">
+    
+    
+                        <h4>Permission:</h4>
+                        <select id="devicePermission" class="form-select" aria-label="Default select example">
+                            <option disabled>Select a Permission</option>
+                            <option '.($row["device_permission"] == "Admin" ? "selected": "").' value="Admin">Admin</option>
+                            <option '.($row["device_permission"] == "Normal" ? "selected": "").' value="Normal">Normal</option>
+                            <option '.($row["device_permission"] == "Guest" ? "selected": "").' value="Guest">Guest</option>
+                        </select>
+                    </section>';
+                ?>
+                
 
             </main>
         </div>
@@ -394,9 +410,9 @@ if (!isset($deviceID)) {
     <footer>
         <nav>
             <ul>
-                <li><a class="homeButton-gray" href="index.html"><span>Home</span></a></li>
-                <li><a class="roomsButton-gray" href="roomsList.html"><span>Rooms</span></a></li>
-                <li><a class="devicesButton-gray" href="devicesList.html?roomID=0"><span>Devices</span></a></li>
+                <li><a class="homeButton-gray" href="index.php"><span>Home</span></a></li>
+                <li><a class="roomsButton-gray" href="roomsList.php"><span>Rooms</span></a></li>
+                <li><a class="devicesButton-gray" href="devicesList.php"><span>Devices</span></a></li>
                 <li><a class="automationButton-gray" href="#"><span>Automation</span></a></li>
             </ul>
         </nav>

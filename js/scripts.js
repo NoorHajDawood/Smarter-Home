@@ -72,7 +72,43 @@ function toolsClick() {
 function addDeviceForm() {
     $('#toolsBlur').click();
     $('#addDevice').show();
+    $('#addDevice').attr('action', './object.php?status=add');
     $('#formBlur').show();
+}
+function editDeviceButton() {
+    $('#toolsBlur').click();
+    $('.listItem .edit').show();
+    // $('#toolsBlur').css('display', 'block');
+    // $('#addDevice').show();
+    // $(':input[name="deviceType"]').val();
+    $('#formBlur').show();
+}
+function deleteDeviceButton() {
+    $('#toolsBlur').click();
+    $('.listItem .trash').show();
+    // $('#toolsBlur').css('display', 'block');
+    // $('#addDevice').show();
+    // $(':input[name="deviceType"]').val();
+    $('#formBlur').show();
+}
+
+function editDeviceForm() {
+    $('#formTitle').html('Edit Device');
+    $('#addDevice').attr('action', './object.php?deviceID=' + this.value + '&status=edit');
+    $(':input[name=deviceType]').val($(this).parent().attr('device-type'));
+    $(':input[name=deviceName]').val($(this).parent().attr('device-name'));
+    $(':input[name=deviceLocation]').val($(this).parent().attr('device-location'));
+    $(':input[name=deviceConsumption]').val($(this).parent().attr('device-power'));
+    $(':input[type=submit]').val("Edit");
+
+    $('#addDevice').show();
+}
+
+function deleteDeviceForm() {
+    $('#formBlur').click();
+    $(this).parent().remove();
+    callAjax("deviceID=" + this.value + "&delete=true");
+
 }
 
 function updateDeviceFromJson() {
@@ -103,31 +139,60 @@ function updateDeviceFromJson() {
     });
 }
 
+function callAjax(dataString) {
+    $.ajax({
+        type: "POST",
+        url: "action.php",
+        data: dataString,
+        cache: true
+    });
+}
+
 function updateDeviceStatusSlider() {
     $('.slider-checkbox').change(function () {
-        console.log(this.checked);
-        console.log(this.value);
-        $('.slider-checkbox:input[value="'+this.value+'"]').not(this).prop('checked', this.checked);
-        $(':input[device-id="'+this.value+'"]').not(this).prop('disabled', !this.checked);
-        if(this.checked) {
+        var dataString = "deviceID=" + this.value + "&status=";
+        $('.slider-checkbox:input[value="' + this.value + '"]').not(this).prop('checked', this.checked);
+        $(':input[device-id="' + this.value + '"]').not(this).prop('disabled', !this.checked);
+        if (this.checked) {
+            dataString += "1";
             $('#device-status').html("Status: On");
+            dataString += "&usage=plus"
         } else {
+            dataString += "0";
             $('#device-status').html("Status: Off");
         }
+        callAjax(dataString);
     });
 }
 
 function updateDeviceFavorite() {
     $('.star').click(function () {
+        var dataString = "deviceID=" + this.value + "&fav=";
         console.log(this.value);
-        if($(this).hasClass("star-full")){
+        if ($(this).hasClass("star-full")) {
             $(this).removeClass("star-full");
             $(this).addClass("star-empty");
+            $(this).parent().hide();
+            dataString += "0";
         } else {
+            dataString += "1";
             $(this).removeClass("star-empty");
             $(this).addClass("star-full");
         }
+        console.log(dataString);
+        callAjax(dataString);
     });
+}
+
+function getDeviceID() {
+
+    var aKeyValue = window.location.search.substring(1).split('&'), deviceID = aKeyValue[0].split("=")[1];
+
+    return deviceID;
+
+
+
+
 }
 
 $(document).ready(function () {
@@ -159,12 +224,21 @@ $(document).ready(function () {
         $('#toolsBlur').click(function () {
             tools.click();
         });
+
         $('#deviceAdd').click(addDeviceForm);
+        $('#deviceEdit').click(editDeviceButton);
+        $('#deviceDelete').click(deleteDeviceButton);
+
+        $('.listItem .edit').click(editDeviceForm);
+        $('.listItem .trash').click(deleteDeviceForm);
+
         $('#formBlur').click(function () {
             $('#formBlur').hide();
             $('.formBox').each(function () {
                 $(this).hide();
-            })
+            });
+            $('.listItem .edit').hide();
+            $('.listItem .trash').hide();
         });
         $('.cancelForm').each(function () {
             $(this).click(function () {
@@ -190,14 +264,24 @@ $(document).ready(function () {
         function show() {
             var as = this.value;
             var strUser = selectedOP.options[selectedOP.selectedIndex].value;
-            window.location.replace("devicesList.php?sort=" + as);
+            window.location.replace(window.location.pathname + "?sort=" + as);
         }
         if (selectedOP)
             selectedOP.onchange = show;
 
+        $('#devicePermission').change(function(){
+            callAjax("deviceID=" + getDeviceID() + "&permission="+this.value);
+        })
+
         updateDeviceFromJson();
         updateDeviceStatusSlider();
         updateDeviceFavorite();
+
+        $('#profileEdit').click(function () {
+            $('.hide').show();
+            $('.shown').hide();
+        });
+        // $('#ajaxForm').submit(ajaxFormOverride());
     }
 
 });
