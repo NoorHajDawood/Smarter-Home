@@ -2,7 +2,7 @@
 include "includes/db.php";
 session_start();
 if (isset($_GET["state"]) and $_GET["state"] == "logout") {
-    $_SESSION["userID"] = 0;
+    session_unset();
     session_destroy();
 }
 if (!empty($_POST["userEmail"])) { // true if form was submitted
