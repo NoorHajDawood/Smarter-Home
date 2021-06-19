@@ -17,10 +17,7 @@ if (isset($_GET["status"])) {
         mysqli_query($connection, $query);
     }
 }
-
 ?>
-
-
 <!DOCTYPE html>
 <html>
 
@@ -56,7 +53,6 @@ if (isset($_GET["status"])) {
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes</button>
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-
                         <div class="collapse" id="homes">
                             <ul>
                                 <?php
@@ -113,7 +109,6 @@ if (isset($_GET["status"])) {
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <input type="text" name="search" placeholder="Search..." class="dropdown-menu">
-
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon avatar" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
@@ -160,7 +155,6 @@ if (isset($_GET["status"])) {
                         $query = "SELECT * FROM tbl_213_user as user left join tbl_213_home as home on user.user_id = home.user_id where home_id=" . $_SESSION["homeID"];
                         $result = mysqli_query($connection, $query);
                         if (!$result) {
-
                             die("failed:(");
                         }
                         while ($row = mysqli_fetch_assoc($result)) {
@@ -176,7 +170,6 @@ if (isset($_GET["status"])) {
                              </div>
                              ';
                         }
-
                         ?>
                     </div>
                 </section>
@@ -186,7 +179,6 @@ if (isset($_GET["status"])) {
                     <!-- <h6>Device Type:</h6> -->
                     <!-- <select name="deviceType" class="form-select" aria-label="Default select example" required>
                         <option value="" disabled selected>Type</option>
-
                         <option id="deviceType1" value="1">Television</option>
                         <option id="deviceType2" value="2">Air Conditioner</option>
                         <option id="deviceType3" value="3">Vacuum</option>

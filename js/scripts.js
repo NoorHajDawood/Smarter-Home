@@ -11,7 +11,6 @@ function burgerToggle() {
         burgerHidden = true;
     }
 }
-
 function functionlPropagation() {
     var array = $('.functional');
     for (var elemnt of array) {
@@ -31,7 +30,6 @@ function mediaCamera() {
         $('#cameraSection').addClass('d-none');
     }
 }
-
 function Arrow() {
     var array = $('.dropdown-toggle:not(.headerIcon)');
     for (var elemnt of array) {
@@ -43,7 +41,6 @@ function Arrow() {
         };
     }
     array = $('.dropdown-parent');
-
     for (var elemnt of array) {
         elemnt.onclick = function () {
             var child = this.nextElementSibling;
@@ -54,7 +51,6 @@ function Arrow() {
         };
     }
 }
-
 function toolsClick() {
     var content = this.nextElementSibling;
     if (content.style.maxHeight) {
@@ -68,7 +64,6 @@ function toolsClick() {
         $('#toolsBlur').css('display', 'block');
     }
 }
-
 function addDeviceForm() {
     $('#toolsBlur').click();
     $(':input[name="memberEmail"]').prop('disabled', false);;
@@ -93,7 +88,6 @@ function deleteDeviceButton() {
     // $(':input[name="deviceType"]').val();
     $('#formBlur').show();
 }
-
 function editDeviceForm() {
     $('#formTitle').html('Edit Device');
     $('#addDevice').attr('action', './object.php?deviceID=' + this.value + '&status=edit');
@@ -108,14 +102,12 @@ function editDeviceForm() {
     $(':input[name="memberEmail"]').prop('disabled', true);
     $('.formBox').show();
 }
-
 function getPageName(url) {
     var index = url.lastIndexOf("/") + 1;
     var filenameWithExtension = url.substr(index);
     var filename = filenameWithExtension.split(".")[0]; // <-- added this line
     return filename;                                    // <-- added this line
 }
-
 function deleteDeviceForm() {
     var page = getPageName(window.location.pathname);
     $('#formBlur').click();
@@ -127,7 +119,6 @@ function deleteDeviceForm() {
     }
     $(this).parent().remove();
 }
-
 function updateDeviceFromJson() {
     $.getJSON("data/SmarterHome.json", function (data) {
         $.each(data.devices, function () {
@@ -150,22 +141,36 @@ function updateDeviceFromJson() {
                 case 5:
                     $('.speaker-volume').attr('value', this.params[0].value);
                     break;
-
             }
         });
     });
 }
-
 function callAjax(dataString) {
     $.ajax({
         type: "POST",
         url: "action.php",
         data: dataString,
-        cache: true
+        cache: true,
+        success: function (html) {
+            if (dataString.includes("fav")) {
+                $('#favoriteAjax').html(html);
+                functionlPropagation();
+                // window.setTimeout(  
+                //     function() {  
+                //         $('.listItem .edit').click(editDeviceForm);
+                //         $('.listItem .trash').click(deleteDeviceForm);
+                //     },  
+                //     5000
+                // );
+                updateDeviceFromJson();
+                updateDeviceStatusSlider();
+                updateDeviceFavorite();
+            }
+        }
     });
 }
-
 function updateDeviceStatusSlider() {
+    $('.slider-checkbox').unbind('change');
     $('.slider-checkbox').change(function () {
         var dataString = "deviceID=" + this.value + "&status=";
         $('.slider-checkbox:input[value="' + this.value + '"]').not(this).prop('checked', this.checked);
@@ -181,35 +186,38 @@ function updateDeviceStatusSlider() {
         callAjax(dataString);
     });
 }
-
 function updateDeviceFavorite() {
+    $('.star').unbind('click');
     $('.star').click(function () {
+        stars = $('.star[value="' + this.value + '"]');
         var dataString = "deviceID=" + this.value + "&fav=";
         if ($(this).hasClass("star-full")) {
-            $(this).removeClass("star-full");
-            $(this).addClass("star-empty");
-            $(this).parent().hide();
+            // $(this).removeClass("star-full");
+            // $(this).addClass("star-empty");
+            stars.removeClass("star-full");
+            stars.addClass("star-empty");
+            if (getPageName(window.location.pathname) == "index") {
+                if ($(this).parents('#favoriteSection').length)
+                    $(this).parent().remove();
+                else
+                    $('a[href$="deviceID=' + this.value + '"').not($(this).parent()).remove();
+            }
             dataString += "0";
         } else {
             dataString += "1";
             $(this).removeClass("star-empty");
             $(this).addClass("star-full");
+            // stars.removeClass("star-empty");
+            // stars.addClass("star-full");
         }
         callAjax(dataString);
     });
 }
-
 function getDeviceID() {
-
     var aKeyValue = window.location.search.substring(1).split('&'), deviceID = aKeyValue[0].split("=")[1];
-
     return deviceID;
 
-
-
-
 }
-
 $(document).ready(function () {
     if ($('body').attr('id') == "loginPage") {
         const pass_field = document.querySelector(".pass-key");
@@ -227,6 +235,9 @@ $(document).ready(function () {
         });
     }
     else {
+        if ($('body').attr('id') == "indexPage") {
+            callAjax("fav=2");
+        }
         $('#burgerInput').click(burgerToggle);
         $('#previewSelector').change(mediaCamera);
         functionlPropagation();
@@ -239,14 +250,11 @@ $(document).ready(function () {
         $('#toolsBlur').click(function () {
             tools.click();
         });
-
         $('#addButton').click(addDeviceForm);
         $('#editButton').click(editDeviceButton);
         $('#deleteButton').click(deleteDeviceButton);
-
         $('.listItem .edit').click(editDeviceForm);
         $('.listItem .trash').click(deleteDeviceForm);
-
         $('#formBlur').click(function () {
             $('#formBlur').hide();
             $('.formBox').each(function () {
@@ -265,7 +273,6 @@ $(document).ready(function () {
             $(this).css('background-image', "url(" + profilePicture + ")");
             $(this).css('border-radius', "50%");
         });
-
         // $('.avatar').css('backgroundImage','profilePicture')
         // function getSelectValue() {
         //     var selectedValue = document.getElementById("previewSelector").value;
@@ -273,7 +280,6 @@ $(document).ready(function () {
         //     console.log(selectedValue);
         // }
         // getSelectValue();
-
         var selectedOP = document.getElementById("previewSelector");
         function show() {
             var as = this.value;
@@ -282,22 +288,17 @@ $(document).ready(function () {
         }
         if (selectedOP)
             selectedOP.onchange = show;
-
         $('#devicePermission').change(function () {
             callAjax("deviceID=" + getDeviceID() + "&permission=" + this.value);
         })
-
         updateDeviceFromJson();
         updateDeviceStatusSlider();
         updateDeviceFavorite();
-
         $('#profileEdit').click(function () {
             $('.hide').show();
             $('.shown').hide();
         });
-
         $('#newRoomButton').click(function myFunction() {
-
             var x = document.getElementById("roomSelect");
             var option = document.createElement("option");
             option.text = $('#newRoomInput').val();
@@ -311,8 +312,4 @@ $(document).ready(function () {
             return false;
         });
     }
-
 });
-
-
-

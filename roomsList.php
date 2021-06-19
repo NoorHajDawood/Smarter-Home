@@ -3,12 +3,7 @@ session_start();
 if (!isset($_SESSION["userID"]) || $_SESSION["userID"] == 0)
     header("Location: login.php");
 include "includes/db.php";
-
-
-
 ?>
-
-
 <!DOCTYPE html>
 <html>
 
@@ -44,7 +39,6 @@ include "includes/db.php";
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes</button>
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-
                         <div class="collapse" id="homes">
                             <ul>
                                 <?php
@@ -101,7 +95,6 @@ include "includes/db.php";
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <input type="text" name="search" placeholder="Search..." class="dropdown-menu">
-
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon avatar" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
@@ -144,15 +137,12 @@ include "includes/db.php";
                         <?php
                         $query = "SELECT device_location , count(*) as sum_devices from tbl_213_device  WHERE home_id = " . $_SESSION["homeID"] . " AND device_location!=''   group by device_location order by device_location";
                         $query2 = "SELECT device_location , count(*) as sum_active from tbl_213_device  WHERE home_id = " . $_SESSION["homeID"] . " AND device_location!='' AND device_status=1   group by device_location  order by device_location";
-
                         $result = mysqli_query($connection, $query);
                         $result2 = mysqli_query($connection, $query2);
                         if (!$result) {
-
                             die("failed:(");
                         }
                         if (mysqli_num_rows($result2) == 0) {
-
                             $row2["device_location"] = "";
                             $row2["sum_active"] = 0;
                         } else
@@ -160,7 +150,6 @@ include "includes/db.php";
                         while ($row = mysqli_fetch_assoc($result)) {
                             // $row2 = mysqli_fetch_assoc($result2);
                             echo ' <a class="rectangle btnClickable listItem" href="devicesList.php?room=' . $row["device_location"] . '">
-
                              <span class="room-bg"></span>
                              <h5>' . $row["device_location"] . '</h5>
                              <div>
@@ -179,7 +168,6 @@ include "includes/db.php";
                              </a>
                              ';
                         }
-
                         ?>
                         <!-- <a class="rectangle btnClickable listItem" href="devicesList.php?room=$row[device_location]">
                             <span class="livingroom-bg"></span>
@@ -223,7 +211,6 @@ include "includes/db.php";
                         </a> -->
                     </div>
                 </section>
-
             </main>
         </div>
     </div>

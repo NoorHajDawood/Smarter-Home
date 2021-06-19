@@ -7,10 +7,8 @@ if (isset($_GET["homeID"])) {
     $query  = "SELECT * FROM tbl_213_home WHERE user_id='"
         . $_SESSION["userID"]
         . "' AND home_id='" . $_GET["homeID"] . "'";
-
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_array($result);
-
     if (is_array($row)) {
         $_SESSION["homeID"] = $row["home_id"];
         $_SESSION["homePermission"] = $row["home_permission"];
@@ -39,7 +37,7 @@ if (isset($_GET["homeID"])) {
     <link rel="icon" type="image/png" href="favicon.ico">
 </head>
 
-<body>
+<body id="indexPage">
     <header>
         <nav id="navBurger">
             <div id="menuToggle">
@@ -53,7 +51,6 @@ if (isset($_GET["homeID"])) {
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes</button>
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-
                         <div class="collapse" id="homes">
                             <ul>
                                 <?php
@@ -110,7 +107,6 @@ if (isset($_GET["homeID"])) {
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <input type="text" name="search" placeholder="Search..." class="dropdown-menu">
-
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon avatar" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
@@ -119,7 +115,6 @@ if (isset($_GET["homeID"])) {
                 <li><a class="dropdown-item" href="#">Security</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><a class="dropdown-item" href="login.php?state=logout">Log Out</a></li>
-
             </ul>
         </div>
     </header>
@@ -167,133 +162,7 @@ if (isset($_GET["homeID"])) {
                         </button>
                     </div>
                 </section>
-                <?php
-                $query = "SELECT * FROM tbl_213_device  where device_fav = 1 and home_id = " . $_SESSION["homeID"];
-                $query = $query . " and (device_permission=";
-                if ($_SESSION["homePermission"] == "Owner" || $_SESSION["homePermission"] == "Admin")
-                    $query = $query . "'Admin' OR device_permission='Normal' OR device_permission='Guest')";
-                else if ($_SESSION["homePermission"] == "Normal")
-                    $query = $query . "'Normal' OR device_permission='Guest')";
-                else if ($_SESSION["homePermission"] == "Guest")
-                    $query = $query . "'Guest')";
-                $result = mysqli_query($connection, $query);
-                if (!is_bool($result) && $row = mysqli_fetch_assoc($result)) {
-                    echo '
-                <hr>
-                <section class="sectionContainer" id="favoriteSection">
-                    <h3>Favorites</h3>
-                    <div id="favorite" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="false">
-                        <div class="carousel-indicators" id="favorite-indicator">
-                            <button type="button" data-bs-target="#favorite" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>';
-                    $counter = 0;
-                    $i = 1;
-                    while ($row) {
-                        ++$counter;
-                        if ($counter % 3 == 1 && $counter != 1) {
-
-                            echo '<button type="button" data-bs-target="#favorite" data-bs-slide-to="' . $i . '" aria-label="Slide ' . ++$i . '"></button>';
-                        }
-                        $row = mysqli_fetch_assoc($result);
-                    }
-                    echo '</div>
-                        <div class="carousel-inner">';
-                    mysqli_free_result($result);
-                    $counter = 0;
-                    $result = mysqli_query($connection, $query);
-                    $row = mysqli_fetch_assoc($result);
-                    while ($row) {
-                        echo '<div class="carousel-item ' . ($counter == 0 ? 'active' : '') . '">
-                                            <div class="rowContainer">';
-                        while (++$counter % 4 != 0 && $row) {
-
-                            echo '<a class="rectangle btnClickable shortcut" href="object.php?deviceID=' . $row["device_id"] . '" >'; //value="' . $row["device_type"] . '"
-
-                            switch ($row["device_type"]) {
-                                case 1:
-                                    echo '<span class="tv-bg"></span>
-                                        <h5>' . $row["device_name"] . '</h5>
-                                        <div>
-                                            <span class="location-sm">' . $row["device_location"] . '</span>
-                                            <div class="centered">
-                                                <button class="functional functionalButton previousBtn"></button>
-                                                <button class="functional functionalButton nextBtn"></button>
-                                            </div>
-                                        </div>
-                                        <label class="switch">
-                                            <input class="slider-checkbox" type="checkbox" value="' . $row["device_id"] . '" ' . ($row["device_status"] ? 'checked' : '') . '>
-                                            <span class="slider round"></span>
-                                        </label>
-                                        <button class="functional functional functionalButton star star-full" value="' . $row["device_id"] . '"></button> ';
-                                    break;
-                                case 2:
-                                    echo ' <span class="ac-bg"></span>';
-                                    echo '<h5>' . $row["device_name"] . '</h5>
-                                        <div>
-                                            <span class="temp-sm ac-temp">22 ℃</span>
-                                            <span class="location-sm">' . $row["device_location"] . '</span>
-                                        </div>
-                                        <div class="sideButtons">
-                                            <button class="functional functionalButton plusBtn"></button>
-                                            <button class="functional functionalButton minusBtn"></button>
-                                        </div>
-                                        <label class="switch">
-                                            <input class="slider-checkbox" type="checkbox" value="' . $row["device_id"] . '" ' . ($row["device_status"] ? 'checked' : '') . '>
-                                            <span class="slider round"></span>
-                                        </label>
-                                        <button class="functional functional functionalButton star star-full" value="' . $row["device_id"] . '"></button>';
-
-                                    break;
-                                case 3:
-                                    echo ' <span class="vac-bg"></span>
-                                            <h5>' . $row["device_name"] . '</h5>
-                                            <div>
-                                                <span class="time-sm vac-progress"></span>
-                                                <span class="location-sm">' . $row["device_location"] . '</span>
-                                            </div>
-                                            <label class="switch">
-                                                <input class="slider-checkbox" type="checkbox" value="' . $row["device_id"] . '" ' . ($row["device_status"] ? 'checked' : '') . '>
-                                                <span class="slider round"></span>
-                                            </label>
-                                            <button class="functional functional functionalButton star star-full" value="' . $row["device_id"] . '"></button>';
-                                    break;
-                                case 4:
-                                    echo '  <span class="lights-upside-bg"></span>';
-                                    echo '<h5>' . $row["device_name"] . '</h5>
-                                        <div>
-                                            <input type="range" class="light-brightness"  device-id="' . $row["device_id"] . '" ' . ($row["device_status"] ? '' : 'disabled') . '>
-                                        </div>
-                                        <label class="switch">
-                                            <input class="slider-checkbox" type="checkbox" value="' . $row["device_id"] . '" ' . ($row["device_status"] ? 'checked' : '') . '>
-                                            <span class="slider round"></span>
-                                        </label>
-                                        <button class="functional functional functionalButton star star-full" value="' . $row["device_id"] . '"></button>';
-                                    break;
-                                case 5:
-                                    echo '  <span class="speakers-bg"></span>';
-                                    echo '<h5>' . $row["device_name"] . '</h5>
-                                        <div>
-                                            <input type="range" class="speaker-volume"  device-id="' . $row["device_id"] . '" ' . ($row["device_status"] ? '' : 'disabled') . '>
-                                        </div>
-                                        <label class="switch">
-                                            <input class="slider-checkbox" type="checkbox" value="' . $row["device_id"] . '" ' . ($row["device_status"] ? 'checked' : '') . '>
-                                            <span class="slider round"></span>
-                                        </label>
-                                        <button class="functional functional functionalButton star star-full" value="' . $row["device_id"] . '"></button>';
-                                    break;
-                            }
-                            echo '</a>';
-                            $row = mysqli_fetch_assoc($result);
-                        }
-                        echo '  </div>
-                            </div>';
-                    }
-                    echo '</div>
-                        </div>
-                    </section>';
-                    mysqli_free_result($result);
-                }
-
-                ?>
+                <div id="favoriteAjax"></div>
                 <div class="clear"></div>
                 <?php
                 $query = "SELECT * FROM tbl_213_device where device_usage > 3 and home_id = " . $_SESSION["homeID"];
@@ -332,9 +201,7 @@ if (isset($_GET["homeID"])) {
                         echo '<div class="carousel-item ' . ($counter == 0 ? 'active' : '') . '">
                                             <div class="rowContainer">';
                         while (++$counter % 4 != 0 && $row) {
-
                             echo '<a class="rectangle btnClickable shortcut" href="object.php?deviceID=' . $row["device_id"] . '" >'; //value="' . $row["device_type"] . '"
-
                             switch ($row["device_type"]) {
                                 case 1:
                                     echo '<span class="tv-bg"></span>
@@ -374,7 +241,7 @@ if (isset($_GET["homeID"])) {
                                         <h5>' . $row["device_name"] . '</h5>
                                         <div>
                                             <span class="time-sm vac-progress">Off</span>
-                                            <span class="location-sm">' . $row["device_location"] . '</span>
+                                            <span class="battery-md vac-battery"> Battery:  </span>
                                         </div>
                                         <label class="switch">
                                             <input class="slider-checkbox" type="checkbox" value="' . $row["device_id"] . '" ' . ($row["device_status"] ? 'checked' : '') . '>

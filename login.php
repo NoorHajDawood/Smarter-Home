@@ -1,19 +1,16 @@
 <?php
 include "includes/db.php";
 session_start();
-if (isset($_GET["state"]) and $_GET["state"] == "logout")  {
+if (isset($_GET["state"]) and $_GET["state"] == "logout") {
     $_SESSION["userID"] = 0;
     session_destroy();
 }
-
 if (!empty($_POST["userEmail"])) { // true if form was submitted
     $query  = "SELECT * FROM tbl_213_user WHERE user_email='"
         . $_POST["userEmail"]
         . "'";
-
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_assoc($result);
-
     if (isset($_GET["state"]) && $_GET["state"] == "signup") {
         if (is_array($row)) {
             $message = "Email is already in use!";  // ****** just replay email
@@ -21,7 +18,6 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
             $query =   "INSERT INTO tbl_213_user (user_name, user_email, user_pass, user_picture) 
                             VALUES ('" . $_POST["userName"] . "','" . $_POST["userEmail"] . "','" . $_POST["userPassword"] . "','" . $_POST["userPicture"] . "')";
             $result = mysqli_query($connection, $query);
-
             $userid = $connection->insert_id;
             $query = "INSERT INTO tbl_213_home (user_id, home_name, home_permission) 
                             VALUES ('" .  $userid . "','" . $_POST["userHome"] . "','Owner')";
@@ -37,18 +33,14 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
                 $_SESSION["userName"] = $row["user_name"];
                 $_SESSION["userEmail"] = $row["user_email"];
                 $_SESSION["userPicture"] = $row["user_picture"];
-
                 $query  = "SELECT * FROM tbl_213_home WHERE user_id='"
                     . $_SESSION["userID"]
                     . "' AND home_permission='Owner' LIMIT 1";
-
                 $result = mysqli_query($connection, $query);
                 $row = mysqli_fetch_array($result);
-
                 $_SESSION["homeID"] = $row["home_id"];
                 $_SESSION["homePermission"] = $row["home_permission"];
                 $_SESSION["homeName"] = $row["home_name"];
-
                 header('Location: ./index.php');
             } else {
                 $message = "Incorrect Password!";
@@ -65,7 +57,6 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
 
 <head>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
     <meta charset="UTF-8">
     <title>Smarter Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,12 +78,7 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
     <header>
         <a id="logo" href="#"></a>
     </header>
-
-
     <main>
-
-
-
         <div class="content">
             <h1>
                 <?php
@@ -113,7 +99,6 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
              		        </div>';
                 }
                 ?>
-
                 <div class="field space">
                     <span class="fa fa-user"></span>
                     <input name="userEmail" spaceholder="Email Address" type="text" required placeholder="Email" value="<?php if (isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>">
@@ -128,7 +113,6 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
                     <input name="userPassword" type="password" class="pass-key" required placeholder="Password" value="<?php if (isset($_POST['userPassword'])) echo $_POST['userPassword']; ?>">
                     <span class="show">SHOW</span>
                 </div>
-
                 <?php
                 if (!isset($_GET["state"]) or $_GET["state"] != "signup")
                     echo (isset($message) ?  '<div class="alert alert-danger space" role="alert">
@@ -177,15 +161,8 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
                     <a href="login.php">Login Now</a>
                 </div>';
             ?>
-
         </div>
-
-
-
     </main>
-
-
-
 
 </body>
 

@@ -283,10 +283,12 @@ footer .selected>a {
     border-style: none;
     box-shadow: none;
 }
+
 main {
     height: 100%;
     min-height: 90vh;
 }
+
 .menu hr {
     margin-right: 10%;
 }

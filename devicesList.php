@@ -39,7 +39,6 @@ include "includes/db.php";
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes</button>
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-
                         <div class="collapse" id="homes">
                             <ul>
                                 <?php
@@ -113,7 +112,6 @@ include "includes/db.php";
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <input type="text" name="search" placeholder="Search..." class="dropdown-menu">
-
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon avatar" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
@@ -152,11 +150,11 @@ include "includes/db.php";
                 <section class="listContaier">
                     <span>Sort: </span>
                     <select id="previewSelector" class="form-select selector d-inline" aria-label="Default select example">
-                        <option value="0" selected disabled>Sort by</option>
-                        <option value="All Devices">All Devices</option>
-                        <option value="Favorite">Favorite</option>
-                        <option value="Power Consumption">Power Consumption</option>
-                        <option value="Frequently Used">Frequently Used</option>
+                        <option value="0" <?php if (!isset($_GET["sort"])) echo 'selected'; ?> disabled>Sort by</option>
+                        <option value="All Devices" <?php if (isset($_GET["sort"]) && $_GET["sort"] == "All Devices") echo 'selected'; ?>>All Devices</option>
+                        <option value="Favorite" <?php if (isset($_GET["sort"]) && $_GET["sort"] == "Favorite") echo 'selected'; ?>>Favorite</option>
+                        <option value="Power Consumption" <?php if (isset($_GET["sort"]) && $_GET["sort"] == "Power Consumption") echo 'selected'; ?>>Power Consumption</option>
+                        <option value="Frequently Used" <?php if (isset($_GET["sort"]) && $_GET["sort"] == "Frequently Used") echo 'selected'; ?>>Frequently Used</option>
                     </select>
                     <div class="rowContainer listItems">
                         <?php
@@ -206,7 +204,6 @@ include "includes/db.php";
                                             <button class="functional functional functionalButton plusBtn"></button>
                                             <button class="functional functional functionalButton minusBtn"></button>
                                         </div>';
-
                                     break;
                                 case 3:
                                     echo '<span class="vac-bg"></span>
@@ -242,7 +239,6 @@ include "includes/db.php";
                     <h6>Device Type:</h6>
                     <select name="deviceType" class="form-select" aria-label="Default select example" required>
                         <option value="" disabled selected>Type</option>
-
                         <option id="deviceType1" value="1">Television</option>
                         <option id="deviceType2" value="2">Air Conditioner</option>
                         <option id="deviceType3" value="3">Vacuum</option>
@@ -258,18 +254,12 @@ include "includes/db.php";
                         <?php
                         $query = "SELECT device_location from tbl_213_device  WHERE home_id = " . $_SESSION["homeID"] . " AND device_location!=''   group by device_location order by device_location";
                         $result = mysqli_query($connection, $query);
+                        while ($row = mysqli_fetch_assoc($result)) {
 
-                        while(  $row = mysqli_fetch_assoc($result))
-                        {
-                            
-                            echo '<option value="'.$row["device_location"].'">'.$row["device_location"].'</option>';
+                            echo '<option value="' . $row["device_location"] . '">' . $row["device_location"] . '</option>';
                         }
 
-
-
-
                         ?>
-
                         <option value="">None</option>
                     </select>
                     <h6>Or New Location:</h6>

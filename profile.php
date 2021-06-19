@@ -3,15 +3,12 @@ session_start();
 if (!isset($_SESSION["userID"]) || $_SESSION["userID"] == 0)
     header("Location: login.php");
 include "includes/db.php";
-
 if (isset($_POST["userEmail"])) {
     $query  = "SELECT * FROM tbl_213_user WHERE user_email='"
         . $_POST["userEmail"]
         . "'";
-
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_assoc($result);
-
     if (is_array($row) && $row["user_email"] != $_SESSION["userEmail"]) {
         $message = "Email is already in use!";
     } else {
@@ -38,9 +35,7 @@ if (isset($_POST["userEmail"])) {
         }
     }
 }
-
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -71,12 +66,11 @@ if (isset($_POST["userEmail"])) {
                 <span></span>
                 <span></span>
                 <ul id="menuBurger" class="menu">
-                <li> <a href="profile.php"> <i class="avatar">.</i> <?php echo $_SESSION["userName"]; ?> </a></li>
+                    <li> <a href="profile.php"> <i class="avatar">.</i> <?php echo $_SESSION["userName"]; ?> </a></li>
                     <li>
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes</button>
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-
                         <div class="collapse" id="homes">
                             <ul>
                                 <?php
@@ -133,7 +127,6 @@ if (isset($_POST["userEmail"])) {
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <input type="text" name="search" placeholder="Search..." class="dropdown-menu">
-
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon avatar" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
@@ -159,7 +152,7 @@ if (isset($_POST["userEmail"])) {
                     <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex flex-column align-items-center text-center"> 
+                                <div class="d-flex flex-column align-items-center text-center">
                                     <img src="<?php echo $_SESSION["userPicture"]; ?>" alt="Admin" class="rounded-circle">
                                     <div class="mt-3">
                                         <h4><?php echo $_SESSION["userName"] ?></h4>
@@ -249,10 +242,8 @@ if (isset($_POST["userEmail"])) {
                                         <button id="profileEdit" class="btn btn-info ">Edit</button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-
                         <div class="row gutters-sm">
                             <div class="col-sm-6 mb-3">
                                 <div class="card h-100">
@@ -290,7 +281,6 @@ if (isset($_POST["userEmail"])) {
                                             $query = "SELECT device_location from tbl_213_device  WHERE home_id = " . $_SESSION["homeID"] . " AND device_location!=''   group by device_location order by device_location";
                                             $result = mysqli_query($connection, $query);
                                             if (!$result) {
-
                                                 die("failed:(");
                                             }
                                             while ($row = mysqli_fetch_assoc($result)) {

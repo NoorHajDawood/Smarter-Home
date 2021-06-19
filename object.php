@@ -7,7 +7,6 @@ if (isset($_GET["status"])) {
     if ($_GET["status"] == "add") {
         $query =   "INSERT INTO tbl_213_device (device_type, device_name, device_location, power_consumption,home_id) 
             VALUES ('" . $_POST["deviceType"] . "','" . $_POST["deviceName"] . "','" . $_POST["deviceLocation"] . "','" . $_POST["deviceConsumption"] . "','" .  $_SESSION["homeID"] . "')";
-
         mysqli_query($connection, $query);
         $deviceID = $connection->insert_id;
     } else if ($_GET["status"] == "edit") {
@@ -20,7 +19,6 @@ if (!isset($deviceID)) {
     $deviceID = $_GET["deviceID"];
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -56,7 +54,6 @@ if (!isset($deviceID)) {
                         <button class="btn btn-primary dropdown-parent home" type="button" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes">
                             My Homes</button>
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#homes" aria-expanded="false" aria-controls="homes"></button>
-
                         <div class="collapse" id="homes">
                             <ul>
                                 <?php
@@ -123,7 +120,6 @@ if (!isset($deviceID)) {
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <input type="text" name="search" placeholder="Search..." class="dropdown-menu">
-
             <button type="button" class="btn btn-secondary  dropdown-toggle dropdown-toggle-split headerIcon avatar" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
@@ -189,10 +185,7 @@ if (!isset($deviceID)) {
                         </div>
                             
                             </li>
-
-
                             <li class="icons temp-bg ac-temp">AC-Temp: 22 ℃</li>';
-
                             break;
                         case 3:
                             echo ' <ul class="objectControls">
@@ -218,8 +211,6 @@ if (!isset($deviceID)) {
                         echo '<li class="location"> Location: ' . $row["device_location"] . '</li>
                     </ul>';
                     ?>
-
-
                 </section>
                 <hr>
                 <section class=" autosection">
@@ -230,12 +221,9 @@ if (!isset($deviceID)) {
                     <?php
                     switch ($row["device_type"]) {
                         case 1:
-
-
                             break;
                         case 2:
                             //     echo '  
-
                             //     <ul class="objectControls">
                             //     <li class="icons ">
                             //     <div class="ac-buttons">
@@ -246,10 +234,7 @@ if (!isset($deviceID)) {
                             //     <button class="functional ac-water"></button>
                             //     <button class="functional ac-cycle"></button>
                             // </div>
-
                             //     </li>
-
-
                             //     <li class="icons temp-bg">AC-Temp: <input type="number"></li>';
                             break;
                         case 3:
@@ -280,14 +265,11 @@ if (!isset($deviceID)) {
                                 <hr class="small-hr">';
                             break;
                         case 4:
-
                             break;
                         case 5:
                             break;
                     }
                     ?>
-
-
                     <div class="position-relative">
                         <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse" data-bs-target="#automation2" aria-expanded="false" aria-controls="automation2">
                             My schedule</button>
@@ -315,17 +297,13 @@ if (!isset($deviceID)) {
                                         </div>
                                     </div>
                                 </div>
-
                                 <?php
                                 switch ($row["device_type"]) {
                                     case 1:
-
                                         echo '
-
                                         <ul class="objectControls">
                                         <li class="icons remote-bg">Channel: Netflix <input type="number" placeholder="#"></li>
                                         <li class="icons volume-bg">Volume: <input type="range"></li>
-
                                         </ul>
                                      
                                             ';
@@ -345,14 +323,10 @@ if (!isset($deviceID)) {
                                     </div>
                                         
                                         </li>
-
-
                                         <li class="icons temp-bg">AC-Temp: <input type="number"></li>
-
                                         </ul>
                                      
                                  ';
-
                                         break;
                                     case 3:
                                         $query = "SELECT device_location FROM tbl_213_device WHERE home_id = " . $_SESSION["homeID"] . " and device_location !='' and device_location is not NULL GROUP BY device_location";
@@ -380,9 +354,6 @@ if (!isset($deviceID)) {
                                         break;
                                 }
                                 ?>
-
-
-
                             </div>
                         </div>
                     </div>
@@ -396,13 +367,12 @@ if (!isset($deviceID)) {
                         <h4>Permission:</h4>
                         <select id="devicePermission" class="form-select" aria-label="Default select example">
                             <option disabled>Select a Permission</option>
-                            <option '.($row["device_permission"] == "Admin" ? "selected": "").' value="Admin">Admin</option>
-                            <option '.($row["device_permission"] == "Normal" ? "selected": "").' value="Normal">Normal</option>
-                            <option '.($row["device_permission"] == "Guest" ? "selected": "").' value="Guest">Guest</option>
+                            <option ' . ($row["device_permission"] == "Admin" ? "selected" : "") . ' value="Admin">Admin</option>
+                            <option ' . ($row["device_permission"] == "Normal" ? "selected" : "") . ' value="Normal">Normal</option>
+                            <option ' . ($row["device_permission"] == "Guest" ? "selected" : "") . ' value="Guest">Guest</option>
                         </select>
                     </section>';
                 ?>
-                
 
             </main>
         </div>
