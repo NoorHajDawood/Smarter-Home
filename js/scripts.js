@@ -1,12 +1,10 @@
 var burgerHidden = true;
 function burgerToggle() {
     if (burgerHidden) {
-        // $('#burgerBlur').css('opacity', '60%');
         $('#burgerBlur').css('display', 'block');
         burgerHidden = false;
     }
     else {
-        // $('#burgerBlur').css('opacity', '0%');
         $('#burgerBlur').css('display', 'none');
         burgerHidden = true;
     }
@@ -75,17 +73,11 @@ function addDeviceForm() {
 function editDeviceButton() {
     $('#toolsBlur').click();
     $('.listItem .edit').show();
-    // $('#toolsBlur').css('display', 'block');
-    // $('.formBox').show();
-    // $(':input[name="deviceType"]').val();
     $('#formBlur').show();
 }
 function deleteDeviceButton() {
     $('#toolsBlur').click();
     $('.listItem .trash').show();
-    // $('#toolsBlur').css('display', 'block');
-    // $('.formBox').show();
-    // $(':input[name="deviceType"]').val();
     $('#formBlur').show();
 }
 function editDeviceForm() {
@@ -105,16 +97,16 @@ function editDeviceForm() {
 function getPageName(url) {
     var index = url.lastIndexOf("/") + 1;
     var filenameWithExtension = url.substr(index);
-    var filename = filenameWithExtension.split(".")[0]; // <-- added this line
-    return filename;                                    // <-- added this line
+    var filename = filenameWithExtension.split(".")[0];
+    return filename;
 }
 function deleteDeviceForm() {
     var page = getPageName(window.location.pathname);
     $('#formBlur').click();
-    if (page == "devicesList") {
+    if (page.toUpperCase() == "devicesList".toUpperCase()) {
         callAjax("deviceID=" + this.value + "&delete=true");
     }
-    else if (page == "memberList") {
+    else if (page.toUpperCase() == "memberList".toUpperCase()) {
         callAjax("memberID=" + this.value + "&homeID=" + $('.listItems').attr('home-id') + "&delete=true");
     }
     $(this).parent().remove();
@@ -196,7 +188,7 @@ function updateDeviceFavorite() {
             // $(this).addClass("star-empty");
             stars.removeClass("star-full");
             stars.addClass("star-empty");
-            if (getPageName(window.location.pathname) == "index") {
+            if (getPageName(window.location.pathname).toUpperCase() == "index".toUpperCase()) {
                 if ($(this).parents('#favoriteSection').length)
                     $(this).parent().remove();
                 else
