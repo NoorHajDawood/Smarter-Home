@@ -232,9 +232,35 @@ if (isset($_POST["userEmail"])) {
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="col-sm-12 hide">
-                                        <a type="button" class="btn btn-secondary" href="profile.php">Cancel</a>
-                                        <input type="submit" value="Edit" class="btn btn-success"></input>
+                                    <div class="row hide">
+                                        <div class="col-sm-12">
+                                            <a type="button" class="btn btn-secondary" href="profile.php">Cancel</a>
+                                            <input type="submit" value="Edit" class="btn btn-success"></input>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger float-end" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                                Delete Account
+                                            </button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Deactivate Account</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Are you sure you want to delete your account?
+                                                            <br>
+                                                            This proccess is unreversable!
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button id="deleteAccount" type="button" class="btn btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </form>
                                 <div class="row shown">

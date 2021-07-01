@@ -1,20 +1,26 @@
 <?php
 include "includes/db.php";
 session_start();
-if (isset($_GET["state"]) and $_GET["state"] == "logout") {
+if (isset($_SESSION["userID"]) and $_SESSION["userID"]!=0 and isset($_GET["delete"]) and $_GET["delete"] == "true" and isset($_SESSION["userID"]) and $_SESSION["userID"] != 0) {
+    $query = "delete from tbl_213_user where user_id=" . $_SESSION["userID"];
+    $result = mysqli_query($connection, $query);
     session_unset();
     session_destroy();
-}
-if (!empty($_POST["userEmail"])) { // true if form was submitted
+} elseif (isset($_GET["state"]) and $_GET["state"] == "logout") {
+    session_unset();
+    session_destroy();
+} elseif (!empty($_POST["userEmail"])) { // true if form was submitted
     $query  = "SELECT * FROM tbl_213_user WHERE user_email='"
         . $_POST["userEmail"]
         . "'";
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_assoc($result);
     if (isset($_GET["state"]) && $_GET["state"] == "signup") {
+        echo 'signup';
         if (is_array($row)) {
             $message = "Email is already in use!";  // ****** just replay email
         } else {
+            echo 'else';
             $query =   "INSERT INTO tbl_213_user (user_name, user_email, user_pass, user_picture) 
                             VALUES ('" . $_POST["userName"] . "','" . $_POST["userEmail"] . "','" . $_POST["userPassword"] . "','" . $_POST["userPicture"] . "')";
             $result = mysqli_query($connection, $query);
@@ -82,10 +88,10 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
         <div class="content">
             <h1>
                 <?php
-                if (!isset($_GET["state"]) or $_GET["state"] != "signup")
-                    echo 'Login Form';
-                else
+                if (isset($_GET["state"]) and $_GET["state"] == "signup")
                     echo 'Signup Form';
+                else
+                    echo 'Login Form';
                 ?>
             </h1>
             <form action="#" method="post">
@@ -142,7 +148,7 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
                 ?>
                 <div class="field space">
                     <input type="submit" value="<?php
-                                                if (isset($_GET["state"])) {
+                                                if (isset($_GET["state"]) and $_GET["state"] == 'signup') {
                                                     echo 'SIGN UP';
                                                 } else {
                                                     echo 'LOGIN';
@@ -150,16 +156,14 @@ if (!empty($_POST["userEmail"])) { // true if form was submitted
                 </div>
             </form>
             <?php
-            if (!isset($_GET["state"]) or $_GET["state"] != "signup")
-                echo '<div class="signup">Dont have account?
-                    <a href="login.php?state=signup">Signup Now</a>
-                </div>';
-            ?>
-            <?php
             if (isset($_GET["state"]) and $_GET["state"] == "signup")
                 echo '<div class="signup">Already have an account?
-                    <a href="login.php">Login Now</a>
-                </div>';
+                        <a href="login.php">Login Now</a>
+                    </div>';
+            else
+                echo '<div class="signup">Dont have account?
+                        <a href="login.php?state=signup">Signup Now</a>
+                    </div>';
             ?>
         </div>
     </main>

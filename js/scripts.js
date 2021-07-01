@@ -303,5 +303,8 @@ $(document).ready(function () {
             // $(roomSelect).val(option.text);
             return false;
         });
+        $('#deleteAccount').click(function(){
+            window.location.href = "login.php?delete=true";
+        });
     }
 });
