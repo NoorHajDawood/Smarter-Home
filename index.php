@@ -302,7 +302,6 @@ if (isset($_GET["homeID"])) {
                                         <div class="automationShortcut">
                                             <span>Schedule: Daily at 7:00am</span>
                                         </div>
-                                        <button class="functional functionalButton star star-full"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
                                         <span class="home-bg"></span>
@@ -310,7 +309,6 @@ if (isset($_GET["homeID"])) {
                                         <div class="automationShortcut">
                                             <span>Schedule: on Arrival</span>
                                         </div>
-                                        <button class="functional functionalButton star star-full"></button>
                                     </a>
                                     <a class="rectangle btnClickable shortcut" href="#">
                                         <span class="shield-bg"></span>
@@ -318,7 +316,6 @@ if (isset($_GET["homeID"])) {
                                         <div class="automationShortcut">
                                             <span>Schedule: on Leave</span>
                                         </div>
-                                        <button class="functional functionalButton star star-full"></button>
                                     </a>
                                 </div>
                             </div>

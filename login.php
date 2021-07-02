@@ -9,7 +9,8 @@ if (isset($_SESSION["userID"]) and $_SESSION["userID"]!=0 and isset($_GET["delet
 } elseif (isset($_GET["state"]) and $_GET["state"] == "logout") {
     session_unset();
     session_destroy();
-} elseif (!empty($_POST["userEmail"])) { // true if form was submitted
+}
+if(!empty($_POST["userEmail"])) { // true if form was submitted
     $query  = "SELECT * FROM tbl_213_user WHERE user_email='"
         . $_POST["userEmail"]
         . "'";
