@@ -147,13 +147,6 @@ function callAjax(dataString) {
             if (dataString.includes("fav")) {
                 $('#favoriteAjax').html(html);
                 functionlPropagation();
-                // window.setTimeout(  
-                //     function() {  
-                //         $('.listItem .edit').click(editDeviceForm);
-                //         $('.listItem .trash').click(deleteDeviceForm);
-                //     },  
-                //     5000
-                // );
                 updateDeviceFromJson();
                 updateDeviceStatusSlider();
                 updateDeviceFavorite();
@@ -184,8 +177,6 @@ function updateDeviceFavorite() {
         stars = $('.star[value="' + this.value + '"]');
         var dataString = "deviceID=" + this.value + "&fav=";
         if ($(this).hasClass("star-full")) {
-            // $(this).removeClass("star-full");
-            // $(this).addClass("star-empty");
             stars.removeClass("star-full");
             stars.addClass("star-empty");
             if (getPageName(window.location.pathname).toUpperCase() == "index".toUpperCase()) {
@@ -199,8 +190,6 @@ function updateDeviceFavorite() {
             dataString += "1";
             $(this).removeClass("star-empty");
             $(this).addClass("star-full");
-            // stars.removeClass("star-empty");
-            // stars.addClass("star-full");
         }
         callAjax(dataString);
     });
@@ -209,6 +198,10 @@ function getDeviceID() {
     var aKeyValue = window.location.search.substring(1).split('&'), deviceID = aKeyValue[0].split("=")[1];
     return deviceID;
 
+}
+function sortSelect() {
+    var as = this.value;
+    window.location.replace(window.location.pathname + "?sort=" + as);
 }
 $(document).ready(function () {
     if ($('body').attr('id') == "loginPage") {
@@ -265,21 +258,9 @@ $(document).ready(function () {
             $(this).css('background-image', "url(" + profilePicture + ")");
             $(this).css('border-radius', "50%");
         });
-        // $('.avatar').css('backgroundImage','profilePicture')
-        // function getSelectValue() {
-        //     var selectedValue = document.getElementById("previewSelector").value;
-        //     alert(selectedValue);
-        //     console.log(selectedValue);
-        // }
-        // getSelectValue();
         var selectedOP = document.getElementById("previewSelector");
-        function show() {
-            var as = this.value;
-            var strUser = selectedOP.options[selectedOP.selectedIndex].value;
-            window.location.replace(window.location.pathname + "?sort=" + as);
-        }
         if (selectedOP)
-            selectedOP.onchange = show;
+            selectedOP.onchange = sortSelect;
         $('#devicePermission').change(function () {
             callAjax("deviceID=" + getDeviceID() + "&permission=" + this.value);
         })
@@ -296,11 +277,6 @@ $(document).ready(function () {
             option.text = $('#newRoomInput').val();
             x.add(option);
             $(option).prop('selected', true);
-            // var roomSelect = $(':input[name="deviceLocation"]');
-            // var option = document.createElement("option");
-            // option.text = $('#newRoomInput').value;
-            // $(roomSelect).add(option);
-            // $(roomSelect).val(option.text);
             return false;
         });
         $('#deleteAccount').click(function(){
