@@ -114,7 +114,7 @@ include "includes/db.php";
                     <li class="breadcrumb-item active" aria-current="page">Rooms</li>
                 </ol>
             </nav>
-            <h1>Members</h1>
+            <h1>Rooms</h1>
             <!-- <button type="button" id="collapsibleTools" class="functionalButton toolsBtn"></button> -->
             <ul id="toolsContent">
                 <li></li>
@@ -135,8 +135,24 @@ include "includes/db.php";
                     <!-- //////////////////////////////////////////////////////// -->
                     <div class="rowContainer listItems">
                         <?php
-                        $query = "SELECT device_location , count(*) as sum_devices from tbl_213_device  WHERE home_id = " . $_SESSION["homeID"] . " AND device_location!=''   group by device_location order by device_location";
-                        $query2 = "SELECT device_location , count(*) as sum_active from tbl_213_device  WHERE home_id = " . $_SESSION["homeID"] . " AND device_location!='' AND device_status=1   group by device_location  order by device_location";
+                        $query = "SELECT device_location , count(*) as sum_devices from tbl_213_device  WHERE home_id = " . $_SESSION["homeID"] . " AND device_location!='' ";
+                        $query = $query . " and (device_permission=";
+                                if ($_SESSION["homePermission"] == "Owner" || $_SESSION["homePermission"] == "Admin")
+                                    $query = $query . "'Admin' OR device_permission='Normal' OR device_permission='Guest')";
+                                else if ($_SESSION["homePermission"] == "Normal")
+                                    $query = $query . "'Normal' OR device_permission='Guest')";
+                                else if ($_SESSION["homePermission"] == "Guest")
+                                    $query = $query . "'Guest') ";   
+                        $query = $query . " group by device_location order by device_location";
+                        $query2 = "SELECT device_location , count(*) as sum_active from tbl_213_device  WHERE home_id = " . $_SESSION["homeID"] . " AND device_location!='' AND device_status=1 ";
+                        $query2 = $query2 . " and (device_permission=";
+                                if ($_SESSION["homePermission"] == "Owner" || $_SESSION["homePermission"] == "Admin")
+                                    $query2 = $query2 . "'Admin' OR device_permission='Normal' OR device_permission='Guest')";
+                                else if ($_SESSION["homePermission"] == "Normal")
+                                    $query2 = $query2 . "'Normal' OR device_permission='Guest')";
+                                else if ($_SESSION["homePermission"] == "Guest")
+                                    $query2 = $query2 . "'Guest') ";   
+                        $query2 = $query2 . " group by device_location  order by device_location";
                         $result = mysqli_query($connection, $query);
                         $result2 = mysqli_query($connection, $query2);
                         if (!$result) {
@@ -153,15 +169,16 @@ include "includes/db.php";
                              <span class="room-bg"></span>
                              <h5>' . $row["device_location"] . '</h5>
                              <div>
-                                 <span>' . $row["sum_devices"] . ' Devices</span>
-                                 <span>';
+                                 <span>' . $row["sum_devices"] . ' Devices</span>';
+
                             if ($row2["device_location"] == $row["device_location"]) {
-                                echo $row2["sum_active"] . ' Active </span>';
+                                echo '<span>' . $row2["sum_active"] . ' Active </span>';
                                 $row2 = mysqli_fetch_assoc($result2);
                                 if (!$row2)
                                     $row2["device_location"] = "";
-                            } else {
-                                echo '<span>0 Devices</span>';
+                            }
+                            else {
+                                echo '<span> 0 Active </span>';
                             }
                             echo '</div>
                              
@@ -169,46 +186,6 @@ include "includes/db.php";
                              ';
                         }
                         ?>
-                        <!-- <a class="rectangle btnClickable listItem" href="devicesList.php?room=$row[device_location]">
-                            <span class="livingroom-bg"></span>
-                            <h5>Living Room</h5>
-                            <div>
-                                <span>5 Devices</span>
-                                <span class="temp-md">22 ℃</span>
-                            </div>
-                        </a>
-                        <a class="rectangle btnClickable listItem" href="devicesList.php?roomID=2">
-                            <span class="kitchen-bg"></span>
-                            <h5>Kitchen</h5>
-                            <div>
-                                <span>5 Devices</span>
-                                <span class="temp-md">22 ℃</span>
-                            </div>
-                        </a>
-                        <a class="rectangle btnClickable listItem" href="devicesList.php?roomID=3">
-                            <span class="bedroom-bg"></span>
-                            <h5>Bedroom 1</h5>
-                            <div>
-                                <span>3 Devices</span>
-                                <span class="temp-md">22 ℃</span>
-                            </div>
-                        </a>
-                        <a class="rectangle btnClickable listItem" href="devicesList.php?roomID=4">
-                            <span class="bedroom-bg"></span>
-                            <h5>Bedroom 2</h5>
-                            <div>
-                                <span>2 Devices</span>
-                                <span class="temp-md">22 ℃</span>
-                            </div>
-                        </a>
-                        <a class="rectangle btnClickable listItem" href="devicesList.php?roomID=5">
-                            <span class="bathroom-bg"></span>
-                            <h5>Bathroom</h5>
-                            <div>
-                                <span>1 Devices</span>
-                                <span class="temp-md">22 ℃</span>
-                            </div>
-                        </a> -->
                     </div>
                 </section>
             </main>

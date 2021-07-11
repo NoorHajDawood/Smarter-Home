@@ -68,6 +68,25 @@ function addDeviceForm() {
     $('.formBox').show();
     $('#addDevice').attr('action', './object.php?status=add');
     $('#addMember').attr('action', './memberList.php?status=add');
+
+    if (getPageName(window.location.pathname).toUpperCase() == 'devicesList'.toUpperCase())
+        $('#formTitle').html('Add Device');
+    else
+        $('#formTitle').html('Add Member');
+    $(':input[name=memberEmail]').val('');
+    $(':input[name=memberPermission]').val('Admin');
+    selectElement = document.getElementById('deviceType');
+    if (selectElement)
+        selectElement.getElementsByTagName('option')[0].selected = 'selected';
+    $(':input[name=deviceName]').val('');
+    selectElement = document.getElementById('roomSelect');
+    if (selectElement)
+        selectElement.getElementsByTagName('option')[0].selected = 'selected';
+    $(':input[name=deviceConsumption]').val('');
+    $(':input[type=submit]').val("Add");
+    $(':input[name="memberEmail"]').prop('disabled', false);
+    // $('.formBox').show();
+
     $('#formBlur').show();
 }
 function editDeviceButton() {
@@ -81,7 +100,10 @@ function deleteDeviceButton() {
     $('#formBlur').show();
 }
 function editDeviceForm() {
-    $('#formTitle').html('Edit Device');
+    if (getPageName(window.location.pathname).toUpperCase() == 'devicesList'.toUpperCase())
+        $('#formTitle').html('Edit Device');
+    else
+        $('#formTitle').html('Edit Member');
     $('#addDevice').attr('action', './object.php?deviceID=' + this.value + '&status=edit');
     $('#addMember').attr('action', './memberList.php?memberID=' + this.value + '&status=edit');
     $(':input[name=memberEmail]').val($(this).parent().attr('member-email'));
@@ -111,8 +133,17 @@ function deleteDeviceForm() {
     }
     $(this).parent().remove();
 }
-function updateDeviceFromJson() {
+function updateDeviceFromJson(flag) {
     $.getJSON("data/SmarterHome.json", function (data) {
+        if (getPageName(window.location.pathname).toUpperCase() == "index".toUpperCase() && flag) {
+            $('#spotify').attr('src', data.media);
+            for(var i = 1; i < data.cameras.length; i++) {
+                $('#camera-indicator').append('<button type="button" data-bs-target="#cameraSection" data-bs-slide-to="'+i+'" aria-label="Slide '+(i+1)+'"></button>');
+            }
+            for(var i = 0; i < data.cameras.length; i++) {
+                $('#camera-inner').append('<div class="carousel-item '+(i==0?'active':'')+'"> <img src="'+data.cameras[i].img+'" class="d-block w-100" alt="Camera'+(i+1)+'" title="Camera'+(i+1)+'"> </div>');
+            }
+        }
         $.each(data.devices, function () {
             switch (this.type) {
                 case 1:
@@ -147,7 +178,7 @@ function callAjax(dataString) {
             if (dataString.includes("fav")) {
                 $('#favoriteAjax').html(html);
                 functionlPropagation();
-                updateDeviceFromJson();
+                updateDeviceFromJson(false);
                 updateDeviceStatusSlider();
                 updateDeviceFavorite();
             }
@@ -258,13 +289,15 @@ $(document).ready(function () {
             $(this).css('background-image', "url(" + profilePicture + ")");
             $(this).css('border-radius', "50%");
         });
-        var selectedOP = document.getElementById("previewSelector");
-        if (selectedOP)
-            selectedOP.onchange = sortSelect;
+        if (getPageName(window.location.pathname).toUpperCase() != "index".toUpperCase()) {
+            var selectedOP = document.getElementById("previewSelector");
+            if (selectedOP)
+                selectedOP.onchange = sortSelect;
+        }
         $('#devicePermission').change(function () {
             callAjax("deviceID=" + getDeviceID() + "&permission=" + this.value);
         })
-        updateDeviceFromJson();
+        updateDeviceFromJson(true);
         updateDeviceStatusSlider();
         updateDeviceFavorite();
         $('#profileEdit').click(function () {
@@ -279,7 +312,7 @@ $(document).ready(function () {
             $(option).prop('selected', true);
             return false;
         });
-        $('#deleteAccount').click(function(){
+        $('#deleteAccount').click(function () {
             window.location.href = "login.php?delete=true";
         });
     }

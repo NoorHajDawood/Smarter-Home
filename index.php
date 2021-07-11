@@ -133,24 +133,13 @@ if (isset($_GET["homeID"])) {
                         <option value="media" selected>Media</option>
                     </select>
                     <div id="mediaSection" class="media">
-                        <iframe src="https://open.spotify.com/embed/album/2iER5YPSsq4WpokLnnQGCO" width="340" height="170" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <iframe id="spotify" width="340" height="170" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                     </div>
                     <div id="cameraSection" class="carousel carousel-dark slide d-none" data-bs-ride="carousel" data-bs-interval="false">
                         <div class="carousel-indicators" id="camera-indicator">
                             <button type="button" data-bs-target="#cameraSection" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#cameraSection" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#cameraSection" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="images/backyard.png" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/front_shop.png" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/backyard.png" class="d-block w-100" alt="...">
-                            </div>
+                        <div id="camera-inner" class="carousel-inner">
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#cameraSection" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -286,42 +275,6 @@ if (isset($_GET["homeID"])) {
                     mysqli_free_result($result);
                 }
                 ?>
-                <hr>
-                <section class="sectionContainer" id="automationSection">
-                    <h3>Automation</h3>
-                    <div id="automation" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="false">
-                        <div class="carousel-indicators" id="camera-indicator">
-                            <button type="button" data-bs-target="#automation" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="rowContainer">
-                                    <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="sun-bg"></span>
-                                        <h5>Morning</h5>
-                                        <div class="automationShortcut">
-                                            <span>Schedule: Daily at 7:00am</span>
-                                        </div>
-                                    </a>
-                                    <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="home-bg"></span>
-                                        <h5>Home</h5>
-                                        <div class="automationShortcut">
-                                            <span>Schedule: on Arrival</span>
-                                        </div>
-                                    </a>
-                                    <a class="rectangle btnClickable shortcut" href="#">
-                                        <span class="shield-bg"></span>
-                                        <h5>Lock</h5>
-                                        <div class="automationShortcut">
-                                            <span>Schedule: on Leave</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
                 <div class="clear"></div>
             </main>
         </div>

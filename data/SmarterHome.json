@@ -1,4 +1,16 @@
 {
+	"media": "https://open.spotify.com/embed/album/2iER5YPSsq4WpokLnnQGCO",
+	"cameras": [
+		{
+			"img": "https://www.oyster.com/wp-content/uploads/sites/35/2019/05/three-bedroom-pool-villa-v7472466-1440-1024x683.jpg"
+		},
+		{
+			"img": "https://www.oyster.com/wp-content/uploads/sites/35/2019/05/one-bedroom-villa-2-v14041177-1440-1024x683.jpg"
+		},
+		{
+			"img": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/66/b8/20/the-bali-dream-villa.jpg?w=900&h=-1&s=1"
+		}
+	],
 	"devices": [
 		{
 			"type": 1,

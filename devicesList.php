@@ -237,7 +237,7 @@ include "includes/db.php";
                 <form id="addDevice" class="formBox" action="./object.php?status=add" method="POST">
                     <h2 id="formTitle">Add Device</h2>
                     <h6>Device Type:</h6>
-                    <select name="deviceType" class="form-select" aria-label="Default select example" required>
+                    <select id="deviceType" name="deviceType" class="form-select" aria-label="Default select example" required>
                         <option value="" disabled selected>Type</option>
                         <option id="deviceType1" value="1">Television</option>
                         <option id="deviceType2" value="2">Air Conditioner</option>

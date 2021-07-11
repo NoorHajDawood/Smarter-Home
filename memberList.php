@@ -143,24 +143,19 @@ if (isset($_GET["status"])) {
             <main id="memberMain">
                 <section class="listContaier">
                     <br>
-                    <!-- <span>Sort: </span>
-                        <select id="previewSelector" class="form-select selector d-inline" aria-label="Default select example">
-                            <option value="0" selected disabled>Sort by</option>
-                            <option value="Alphabet">Alphabet</option>
-                            <option value="Power Consumption">Power Consumption</option>
-                        </select> -->
-                    <!-- //////////////////////////////////////////////////////// -->
                     <div class="rowContainer listItems" home-id="<?php echo $_SESSION["homeID"]; ?>">
                         <?php
-                        $query = "SELECT * FROM tbl_213_user as user left join tbl_213_home as home on user.user_id = home.user_id where home_id=" . $_SESSION["homeID"];
+                        $query = "SELECT * FROM tbl_213_user as user inner join tbl_213_home as home on user.user_id = home.user_id where home_id=" . $_SESSION["homeID"];
                         $result = mysqli_query($connection, $query);
                         if (!$result) {
                             die("failed:(");
                         }
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo ' <div class="rectangle btnClickable listItem" member-email="' . $row["user_email"] . '" member-permission="' . $row["home_permission"] . '">';
-                            echo '<button class="functional functional functionalButton trash" value="' . $row["user_id"] . '"></button>';
-                            echo '<button class="functional functional functionalButton edit" value="' . $row["user_id"] . '"></button>';
+                            if ($row["home_permission"] != "Owner") {
+                                echo '<button class="functional functional functionalButton trash" value="' . $row["user_id"] . '"></button>';
+                                echo '<button class="functional functional functionalButton edit" value="' . $row["user_id"] . '"></button>';
+                            }
                             echo '<img class="member-picture" src="' . $row["user_picture"] . '"> 
                              <h5>' . $row["user_name"] . '</h5>
                              <div>
@@ -176,16 +171,6 @@ if (isset($_GET["status"])) {
                 <div id="formBlur" class="screenBlur"></div>
                 <form id="addMember" class="formBox" action="#" method="POST">
                     <h2 id="formTitle">Add Member</h2>
-                    <!-- <h6>Device Type:</h6> -->
-                    <!-- <select name="deviceType" class="form-select" aria-label="Default select example" required>
-                        <option value="" disabled selected>Type</option>
-                        <option id="deviceType1" value="1">Television</option>
-                        <option id="deviceType2" value="2">Air Conditioner</option>
-                        <option id="deviceType3" value="3">Vacuum</option>
-                        <option id="deviceType4" value="4">Lights</option>
-                        <option id="deviceType5" value="5">Speakers</option>
-                    </select>
-                    </select> -->
                     <h6>Member Email:</h6>
                     <input name="memberEmail" class="form-control" required type="text" placeholder="Member Email">
                     <h6>Permission:</h6>
