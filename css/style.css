@@ -142,6 +142,21 @@ h1 {
     margin-bottom: 10px;
 }
 
+.panel {
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    background-color: white;
+    display: block;
+    margin-bottom: 15px;
+    border-style: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+}
+
+.panel ul {
+    margin: 0;
+}
+
 .preview {
     height: 170px;
     margin-top: 10px;

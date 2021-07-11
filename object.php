@@ -143,11 +143,7 @@ if (!isset($deviceID)) {
             </nav>
             <h1><?php echo $row["device_name"]; ?></h1>
             <main id="objectMain">
-                <!-- <form id="ajaxForm" action="" method="post" class="">
-                    <span id="formData">deviceID=1&status=0</span>
-                    <button id="ajaxSubmit" type="submit" value="Submit"></button>
-                </form> -->
-                <section class="infoSection position-relative">
+                <section class="panel infoSection position-relative">
                     <span id="device-status">Status: <?php echo ($row["device_status"] ? "On" : "Off"); ?></span>
                     <label class="switch">
                         <input class="slider-checkbox" type="checkbox" value=<?php echo '"' . $row["device_id"] . '" ' . ($row["device_status"] ? 'checked' : '') ?>>
@@ -156,7 +152,6 @@ if (!isset($deviceID)) {
                     <button <?php echo 'class="functional functionalButton star star-' . ($row["device_fav"] == 1 ? "full" : "empty") . '" value="' . $row["device_id"] . '"' ?>></button>
                     <br>
                     <?php
-                    // echo '<span>Information:</span>';
                     switch ($row["device_type"]) {
                         case 1:
                             echo '<div class="sideButtons">
@@ -212,32 +207,13 @@ if (!isset($deviceID)) {
                     </ul>';
                     ?>
                 </section>
-                <hr>
-                <section class=" autosection">
+                <section class="panel autosection">
                     <h4>Automation</h4>
                     <button class="functional functionalButton edit"></button>
                     <button class="functional functionalButton plusBtn"></button>
                     <div class="clear"></div>
                     <?php
-                    switch ($row["device_type"]) {
-                        case 1:
-                            break;
-                        case 2:
-                            //     echo '  
-                            //     <ul class="objectControls">
-                            //     <li class="icons ">
-                            //     <div class="ac-buttons">
-                            //     <button class="functional ac-night"></button>
-                            //     <button class="functional ac-clock"></button>
-                            //     <button class="functional ac-hot"></button>
-                            //     <button class="functional ac-cold"></button>
-                            //     <button class="functional ac-water"></button>
-                            //     <button class="functional ac-cycle"></button>
-                            // </div>
-                            //     </li>
-                            //     <li class="icons temp-bg">AC-Temp: <input type="number"></li>';
-                            break;
-                        case 3:
+                    if ($row["device_type"] == 3) {
                             echo '<div class="position-relative">
                                     <button class="btn btn-primary dropdown-parent clearToggle" type="button" data-bs-toggle="collapse" data-bs-target="#automation1" aria-expanded="false" aria-controls="automation1">
                                         Quick clean</button>
@@ -263,11 +239,6 @@ if (!isset($deviceID)) {
                                     </label>
                                 </div>
                                 <hr class="small-hr">';
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            break;
                     }
                     ?>
                     <div class="position-relative">
@@ -360,8 +331,8 @@ if (!isset($deviceID)) {
                 </section>
                 <?php
                 if ($_SESSION["homePermission"] == "Admin" || $_SESSION["homePermission"] == "Owner")
-                    echo '<hr>
-                    <section class="Permission">
+                    echo '
+                    <section class="panel Permission">
     
     
                         <h4>Permission:</h4>
